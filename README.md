@@ -1,1 +1,1 @@
-# typescript-sdk
+# Maestro TypeScript SDK
