@@ -26,4 +26,8 @@
 
 # Documentation
 
+* [Maestro public docs](https://docs.gomaestro.org/)
+
 # Contributing
+
+Meastro welcomes all contributors! Please see our [contributing guidelines](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md).
