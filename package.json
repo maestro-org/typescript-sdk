@@ -1,6 +1,6 @@
 {
   "name": "@gomaestro/maestro-js",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A JavaScript/TypeScript SDK for interacting with the https://gomaestro.org API",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
