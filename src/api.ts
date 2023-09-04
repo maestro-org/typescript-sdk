@@ -802,6 +802,92 @@ export interface Cip68Metadata {
 
 
 /**
+ * 
+ * @export
+ * @interface ContractsVestingLockPost200Response
+ */
+export interface ContractsVestingLockPost200Response {
+  /**
+   * 
+   * @type {string}
+   * @memberof ContractsVestingLockPost200Response
+   */
+  'cbor_hex'?: string;
+  /**
+   * 
+   * @type {string}
+   * @memberof ContractsVestingLockPost200Response
+   */
+  'tx_hash'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ContractsVestingLockPostRequest
+ */
+export interface ContractsVestingLockPostRequest {
+  /**
+   * Sender\'s bech32 address
+   * @type {string}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'sender': string;
+  /**
+   * Beneficiary\'s bech32 address
+   * @type {string}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'beneficiary': string;
+  /**
+   * Asset policy ID of the asset to be locked
+   * @type {string}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'asset_policy_id': string;
+  /**
+   * Asset policy token name of the asset to be locked
+   * @type {string}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'asset_token_name': string;
+  /**
+   * Total amount of the asset to be locked
+   * @type {number}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'total_vesting_quantity': number;
+  /**
+   * Vesting period start in UNIX time (seconds)
+   * @type {number}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'vesting_period_start': number;
+  /**
+   * Vesting period end in UNIX time (seconds)
+   * @type {number}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'vesting_period_end': number;
+  /**
+   * Valid initial unlock period start in UNIX time (seconds)
+   * @type {number}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'first_unlock_possible_after': number;
+  /**
+   * Number of vesting installments used to collect vested assets
+   * @type {number}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'total_installments': number;
+  /**
+   * An arbitrary note associated with locked assets
+   * @type {string}
+   * @memberof ContractsVestingLockPostRequest
+   */
+  'vesting_memo': string;
+}
+/**
  * Information summary of the current epoch
  * @export
  * @interface CurrentEpochInfo
@@ -3597,6 +3683,37 @@ export interface TransactionInfo {
   'withdrawals': Array<Withdrawal>;
 }
 /**
+ * Transaction Manager state
+ * @export
+ * @interface TxManagerState
+ */
+export interface TxManagerState {
+  /**
+   * block number
+   * @type {string}
+   * @memberof TxManagerState
+   */
+  'block': string;
+  /**
+   * transaction state
+   * @type {string}
+   * @memberof TxManagerState
+   */
+  'state': string;
+  /**
+   * transaction state timestamp
+   * @type {string}
+   * @memberof TxManagerState
+   */
+  'timestamp': string;
+  /**
+   * transaction hash
+   * @type {string}
+   * @memberof TxManagerState
+   */
+  'transaction_hash': string;
+}
+/**
  * 
  * @export
  * @enum {string}
@@ -3818,6 +3935,55 @@ export interface Version {
    * @memberof Version
    */
   'minor': number;
+}
+/**
+ * Vesting states at a beneficiary address
+ * @export
+ * @interface VestingState
+ */
+export interface VestingState {
+  /**
+   * Asset policy token name of the asset to be locked
+   * @type {string}
+   * @memberof VestingState
+   */
+  'asset_name': string;
+  /**
+   * Asset policy token symbol of the asset to be locked
+   * @type {string}
+   * @memberof VestingState
+   */
+  'asset_symbol': string;
+  /**
+   * Remaning amount of the token left to vest
+   * @type {number}
+   * @memberof VestingState
+   */
+  'remaining_vesting_quantity'?: number;
+  /**
+   * Number of vesting installments used to collect vested assets
+   * @type {number}
+   * @memberof VestingState
+   */
+  'total_installments': number;
+  /**
+   * Total amount of the asset that will be vested
+   * @type {number}
+   * @memberof VestingState
+   */
+  'total_vesting_quantity': number;
+  /**
+   * Vesting period start in UNIX time (seconds)
+   * @type {number}
+   * @memberof VestingState
+   */
+  'vesting_period_start': number;
+  /**
+   * Vesting period end in UNIX time (seconds)
+   * @type {number}
+   * @memberof VestingState
+   */
+  'vesting_period_end': number;
 }
 /**
  * 
@@ -6846,7 +7012,7 @@ export const GeneralApiAxiosParamCreator = function(configuration: Configuration
   return {
     /**
      * Returns the identifier of the most recently processed block on the network
-     * @summary Chain-tip
+     * @summary Chain tip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6976,7 +7142,7 @@ export const GeneralApiFp = function(configuration: Configuration) {
   return {
     /**
      * Returns the identifier of the most recently processed block on the network
-     * @summary Chain-tip
+     * @summary Chain tip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -7026,7 +7192,7 @@ export const GeneralApiFactory = function(configuration: Configuration, basePath
   return {
     /**
      * Returns the identifier of the most recently processed block on the network
-     * @summary Chain-tip
+     * @summary Chain tip
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -7072,7 +7238,7 @@ export const GeneralApiFactory = function(configuration: Configuration, basePath
 export class GeneralApi extends BaseAPI {
   /**
    * Returns the identifier of the most recently processed block on the network
-   * @summary Chain-tip
+   * @summary Chain tip
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GeneralApi
@@ -7904,6 +8070,326 @@ export class ScriptsApi extends BaseAPI {
 
 
 /**
+ * TransactionManagerApi - axios parameter creator
+ * @export
+ */
+export const TransactionManagerApiAxiosParamCreator = function(configuration: Configuration) {
+  return {
+    /**
+     * Returns the history of submitted transactions
+     * @summary Transactions history
+     * @param {number} [count] The max number of results per pagination page
+     * @param {number} [page] Pagination page number to show results for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerHistory: async (count?: number, page?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      const localVarPath = `/txmanager/history`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+      if (count !== undefined) {
+        localVarQueryParameter['count'] = count;
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameter['page'] = page;
+      }
+
+
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Returns the most recent state of a transaction
+     * @summary Transaction state
+     * @param {string} txHash Hex encoded transaction hash
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerState: async (txHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'txHash' is not null or undefined
+      assertParamExists('txManagerState', 'txHash', txHash)
+      const localVarPath = `/txmanager/{tx_hash}/state`
+        .replace(`{${"tx_hash"}}`, encodeURIComponent(String(txHash)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
+     * @summary Submit transaction
+     * @param {string} body CBOR encoded transaction
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerSubmit: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'body' is not null or undefined
+      assertParamExists('txManagerSubmit', 'body', body)
+      const localVarPath = `/txmanager`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+
+
+      localVarHeaderParameter['Content-Type'] = 'application/cbor';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
+     * @summary Turbo submit transaction
+     * @param {string} body CBOR encoded transaction
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerTurboSubmit: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'body' is not null or undefined
+      assertParamExists('txManagerTurboSubmit', 'body', body)
+      const localVarPath = `/txmanager/turbosubmit`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+
+
+      localVarHeaderParameter['Content-Type'] = 'application/cbor';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  }
+};
+
+/**
+ * TransactionManagerApi - functional programming interface
+ * @export
+ */
+export const TransactionManagerApiFp = function(configuration: Configuration) {
+  const localVarAxiosParamCreator = TransactionManagerApiAxiosParamCreator(configuration)
+  return {
+    /**
+     * Returns the history of submitted transactions
+     * @summary Transactions history
+     * @param {number} [count] The max number of results per pagination page
+     * @param {number} [page] Pagination page number to show results for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async txManagerHistory(count?: number, page?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TxManagerState>>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerHistory(count, page, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+    /**
+     * Returns the most recent state of a transaction
+     * @summary Transaction state
+     * @param {string} txHash Hex encoded transaction hash
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async txManagerState(txHash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TxManagerState>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerState(txHash, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+    /**
+     * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
+     * @summary Submit transaction
+     * @param {string} body CBOR encoded transaction
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async txManagerSubmit(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerSubmit(body, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+    /**
+     * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
+     * @summary Turbo submit transaction
+     * @param {string} body CBOR encoded transaction
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async txManagerTurboSubmit(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerTurboSubmit(body, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+  }
+};
+
+/**
+ * TransactionManagerApi - factory interface
+ * @export
+ */
+export const TransactionManagerApiFactory = function(configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = TransactionManagerApiFp(configuration)
+  return {
+    /**
+     * Returns the history of submitted transactions
+     * @summary Transactions history
+     * @param {number} [count] The max number of results per pagination page
+     * @param {number} [page] Pagination page number to show results for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerHistory(count?: number, page?: number, options?: any): AxiosPromise<Array<TxManagerState>> {
+      return localVarFp.txManagerHistory(count, page, options).then((request) => request(axios, basePath));
+    },
+    /**
+     * Returns the most recent state of a transaction
+     * @summary Transaction state
+     * @param {string} txHash Hex encoded transaction hash
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerState(txHash: string, options?: any): AxiosPromise<TxManagerState> {
+      return localVarFp.txManagerState(txHash, options).then((request) => request(axios, basePath));
+    },
+    /**
+     * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
+     * @summary Submit transaction
+     * @param {string} body CBOR encoded transaction
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerSubmit(body: string, options?: any): AxiosPromise<string> {
+      return localVarFp.txManagerSubmit(body, options).then((request) => request(axios, basePath));
+    },
+    /**
+     * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
+     * @summary Turbo submit transaction
+     * @param {string} body CBOR encoded transaction
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txManagerTurboSubmit(body: string, options?: any): AxiosPromise<string> {
+      return localVarFp.txManagerTurboSubmit(body, options).then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * TransactionManagerApi - object-oriented interface
+ * @export
+ * @class TransactionManagerApi
+ * @extends {BaseAPI}
+ */
+export class TransactionManagerApi extends BaseAPI {
+  /**
+   * Returns the history of submitted transactions
+   * @summary Transactions history
+   * @param {number} [count] The max number of results per pagination page
+   * @param {number} [page] Pagination page number to show results for
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TransactionManagerApi
+   */
+  public txManagerHistory(count?: number, page?: number, options?: AxiosRequestConfig) {
+    return TransactionManagerApiFp(this.configuration).txManagerHistory(count, page, options).then((request) => request(this.axios));
+  }
+
+  /**
+   * Returns the most recent state of a transaction
+   * @summary Transaction state
+   * @param {string} txHash Hex encoded transaction hash
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TransactionManagerApi
+   */
+  public txManagerState(txHash: string, options?: AxiosRequestConfig) {
+    return TransactionManagerApiFp(this.configuration).txManagerState(txHash, options).then((request) => request(this.axios));
+  }
+
+  /**
+   * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
+   * @summary Submit transaction
+   * @param {string} body CBOR encoded transaction
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TransactionManagerApi
+   */
+  public txManagerSubmit(body: string, options?: AxiosRequestConfig) {
+    return TransactionManagerApiFp(this.configuration).txManagerSubmit(body, options).then((request) => request(this.axios));
+  }
+
+  /**
+   * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
+   * @summary Turbo submit transaction
+   * @param {string} body CBOR encoded transaction
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof TransactionManagerApi
+   */
+  public txManagerTurboSubmit(body: string, options?: AxiosRequestConfig) {
+    return TransactionManagerApiFp(this.configuration).txManagerTurboSubmit(body, options).then((request) => request(this.axios));
+  }
+}
+
+
+
+/**
  * TransactionsApi - axios parameter creator
  * @export
  */
@@ -8016,7 +8502,7 @@ export const TransactionsApiAxiosParamCreator = function(configuration: Configur
       };
     },
     /**
-     * Returns the specified transaction output. Attempts to resolve the datum hash to the corresponding bytes and JSON, should the output contain a datum hash.
+     * Returns the specified transaction output.
      * @summary Transaction output by output reference
      * @param {string} txHash Transaction Hash
      * @param {number} index Output Index
@@ -8059,7 +8545,7 @@ export const TransactionsApiAxiosParamCreator = function(configuration: Configur
       };
     },
     /**
-     * Returns the specified transaction outputs. Returns 404 if any of the outputs specified do not exist. Results are sorted lexicographically by output reference and duplicates are omitted.
+     * Returns the specified transaction outputs
      * @summary Transaction outputs by output references
      * @param {Array<string>} requestBody 
      * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
@@ -8149,7 +8635,7 @@ export const TransactionsApiFp = function(configuration: Configuration) {
       return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
     },
     /**
-     * Returns the specified transaction output. Attempts to resolve the datum hash to the corresponding bytes and JSON, should the output contain a datum hash.
+     * Returns the specified transaction output.
      * @summary Transaction output by output reference
      * @param {string} txHash Transaction Hash
      * @param {number} index Output Index
@@ -8162,7 +8648,7 @@ export const TransactionsApiFp = function(configuration: Configuration) {
       return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
     },
     /**
-     * Returns the specified transaction outputs. Returns 404 if any of the outputs specified do not exist. Results are sorted lexicographically by output reference and duplicates are omitted.
+     * Returns the specified transaction outputs
      * @summary Transaction outputs by output references
      * @param {Array<string>} requestBody 
      * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
@@ -8216,7 +8702,7 @@ export const TransactionsApiFactory = function(configuration: Configuration, bas
       return localVarFp.txInfo(txHash, options).then((request) => request(axios, basePath));
     },
     /**
-     * Returns the specified transaction output. Attempts to resolve the datum hash to the corresponding bytes and JSON, should the output contain a datum hash.
+     * Returns the specified transaction output.
      * @summary Transaction output by output reference
      * @param {string} txHash Transaction Hash
      * @param {number} index Output Index
@@ -8228,7 +8714,7 @@ export const TransactionsApiFactory = function(configuration: Configuration, bas
       return localVarFp.txoByTxoRef(txHash, index, withCbor, options).then((request) => request(axios, basePath));
     },
     /**
-     * Returns the specified transaction outputs. Returns 404 if any of the outputs specified do not exist. Results are sorted lexicographically by output reference and duplicates are omitted.
+     * Returns the specified transaction outputs
      * @summary Transaction outputs by output references
      * @param {Array<string>} requestBody 
      * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
@@ -8287,7 +8773,7 @@ export class TransactionsApi extends BaseAPI {
   }
 
   /**
-   * Returns the specified transaction output. Attempts to resolve the datum hash to the corresponding bytes and JSON, should the output contain a datum hash.
+   * Returns the specified transaction output.
    * @summary Transaction output by output reference
    * @param {string} txHash Transaction Hash
    * @param {number} index Output Index
@@ -8301,7 +8787,7 @@ export class TransactionsApi extends BaseAPI {
   }
 
   /**
-   * Returns the specified transaction outputs. Returns 404 if any of the outputs specified do not exist. Results are sorted lexicographically by output reference and duplicates are omitted.
+   * Returns the specified transaction outputs
    * @summary Transaction outputs by output references
    * @param {Array<string>} requestBody 
    * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
@@ -8312,6 +8798,248 @@ export class TransactionsApi extends BaseAPI {
    */
   public txosByTxoRefs(requestBody: Array<string>, resolveDatums?: boolean | null, withCbor?: boolean | null, options?: AxiosRequestConfig) {
     return TransactionsApiFp(this.configuration).txosByTxoRefs(requestBody, resolveDatums, withCbor, options).then((request) => request(this.axios));
+  }
+}
+
+
+
+/**
+ * VestingApi - axios parameter creator
+ * @export
+ */
+export const VestingApiAxiosParamCreator = function(configuration: Configuration) {
+  return {
+    /**
+     * Collect assets from the vesting contract
+     * @summary Collect assets
+     * @param {string} beneficiary Beneficiary\&#39;s bech32 address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contractsVestingCollectBeneficiaryPost: async (beneficiary: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'beneficiary' is not null or undefined
+      assertParamExists('contractsVestingCollectBeneficiaryPost', 'beneficiary', beneficiary)
+      const localVarPath = `/contracts/vesting/collect/{beneficiary}`
+        .replace(`{${"beneficiary"}}`, encodeURIComponent(String(beneficiary)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Lock assets into the vesting contract
+     * @summary Lock assets
+     * @param {ContractsVestingLockPostRequest} contractsVestingLockPostRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contractsVestingLockPost: async (contractsVestingLockPostRequest: ContractsVestingLockPostRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'contractsVestingLockPostRequest' is not null or undefined
+      assertParamExists('contractsVestingLockPost', 'contractsVestingLockPostRequest', contractsVestingLockPostRequest)
+      const localVarPath = `/contracts/vesting/lock`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+      localVarRequestOptions.data = serializeDataIfNeeded(contractsVestingLockPostRequest, localVarRequestOptions, configuration)
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Detailed list of vesting assets at a beneficiary address
+     * @summary State of vesting assets
+     * @param {string} beneficiary Beneficiary bech32 address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contractsVestingStateBeneficiaryGet: async (beneficiary: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+      // verify required parameter 'beneficiary' is not null or undefined
+      assertParamExists('contractsVestingStateBeneficiaryGet', 'beneficiary', beneficiary)
+      const localVarPath = `/contracts/vesting/state/{beneficiary}`
+        .replace(`{${"beneficiary"}}`, encodeURIComponent(String(beneficiary)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions = configuration.baseOptions;
+
+      const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication api-key required
+      setApiKeyToObject(localVarHeaderParameter, "api-key", configuration)
+
+
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  }
+};
+
+/**
+ * VestingApi - functional programming interface
+ * @export
+ */
+export const VestingApiFp = function(configuration: Configuration) {
+  const localVarAxiosParamCreator = VestingApiAxiosParamCreator(configuration)
+  return {
+    /**
+     * Collect assets from the vesting contract
+     * @summary Collect assets
+     * @param {string} beneficiary Beneficiary\&#39;s bech32 address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async contractsVestingCollectBeneficiaryPost(beneficiary: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContractsVestingLockPost200Response>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingCollectBeneficiaryPost(beneficiary, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+    /**
+     * Lock assets into the vesting contract
+     * @summary Lock assets
+     * @param {ContractsVestingLockPostRequest} contractsVestingLockPostRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async contractsVestingLockPost(contractsVestingLockPostRequest: ContractsVestingLockPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContractsVestingLockPost200Response>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingLockPost(contractsVestingLockPostRequest, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+    /**
+     * Detailed list of vesting assets at a beneficiary address
+     * @summary State of vesting assets
+     * @param {string} beneficiary Beneficiary bech32 address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async contractsVestingStateBeneficiaryGet(beneficiary: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VestingState>> {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingStateBeneficiaryGet(beneficiary, options);
+      return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+    },
+  }
+};
+
+/**
+ * VestingApi - factory interface
+ * @export
+ */
+export const VestingApiFactory = function(configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+  const localVarFp = VestingApiFp(configuration)
+  return {
+    /**
+     * Collect assets from the vesting contract
+     * @summary Collect assets
+     * @param {string} beneficiary Beneficiary\&#39;s bech32 address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contractsVestingCollectBeneficiaryPost(beneficiary: string, options?: any): AxiosPromise<ContractsVestingLockPost200Response> {
+      return localVarFp.contractsVestingCollectBeneficiaryPost(beneficiary, options).then((request) => request(axios, basePath));
+    },
+    /**
+     * Lock assets into the vesting contract
+     * @summary Lock assets
+     * @param {ContractsVestingLockPostRequest} contractsVestingLockPostRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contractsVestingLockPost(contractsVestingLockPostRequest: ContractsVestingLockPostRequest, options?: any): AxiosPromise<ContractsVestingLockPost200Response> {
+      return localVarFp.contractsVestingLockPost(contractsVestingLockPostRequest, options).then((request) => request(axios, basePath));
+    },
+    /**
+     * Detailed list of vesting assets at a beneficiary address
+     * @summary State of vesting assets
+     * @param {string} beneficiary Beneficiary bech32 address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contractsVestingStateBeneficiaryGet(beneficiary: string, options?: any): AxiosPromise<VestingState> {
+      return localVarFp.contractsVestingStateBeneficiaryGet(beneficiary, options).then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * VestingApi - object-oriented interface
+ * @export
+ * @class VestingApi
+ * @extends {BaseAPI}
+ */
+export class VestingApi extends BaseAPI {
+  /**
+   * Collect assets from the vesting contract
+   * @summary Collect assets
+   * @param {string} beneficiary Beneficiary\&#39;s bech32 address
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof VestingApi
+   */
+  public contractsVestingCollectBeneficiaryPost(beneficiary: string, options?: AxiosRequestConfig) {
+    return VestingApiFp(this.configuration).contractsVestingCollectBeneficiaryPost(beneficiary, options).then((request) => request(this.axios));
+  }
+
+  /**
+   * Lock assets into the vesting contract
+   * @summary Lock assets
+   * @param {ContractsVestingLockPostRequest} contractsVestingLockPostRequest 
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof VestingApi
+   */
+  public contractsVestingLockPost(contractsVestingLockPostRequest: ContractsVestingLockPostRequest, options?: AxiosRequestConfig) {
+    return VestingApiFp(this.configuration).contractsVestingLockPost(contractsVestingLockPostRequest, options).then((request) => request(this.axios));
+  }
+
+  /**
+   * Detailed list of vesting assets at a beneficiary address
+   * @summary State of vesting assets
+   * @param {string} beneficiary Beneficiary bech32 address
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof VestingApi
+   */
+  public contractsVestingStateBeneficiaryGet(beneficiary: string, options?: AxiosRequestConfig) {
+    return VestingApiFp(this.configuration).contractsVestingStateBeneficiaryGet(beneficiary, options).then((request) => request(this.axios));
   }
 }
 
