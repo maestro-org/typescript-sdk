@@ -1,7 +1,7 @@
 {
   "name": "@gomaestro/maestro-js",
   "version": "0.0.0",
-  "description": "A JavaScript/TypeScript SDK for interacting with the https://gomaestro.org API",
+  "description": "TypeScript SDK for the Maestro Dapp Platform",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -11,10 +11,11 @@
     "lint": "tsc"
   },
   "keywords": [
+    "typescript",
+    "blockchain",
+    "cryptocurrency",
     "maestro",
-    "cardano",
-    "cardano indexer",
-    "cardano api"
+    "cardano"
   ],
   "author": "gomaestro.org",
   "license": "Apache-2.0",

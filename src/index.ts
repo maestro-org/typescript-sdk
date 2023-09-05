@@ -1,28 +1,36 @@
+import { AccountsApi, AddressesApi, AssetsApi, BlocksApi, DatumApi, EcosystemApi, EpochsApi, GeneralApi, PoolsApi, ScriptsApi, TransactionManagerApi, TransactionsApi, VestingApi } from "./api";
+import { Configuration } from "./configuration";
+
 export * from "./api";
 export * from "./configuration";
 
-
-/*
-import { AddressesApi } from "./api";
-import { Configuration } from "./configuration";
-
-let addrApi = new AddressesApi(new Configuration({ apiKey: "<Your-API-Key>", network: "Preprod" }))
-addrApi.utxosByAddress("aasdddr_test1qqe9k9zmswzx9h9vaaf49shun82t8nr52h0ptpgumzxjjqm6wlgjpw0gdtwuwwydhwcm6g6sfy9h69q2kg6q8p3jxdxsrrxrdm").then(x => console.log(x.data)).catch(error => {
-  if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
-    console.log(error.response.data);
-    console.log(error.response.status);
-    console.log(error.response.headers);
-  } else if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
-    console.log(error.request);
-  } else {
-    // Something happened in setting up the request that triggered an Error
-    console.log('Error', error.message);
+export class MaestroClient {
+  accounts: AccountsApi
+  addresses: AddressesApi
+  assets: AssetsApi
+  blocks: BlocksApi
+  datum: DatumApi
+  ecosystem: EcosystemApi
+  epochs: EpochsApi
+  general: GeneralApi
+  pools: PoolsApi
+  scripts: ScriptsApi
+  transactions: TransactionsApi
+  txManager: TransactionManagerApi
+  vesting: VestingApi
+  constructor(config: Configuration) {
+    this.accounts = new AccountsApi(config);
+    this.addresses = new AddressesApi(config);
+    this.assets = new AssetsApi(config);
+    this.blocks = new BlocksApi(config);
+    this.datum = new DatumApi(config);
+    this.ecosystem = new EcosystemApi(config);
+    this.epochs = new EpochsApi(config);
+    this.general = new GeneralApi(config);
+    this.pools = new PoolsApi(config);
+    this.scripts = new ScriptsApi(config);
+    this.transactions = new TransactionsApi(config);
+    this.txManager = new TransactionManagerApi(config);
+    this.vesting = new VestingApi(config);
   }
-});
-addrApi.utxosByAddresses(["addr_test1qqe9k9zmswzx9h9vaaf49shun82t8nr52h0ptpgumzxjjqm6wlgjpw0gdtwuwwydhwcm6g6sfy9h69q2kg6q8p3jxdxsrrxrdm"]).then(x => console.log(x.data))
-*/
+}
