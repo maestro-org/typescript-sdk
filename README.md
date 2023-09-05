@@ -10,6 +10,9 @@
     <a href="https://github.com/maestro-org/typescript-sdk/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/maestro-org/typescript-sdk?style=flat-square&label=License" />
     </a>
+    <a href="https://github.com/maestro-org/typescript-sdk/actions/workflows/build.yml?query=branch%3Amain">
+      <img src="https://img.shields.io/github/actions/workflow/status/maestro-org/typescript-sdk/main.yml?style=flat-square&branch=main&label=Build" />
+    </a>
     <a href="./CONTRIBUTING.md">
       <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
     </a>
