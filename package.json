@@ -1,5 +1,5 @@
 {
-  "name": "@gomaestro/maestro-js",
+  "name": "@maestro-org/typescript-sdk",
   "version": "0.1.0",
   "description": "TypeScript SDK for the Maestro Dapp Platform",
   "main": "dist/index.js",
