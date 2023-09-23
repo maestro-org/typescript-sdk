@@ -66,7 +66,7 @@ let maestroClient = new MaestroClient(
 
 maestroClient.addresses
   .utxosByAddress(
-    "aasdddr_test1qqe9k9zmswzx9h9vaaf49shun82t8nr52h0ptpgumzxjjqm6wlgjpw0gdtwuwwydhwcm6g6sfy9h69q2kg6q8p3jxdxsrrxrdm"
+    "adaddr_test1wpgexmeunzsykesf42d4eqet5yvzeap6trjnflxqtkcf66g0kpnxt"
   )
   .then((x) => console.log(x.data))
   .catch((error) => {
@@ -88,7 +88,7 @@ maestroClient.addresses
   });
 maestroClient.addresses
   .utxosByAddresses([
-    "addr_test1qqe9k9zmswzx9h9vaaf49shun82t8nr52h0ptpgumzxjjqm6wlgjpw0gdtwuwwydhwcm6g6sfy9h69q2kg6q8p3jxdxsrrxrdm",
+    "addr_test1wpgexmeunzsykesf42d4eqet5yvzeap6trjnflxqtkcf66g0kpnxt",
   ])
   .then((x) => console.log(x.data));
 
