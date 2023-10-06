@@ -109,7 +109,7 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        txManagerSubmit: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        txManagerSubmit: async (body: string | Uint8Array, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('txManagerSubmit', 'body', body);
             const localVarPath = `/txmanager`;
@@ -133,8 +133,8 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
-
+            // localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
+            localVarRequestOptions.data = typeof body === 'string' ? Buffer.from(body, 'hex') : Buffer.from(body);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -226,7 +226,7 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
          * @throws {RequiredError}
          */
         async txManagerSubmit(
-            body: string,
+            body: string | Uint8Array,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerSubmit(body, options);
