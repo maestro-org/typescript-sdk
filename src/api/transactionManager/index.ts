@@ -46,7 +46,7 @@ export class TransactionManagerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TransactionManagerApi
      */
-    public txManagerSubmit(body: string, options?: AxiosRequestConfig) {
+    public txManagerSubmit(body: string | Uint8Array, options?: AxiosRequestConfig) {
         return TransactionManagerApiFp(this.configuration)
             .txManagerSubmit(body, options)
             .then((request) => request(this.axios));
