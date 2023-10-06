@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
-    "lint": "yarn prettier '*/**/*.ts' --write && yarn eslint '*/**/*.ts' --fix",
+    "lint": "yarn prettier 'src/**/*.ts' --write && yarn eslint 'src/**/*.ts' --fix",
     "test": "pnpm test",
     "clean": "rm -rf dist && rm -rf node_modules && rm -f package-lock.json",
     "prepare": "husky install"
@@ -44,7 +44,7 @@
     "axios": "^1.5.0"
   },
   "lint-staged": {
-    "**/*.{js,ts,}": [
+    "src/**/*.{js,ts,},": [
       "yarn prettier --write",
       "yarn eslint --fix"
     ]
