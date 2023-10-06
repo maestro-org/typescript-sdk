@@ -8,9 +8,10 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
-    "lint": "tsc",
+    "lint": "yarn prettier '*/**/*.ts' --write && yarn eslint '*/**/*.ts' --fix",
     "test": "pnpm test",
-    "clean": "rm -rf dist && rm -rf node_modules && rm -f package-lock.json"
+    "clean": "rm -rf dist && rm -rf node_modules && rm -f package-lock.json",
+    "prepare": "husky install"
   },
   "keywords": [
     "typescript",
@@ -22,11 +23,30 @@
   "author": "gomaestro.org",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@commitlint/cli": "^17.4.3",
+    "@commitlint/config-conventional": "^17.4.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "commitlint": "^17.4.3",
     "@changesets/cli": "^2.26.2",
     "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8"
   },
   "dependencies": {
     "axios": "^1.5.0"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,}": [
+      "yarn prettier --write",
+      "yarn eslint --fix"
+    ]
   }
 }

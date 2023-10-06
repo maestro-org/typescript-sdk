@@ -1,6 +1,6 @@
-import type { Configuration } from './configuration';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
+import type { Configuration } from './configuration';
 
 /**
  *
@@ -8,8 +8,8 @@ import globalAxios from 'axios';
  * @interface RequestArgs
  */
 export interface RequestArgs {
-  url: string;
-  options: AxiosRequestConfig;
+    url: string;
+    options: AxiosRequestConfig;
 }
 
 /**
@@ -18,10 +18,8 @@ export interface RequestArgs {
  * @class BaseAPI
  */
 export class BaseAPI {
-
-  constructor(protected configuration: Configuration, protected axios: AxiosInstance = globalAxios) {
-  }
-};
+    constructor(protected configuration: Configuration, protected axios: AxiosInstance = globalAxios) {}
+}
 
 /**
  *
@@ -30,8 +28,8 @@ export class BaseAPI {
  * @extends {Error}
  */
 export class RequiredError extends Error {
-  constructor(public field: string, msg?: string) {
-    super(msg);
-    this.name = "RequiredError"
-  }
+    constructor(public field: string, msg?: string) {
+        super(msg);
+        this.name = 'RequiredError';
+    }
 }
