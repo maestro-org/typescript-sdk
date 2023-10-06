@@ -133,8 +133,8 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
-
+            // localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
+            localVarRequestOptions.data = typeof body === 'string' ? Buffer.from(body, 'hex') : Buffer.from(body);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
