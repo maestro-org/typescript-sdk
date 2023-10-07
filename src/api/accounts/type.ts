@@ -45,3 +45,30 @@ export interface AccountAssetsQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for fetching account history.
+ * @export
+ * @interface AccountHistoryQueryParams
+ *
+ */
+export interface AccountHistoryQueryParams {
+    /**
+     * Fetch result for only a specific epoch
+     * @type {string | null}
+     * @memberof AccountHistoryQueryParams
+     */
+    epochNo?: number | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AccountHistoryQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AccountHistoryQueryParams
+     */
+    cursor?: string | null;
+}

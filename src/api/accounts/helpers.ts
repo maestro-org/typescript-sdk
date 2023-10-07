@@ -17,7 +17,7 @@ import {
     PaginatedAccountReward,
     PaginatedAccountUpdate,
 } from '../type';
-import { AccountAddressesQueryParams, AccountAssetsQueryParams } from './type';
+import { AccountAddressesQueryParams, AccountAssetsQueryParams, AccountHistoryQueryParams } from './type';
 
 /**
  * AccountsApi - axios parameter creator
@@ -113,17 +113,13 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
          * Returns per-epoch history for the specified stake key
          * @summary Stake account history
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [epochNo] Fetch result for only a specific epoch
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountHistoryQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         accountHistory: async (
             stakeAddr: string,
-            epochNo?: number | null,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: AccountHistoryQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'stakeAddr' is not null or undefined
@@ -138,22 +134,9 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (epochNo !== undefined) {
-                localVarQueryParameter.epoch_no = epochNo;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -475,26 +458,16 @@ export const AccountsApiFp = function (configuration: Configuration) {
          * Returns per-epoch history for the specified stake key
          * @summary Stake account history
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [epochNo] Fetch result for only a specific epoch
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountHistoryQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async accountHistory(
             stakeAddr: string,
-            epochNo?: number | null,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: AccountHistoryQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountHistory>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountHistory(
-                stakeAddr,
-                epochNo,
-                count,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accountHistory(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

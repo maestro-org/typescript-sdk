@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AccountsApiFp } from './helpers';
-import { AccountAddressesQueryParams, AccountAssetsQueryParams } from './type';
+import { AccountAddressesQueryParams, AccountAssetsQueryParams, AccountHistoryQueryParams } from './type';
 
 /**
  * AccountsApi - object-oriented interface
@@ -48,22 +48,14 @@ export class AccountsApi extends BaseAPI {
      * Returns per-epoch history for the specified stake key
      * @summary Stake account history
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [epochNo] Fetch result for only a specific epoch
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountHistoryQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountHistory(
-        stakeAddr: string,
-        epochNo?: number | null,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountHistory(stakeAddr: string, queryParams?: AccountHistoryQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountHistory(stakeAddr, epochNo, count, cursor, options)
+            .accountHistory(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
