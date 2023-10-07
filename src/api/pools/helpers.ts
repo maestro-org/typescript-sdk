@@ -19,7 +19,7 @@ import {
     TimestampedPoolRelays,
     TimestampedPoolUpdates,
 } from '../type';
-import { PoolBlocksOrderEnum, PoolHistoryOrderEnum } from './type';
+import { ListPoolsQueryParams, PoolBlocksOrderEnum, PoolHistoryOrderEnum } from './type';
 
 /**
  * PoolsApi - axios parameter creator
@@ -30,14 +30,12 @@ export const PoolsApiAxiosParamCreator = function (configuration: Configuration)
         /**
          * Returns a list of currently registered stake pools
          * @summary List registered stake pools
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {ListPoolsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         listPools: async (
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter?: ListPoolsQueryParams,
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             const localVarPath = `/pools`;
@@ -47,18 +45,9 @@ export const PoolsApiAxiosParamCreator = function (configuration: Configuration)
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -418,17 +407,15 @@ export const PoolsApiFp = function (configuration: Configuration) {
         /**
          * Returns a list of currently registered stake pools
          * @summary List registered stake pools
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {ListPoolsQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async listPools(
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: ListPoolsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolListInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listPools(count, cursor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPools(queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
@@ -566,128 +553,128 @@ export const PoolsApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * PoolsApi - factory interface
- * @export
- */
-export const PoolsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PoolsApiFp(configuration);
-    return {
-        /**
-         * Returns a list of currently registered stake pools
-         * @summary List registered stake pools
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listPools(count?: number | null, cursor?: string | null, options?: any): AxiosPromise<PaginatedPoolListInfo> {
-            return localVarFp.listPools(count, cursor, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Return information about blocks minted by a given pool for all epochs (or just for epoch `epoch_no` if provided)
-         * @summary Stake pool blocks
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {number | null} [epochNo] Epoch number to fetch results for
-         * @param {number | null} [count] The max number of results per page
-         * @param {PoolBlocksOrderEnum} [order] The order in which the results are sorted (by block absolute slot)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolBlocks(
-            poolId: string,
-            epochNo?: number | null,
-            count?: number | null,
-            order?: PoolBlocksOrderEnum,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedPoolBlock> {
-            return localVarFp
-                .poolBlocks(poolId, epochNo, count, order, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of delegators of the specified pool
-         * @summary Stake pool delegators
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolDelegators(
-            poolId: string,
-            count?: number | null,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedDelegatorInfo> {
-            return localVarFp
-                .poolDelegators(poolId, count, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns per-epoch information about the specified pool (or just for epoch `epoch_no` if provided)
-         * @summary Stake pool history
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {number | null} [epochNo] Epoch number to fetch results for
-         * @param {number | null} [count] The max number of results per page
-         * @param {PoolHistoryOrderEnum} [order] The order in which the results are sorted (by epoch number)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolHistory(
-            poolId: string,
-            epochNo?: number | null,
-            count?: number | null,
-            order?: PoolHistoryOrderEnum,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedPoolHistory> {
-            return localVarFp
-                .poolHistory(poolId, epochNo, count, order, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns current information about the specified pool
-         * @summary Stake pool information
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolInfo(poolId: string, options?: any): AxiosPromise<TimestampedPoolInfo> {
-            return localVarFp.poolInfo(poolId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the metadata declared on-chain by the specified stake pool
-         * @summary Stake pool metadata
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolMetadata(poolId: string, options?: any): AxiosPromise<TimestampedPoolMetadata> {
-            return localVarFp.poolMetadata(poolId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of relays declared on-chain by the specified stake pool
-         * @summary Stake pool relays
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolRelays(poolId: string, options?: any): AxiosPromise<TimestampedPoolRelays> {
-            return localVarFp.poolRelays(poolId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of updates relating to the specified pool
-         * @summary Stake pool updates
-         * @param {string} poolId Pool ID in bech32 format
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        poolUpdates(poolId: string, options?: any): AxiosPromise<TimestampedPoolUpdates> {
-            return localVarFp.poolUpdates(poolId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * PoolsApi - factory interface
+//  * @export
+//  */
+// export const PoolsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = PoolsApiFp(configuration);
+//     return {
+//         /**
+//          * Returns a list of currently registered stake pools
+//          * @summary List registered stake pools
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         listPools(count?: number | null, cursor?: string | null, options?: any): AxiosPromise<PaginatedPoolListInfo> {
+//             return localVarFp.listPools(count, cursor, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Return information about blocks minted by a given pool for all epochs (or just for epoch `epoch_no` if provided)
+//          * @summary Stake pool blocks
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {number | null} [epochNo] Epoch number to fetch results for
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {PoolBlocksOrderEnum} [order] The order in which the results are sorted (by block absolute slot)
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolBlocks(
+//             poolId: string,
+//             epochNo?: number | null,
+//             count?: number | null,
+//             order?: PoolBlocksOrderEnum,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedPoolBlock> {
+//             return localVarFp
+//                 .poolBlocks(poolId, epochNo, count, order, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a list of delegators of the specified pool
+//          * @summary Stake pool delegators
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolDelegators(
+//             poolId: string,
+//             count?: number | null,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedDelegatorInfo> {
+//             return localVarFp
+//                 .poolDelegators(poolId, count, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns per-epoch information about the specified pool (or just for epoch `epoch_no` if provided)
+//          * @summary Stake pool history
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {number | null} [epochNo] Epoch number to fetch results for
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {PoolHistoryOrderEnum} [order] The order in which the results are sorted (by epoch number)
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolHistory(
+//             poolId: string,
+//             epochNo?: number | null,
+//             count?: number | null,
+//             order?: PoolHistoryOrderEnum,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedPoolHistory> {
+//             return localVarFp
+//                 .poolHistory(poolId, epochNo, count, order, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns current information about the specified pool
+//          * @summary Stake pool information
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolInfo(poolId: string, options?: any): AxiosPromise<TimestampedPoolInfo> {
+//             return localVarFp.poolInfo(poolId, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the metadata declared on-chain by the specified stake pool
+//          * @summary Stake pool metadata
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolMetadata(poolId: string, options?: any): AxiosPromise<TimestampedPoolMetadata> {
+//             return localVarFp.poolMetadata(poolId, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a list of relays declared on-chain by the specified stake pool
+//          * @summary Stake pool relays
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolRelays(poolId: string, options?: any): AxiosPromise<TimestampedPoolRelays> {
+//             return localVarFp.poolRelays(poolId, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a list of updates relating to the specified pool
+//          * @summary Stake pool updates
+//          * @param {string} poolId Pool ID in bech32 format
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         poolUpdates(poolId: string, options?: any): AxiosPromise<TimestampedPoolUpdates> {
+//             return localVarFp.poolUpdates(poolId, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

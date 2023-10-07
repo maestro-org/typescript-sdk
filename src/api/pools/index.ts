@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { PoolsApiFp } from './helpers';
-import { PoolBlocksOrderEnum, PoolHistoryOrderEnum } from './type';
+import { ListPoolsQueryParams, PoolBlocksOrderEnum, PoolHistoryOrderEnum } from './type';
 
 /**
  * PoolsApi - object-oriented interface
@@ -13,15 +13,14 @@ export class PoolsApi extends BaseAPI {
     /**
      * Returns a list of currently registered stake pools
      * @summary List registered stake pools
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {ListPoolsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PoolsApi
      */
-    public listPools(count?: number | null, cursor?: string | null, options?: AxiosRequestConfig) {
+    public listPools(queryParams?: ListPoolsQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
-            .listPools(count, cursor, options)
+            .listPools(queryParams, options)
             .then((request) => request(this.axios));
     }
 
