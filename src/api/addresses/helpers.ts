@@ -24,6 +24,7 @@ import {
     TxsByPaymentCredOrderEnum,
     TxsByPaymentCredQueryParams,
     UtxoRefsAtAddressOrderEnum,
+    UtxoRefsAtAddressQueryParams,
     UtxosByAddressOrderEnum,
     UtxosByPaymentCredOrderEnum,
 } from './type';
@@ -198,21 +199,13 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
          * Returns references (pair of transaction hash and output index in transaction) for UTxOs controlled by the specified address
          * @summary UTxO references at an address
          * @param {string} address Address in bech32 format
-         * @param {number | null} [count] The max number of results per page
-         * @param {UtxoRefsAtAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxoRefsAtAddressQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         utxoRefsAtAddress: async (
             address: string,
-            count?: number | null,
-            order?: UtxoRefsAtAddressOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: UtxoRefsAtAddressQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'address' is not null or undefined
@@ -227,30 +220,9 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (from !== undefined) {
-                localVarQueryParameter.from = from;
-            }
-
-            if (to !== undefined) {
-                localVarQueryParameter.to = to;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -574,32 +546,16 @@ export const AddressesApiFp = function (configuration: Configuration) {
          * Returns references (pair of transaction hash and output index in transaction) for UTxOs controlled by the specified address
          * @summary UTxO references at an address
          * @param {string} address Address in bech32 format
-         * @param {number | null} [count] The max number of results per page
-         * @param {UtxoRefsAtAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxoRefsAtAddressQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async utxoRefsAtAddress(
             address: string,
-            count?: number | null,
-            order?: UtxoRefsAtAddressOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            queryParams?: UtxoRefsAtAddressQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoRef>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxoRefsAtAddress(
-                address,
-                count,
-                order,
-                from,
-                to,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.utxoRefsAtAddress(address, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

@@ -41,7 +41,7 @@ export type UtxosByPaymentCredOrderEnum =
     (typeof UtxosByPaymentCredOrderEnum)[keyof typeof UtxosByPaymentCredOrderEnum];
 
 /**
- * Query parameters for fetching transactions by address.
+ * Query parameters for txsByAddress.
  * @export
  * @interface TxsByAddressQueryParams
  *
@@ -80,7 +80,7 @@ export interface TxsByAddressQueryParams {
 }
 
 /**
- * Query parameters for fetching transactions by payment credential.
+ * Query parameters for txsByPaymentCred.
  * @export
  * @interface TxsByPaymentCredQueryParams
  *
@@ -94,7 +94,7 @@ export interface TxsByPaymentCredQueryParams {
     count?: number | null;
     /**
      * The order in which the results are sorted, by transaction age
-     * @type {TxsByAddressOrderEnum}
+     * @type {TxsByPaymentCredOrderEnum}
      * @memberof TxsByPaymentCredQueryParams
      */
     order?: TxsByPaymentCredOrderEnum;
@@ -114,6 +114,45 @@ export interface TxsByPaymentCredQueryParams {
      * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
      * @type {string | null}
      * @memberof TxsByPaymentCredQueryParams
+     */
+    cursor?: string | null;
+}
+
+/**
+ * Query parameters for utxoRefsAtAddress.
+ * @export
+ * @interface UtxoRefsAtAddressQueryParams
+ *
+ */
+export interface UtxoRefsAtAddressQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof UtxoRefsAtAddressQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by slot at which UTxO was produced)
+     * @type {UtxoRefsAtAddressOrderEnum}
+     * @memberof UtxoRefsAtAddressQueryParams
+     */
+    order?: UtxoRefsAtAddressOrderEnum;
+    /**
+     * Return only UTxOs created on or after a specific slot
+     * @type {number | null}
+     * @memberof UtxoRefsAtAddressQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only UTxOs created before a specific slot
+     * @type {number | null}
+     * @memberof UtxoRefsAtAddressQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof UtxoRefsAtAddressQueryParams
      */
     cursor?: string | null;
 }

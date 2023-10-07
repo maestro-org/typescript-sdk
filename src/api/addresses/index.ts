@@ -3,7 +3,6 @@ import { BaseAPI } from '../../base';
 import { AddressesApiFp } from './helpers';
 import {
     TxsByAddressQueryParams,
-    TxsByPaymentCredOrderEnum,
     TxsByPaymentCredQueryParams,
     UtxoRefsAtAddressOrderEnum,
     UtxosByAddressOrderEnum,
@@ -83,26 +82,14 @@ export class AddressesApi extends BaseAPI {
      * Returns references (pair of transaction hash and output index in transaction) for UTxOs controlled by the specified address
      * @summary UTxO references at an address
      * @param {string} address Address in bech32 format
-     * @param {number | null} [count] The max number of results per page
-     * @param {UtxoRefsAtAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxoRefsAtAddressQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public utxoRefsAtAddress(
-        address: string,
-        count?: number | null,
-        order?: UtxoRefsAtAddressOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public utxoRefsAtAddress(address: string, queryParams?: TxsByPaymentCredQueryParams, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration)
-            .utxoRefsAtAddress(address, count, order, from, to, cursor, options)
+            .utxoRefsAtAddress(address, queryParams, options)
             .then((request) => request(this.axios));
     }
 

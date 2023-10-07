@@ -1,5 +1,5 @@
 /**
- * Query parameters for fetching account addresses.
+ * Query parameters for accountAddresses.
  * @export
  * @interface AccountAddressesQueryParams
  *
@@ -20,7 +20,7 @@ export interface AccountAddressesQueryParams {
 }
 
 /**
- * Query parameters for fetching account assets.
+ * Query parameters for accountAssets.
  * @export
  * @interface AccountAssetsQueryParams
  *
@@ -47,7 +47,7 @@ export interface AccountAssetsQueryParams {
 }
 
 /**
- * Query parameters for fetching account history.
+ * Query parameters for accountHistory.
  * @export
  * @interface AccountHistoryQueryParams
  *
@@ -74,7 +74,7 @@ export interface AccountHistoryQueryParams {
 }
 
 /**
- * Query parameters for fetching account rewards.
+ * Query parameters for accountRewards.
  * @export
  * @interface AccountRewardsQueryParams
  *
@@ -95,7 +95,7 @@ export interface AccountRewardsQueryParams {
 }
 
 /**
- * Query parameters for fetching account updates.
+ * Query parameters for accountUpdates.
  * @export
  * @interface AccountUpdatesQueryParams
  *
