@@ -17,6 +17,7 @@ import {
     TimestampedUtxo,
     PaginatedUtxoWithBytes,
 } from '../type';
+import { TxoByTxoRefQueryParams } from './type';
 
 /**
  * TransactionsApi - axios parameter creator
@@ -145,14 +146,14 @@ export const TransactionsApiAxiosParamCreator = function (configuration: Configu
          * @summary Transaction output by output reference
          * @param {string} txHash Transaction Hash
          * @param {number} index Output Index
-         * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+         * @param {TxoByTxoRefQueryParams} [localVarQueryParameter] Query Parameters
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         txoByTxoRef: async (
             txHash: string,
             index: number,
-            withCbor?: boolean | null,
+            localVarQueryParameter: TxoByTxoRefQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'txHash' is not null or undefined
@@ -168,14 +169,9 @@ export const TransactionsApiAxiosParamCreator = function (configuration: Configu
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (withCbor !== undefined) {
-                localVarQueryParameter.with_cbor = withCbor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -302,17 +298,17 @@ export const TransactionsApiFp = function (configuration: Configuration) {
          * @summary Transaction output by output reference
          * @param {string} txHash Transaction Hash
          * @param {number} index Output Index
-         * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+         * @param {TxoByTxoRefQueryParams} [queryParams] Query Parameters
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async txoByTxoRef(
             txHash: string,
             index: number,
-            withCbor?: boolean | null,
+            queryParams?: TxoByTxoRefQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedUtxo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txoByTxoRef(txHash, index, withCbor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txoByTxoRef(txHash, index, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
@@ -341,83 +337,83 @@ export const TransactionsApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * TransactionsApi - factory interface
- * @export
- */
-export const TransactionsApiFactory = function (
-    configuration: Configuration,
-    basePath?: string,
-    axios?: AxiosInstance,
-) {
-    const localVarFp = TransactionsApiFp(configuration);
-    return {
-        /**
-         * Returns the address which was specified in the given transaction output.  Note that if the transaction is invalid this will only return a result for the collateral return output, should one be present in the transaction. If the transaction is valid it will not return a result for the collateral return output.
-         * @summary Address by transaction output reference
-         * @param {string} txHash Transaction Hash
-         * @param {number} index Output Index
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addressByTxo(txHash: string, index: number, options?: any): AxiosPromise<TimestampedAddress> {
-            return localVarFp.addressByTxo(txHash, index, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns hex-encoded CBOR bytes of a transaction
-         * @summary CBOR bytes of a transaction
-         * @param {string} txHash Transaction Hash
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txCborByTxHash(txHash: string, options?: any): AxiosPromise<TimestampedTxCbor> {
-            return localVarFp.txCborByTxHash(txHash, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns detailed information about a transaction
-         * @summary Transaction details
-         * @param {string} txHash Transaction hash in hex
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txInfo(txHash: string, options?: any): AxiosPromise<TimestampedTransactionInfo> {
-            return localVarFp.txInfo(txHash, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the specified transaction output.
-         * @summary Transaction output by output reference
-         * @param {string} txHash Transaction Hash
-         * @param {number} index Output Index
-         * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txoByTxoRef(
-            txHash: string,
-            index: number,
-            withCbor?: boolean | null,
-            options?: any,
-        ): AxiosPromise<TimestampedUtxo> {
-            return localVarFp.txoByTxoRef(txHash, index, withCbor, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the specified transaction outputs
-         * @summary Transaction outputs by output references
-         * @param {Array<string>} requestBody
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txosByTxoRefs(
-            requestBody: Array<string>,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            options?: any,
-        ): AxiosPromise<PaginatedUtxoWithBytes> {
-            return localVarFp
-                .txosByTxoRefs(requestBody, resolveDatums, withCbor, options)
-                .then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * TransactionsApi - factory interface
+//  * @export
+//  */
+// export const TransactionsApiFactory = function (
+//     configuration: Configuration,
+//     basePath?: string,
+//     axios?: AxiosInstance,
+// ) {
+//     const localVarFp = TransactionsApiFp(configuration);
+//     return {
+//         /**
+//          * Returns the address which was specified in the given transaction output.  Note that if the transaction is invalid this will only return a result for the collateral return output, should one be present in the transaction. If the transaction is valid it will not return a result for the collateral return output.
+//          * @summary Address by transaction output reference
+//          * @param {string} txHash Transaction Hash
+//          * @param {number} index Output Index
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         addressByTxo(txHash: string, index: number, options?: any): AxiosPromise<TimestampedAddress> {
+//             return localVarFp.addressByTxo(txHash, index, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns hex-encoded CBOR bytes of a transaction
+//          * @summary CBOR bytes of a transaction
+//          * @param {string} txHash Transaction Hash
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txCborByTxHash(txHash: string, options?: any): AxiosPromise<TimestampedTxCbor> {
+//             return localVarFp.txCborByTxHash(txHash, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns detailed information about a transaction
+//          * @summary Transaction details
+//          * @param {string} txHash Transaction hash in hex
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txInfo(txHash: string, options?: any): AxiosPromise<TimestampedTransactionInfo> {
+//             return localVarFp.txInfo(txHash, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the specified transaction output.
+//          * @summary Transaction output by output reference
+//          * @param {string} txHash Transaction Hash
+//          * @param {number} index Output Index
+//          * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txoByTxoRef(
+//             txHash: string,
+//             index: number,
+//             withCbor?: boolean | null,
+//             options?: any,
+//         ): AxiosPromise<TimestampedUtxo> {
+//             return localVarFp.txoByTxoRef(txHash, index, withCbor, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the specified transaction outputs
+//          * @summary Transaction outputs by output references
+//          * @param {Array<string>} requestBody
+//          * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
+//          * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txosByTxoRefs(
+//             requestBody: Array<string>,
+//             resolveDatums?: boolean | null,
+//             withCbor?: boolean | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedUtxoWithBytes> {
+//             return localVarFp
+//                 .txosByTxoRefs(requestBody, resolveDatums, withCbor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//     };
+// };

@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { TransactionsApiFp } from './helpers';
+import { TxoByTxoRefQueryParams } from './type';
 
 /**
  * TransactionsApi - object-oriented interface
@@ -57,14 +58,19 @@ export class TransactionsApi extends BaseAPI {
      * @summary Transaction output by output reference
      * @param {string} txHash Transaction Hash
      * @param {number} index Output Index
-     * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+     * @param {TxoByTxoRefQueryParams} [queryParams] Query Parameters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TransactionsApi
      */
-    public txoByTxoRef(txHash: string, index: number, withCbor?: boolean | null, options?: AxiosRequestConfig) {
+    public txoByTxoRef(
+        txHash: string,
+        index: number,
+        queryParams?: TxoByTxoRefQueryParams,
+        options?: AxiosRequestConfig,
+    ) {
         return TransactionsApiFp(this.configuration)
-            .txoByTxoRef(txHash, index, withCbor, options)
+            .txoByTxoRef(txHash, index, queryParams, options)
             .then((request) => request(this.axios));
     }
 

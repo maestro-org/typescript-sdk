@@ -6,7 +6,6 @@ import {
     setSearchParams,
     toPathString,
     assertParamExists,
-    serializeDataIfNeeded,
     createRequestFunction,
 } from '../../common';
 import { Configuration } from '../../configuration';
