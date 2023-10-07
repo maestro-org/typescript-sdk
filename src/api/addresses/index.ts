@@ -7,6 +7,7 @@ import {
     UtxoRefsAtAddressOrderEnum,
     UtxosByAddressOrderEnum,
     UtxosByAddressQueryParams,
+    UtxosByAddressesQueryParams,
     UtxosByPaymentCredOrderEnum,
 } from './type';
 
@@ -113,24 +114,18 @@ export class AddressesApi extends BaseAPI {
      * Return detailed information on UTxOs which are controlled by some address in the specified list of addresses
      * @summary UTxOs at multiple addresses
      * @param {Array<string>} requestBody
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxosByAddressesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
     public utxosByAddresses(
         requestBody: Array<string>,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
-        count?: number | null,
-        cursor?: string | null,
+        queryParams?: UtxosByAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration)
-            .utxosByAddresses(requestBody, resolveDatums, withCbor, count, cursor, options)
+            .utxosByAddresses(requestBody, queryParams, options)
             .then((request) => request(this.axios));
     }
 

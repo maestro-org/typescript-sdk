@@ -27,6 +27,7 @@ import {
     UtxoRefsAtAddressQueryParams,
     UtxosByAddressOrderEnum,
     UtxosByAddressQueryParams,
+    UtxosByAddressesQueryParams,
     UtxosByPaymentCredOrderEnum,
 } from './type';
 
@@ -248,7 +249,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
          */
         utxosByAddress: async (
             address: string,
-            localVarQueryParameter?: UtxosByAddressQueryParams,
+            localVarQueryParameter: UtxosByAddressQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'address' is not null or undefined
@@ -284,19 +285,13 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
          * Return detailed information on UTxOs which are controlled by some address in the specified list of addresses
          * @summary UTxOs at multiple addresses
          * @param {Array<string>} requestBody
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxosByAddressesQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         utxosByAddresses: async (
             requestBody: Array<string>,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: UtxosByAddressesQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'requestBody' is not null or undefined
@@ -308,26 +303,9 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (resolveDatums !== undefined) {
-                localVarQueryParameter.resolve_datums = resolveDatums;
-            }
-
-            if (withCbor !== undefined) {
-                localVarQueryParameter.with_cbor = withCbor;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -538,27 +516,18 @@ export const AddressesApiFp = function (configuration: Configuration) {
          * Return detailed information on UTxOs which are controlled by some address in the specified list of addresses
          * @summary UTxOs at multiple addresses
          * @param {Array<string>} requestBody
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxosByAddressesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async utxosByAddresses(
             requestBody: Array<string>,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: UtxosByAddressesQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByAddresses(
                 requestBody,
-                resolveDatums,
-                withCbor,
-                count,
-                cursor,
+                queryParams,
                 options,
             );
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
