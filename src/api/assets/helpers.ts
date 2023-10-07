@@ -25,6 +25,7 @@ import {
     AssetAccountsQueryParams,
     AssetAddressesQueryParams,
     AssetTxsOrderEnum,
+    AssetTxsQueryParams,
     AssetUpdatesOrderEnum,
     AssetUtxosOrderEnum,
     PolicyTxsOrderEnum,
@@ -154,19 +155,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns a list of transactions in which a transaction input or output contains some of the specified asset
          * @summary Native asset transactions
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {number | null} [fromHeight] Return only transactions after supplied block height
-         * @param {number | null} [count] The max number of results per page
-         * @param {AssetTxsOrderEnum} [order] The order in which the results are sorted (by block height)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetTxsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         assetTxs: async (
             asset: string,
-            fromHeight?: number | null,
-            count?: number | null,
-            order?: AssetTxsOrderEnum,
-            cursor?: string | null,
+            localVarQueryParameter: AssetTxsQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -178,26 +173,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (fromHeight !== undefined) {
-                localVarQueryParameter.from_height = fromHeight;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -694,29 +672,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns a list of transactions in which a transaction input or output contains some of the specified asset
          * @summary Native asset transactions
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {number | null} [fromHeight] Return only transactions after supplied block height
-         * @param {number | null} [count] The max number of results per page
-         * @param {AssetTxsOrderEnum} [order] The order in which the results are sorted (by block height)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetTxsQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async assetTxs(
             asset: string,
-            fromHeight?: number | null,
-            count?: number | null,
-            order?: AssetTxsOrderEnum,
-            cursor?: string | null,
+            queryParams?: AssetTxsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetTx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetTxs(
-                asset,
-                fromHeight,
-                count,
-                order,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.assetTxs(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

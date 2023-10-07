@@ -5,6 +5,7 @@ import {
     AssetAccountsQueryParams,
     AssetAddressesQueryParams,
     AssetTxsOrderEnum,
+    AssetTxsQueryParams,
     AssetUpdatesOrderEnum,
     AssetUtxosOrderEnum,
     PolicyTxsOrderEnum,
@@ -66,24 +67,14 @@ export class AssetsApi extends BaseAPI {
      * Returns a list of transactions in which a transaction input or output contains some of the specified asset
      * @summary Native asset transactions
      * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-     * @param {number | null} [fromHeight] Return only transactions after supplied block height
-     * @param {number | null} [count] The max number of results per page
-     * @param {AssetTxsOrderEnum} [order] The order in which the results are sorted (by block height)
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AssetTxsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public assetTxs(
-        asset: string,
-        fromHeight?: number | null,
-        count?: number | null,
-        order?: AssetTxsOrderEnum,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public assetTxs(asset: string, queryParams?: AssetTxsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .assetTxs(asset, fromHeight, count, order, cursor, options)
+            .assetTxs(asset, queryParams, options)
             .then((request) => request(this.axios));
     }
 

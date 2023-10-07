@@ -80,3 +80,36 @@ export interface AssetAddressesQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for assetTxs.
+ * @export
+ * @interface AssetAddressesQueryParams
+ *
+ */
+export interface AssetTxsQueryParams {
+    /**
+     * Return only transactions after supplied block height
+     * @type {number | null}
+     * @memberof AssetTxsQueryParams
+     */
+    fromHeight?: number | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AssetTxsQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by block height)
+     * @type {AssetTxsOrderEnum}
+     * @memberof AssetTxsQueryParams
+     */
+    order?: AssetTxsOrderEnum;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AssetTxsQueryParams
+     */
+    cursor?: string | null;
+}
