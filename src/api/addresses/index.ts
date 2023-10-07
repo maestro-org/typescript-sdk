@@ -2,9 +2,9 @@ import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AddressesApiFp } from './helpers';
 import {
-    TxsByAddressOrderEnum,
     TxsByAddressQueryParams,
     TxsByPaymentCredOrderEnum,
+    TxsByPaymentCredQueryParams,
     UtxoRefsAtAddressOrderEnum,
     UtxosByAddressOrderEnum,
     UtxosByPaymentCredOrderEnum,
@@ -64,26 +64,18 @@ export class AddressesApi extends BaseAPI {
      * Returns transactions in which the specified payment credential spent or received funds.  Specifically, the transactions where: the payment credential was used in an address which controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
      * @summary Payment credential transactions
      * @param {string} credential Payment credential in bech32 format
-     * @param {number | null} [count] The max number of results per page
-     * @param {TxsByPaymentCredOrderEnum} [order] The order in which the results are sorted, by transaction age)
-     * @param {number | null} [from] Return only transactions minted on or after a specific slot
-     * @param {number | null} [to] Return only transactions minted on or before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {TxsByPaymentCredQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
     public txsByPaymentCred(
         credential: string,
-        count?: number | null,
-        order?: TxsByPaymentCredOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
+        queryParams?: TxsByPaymentCredQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration)
-            .txsByPaymentCred(credential, count, order, from, to, cursor, options)
+            .txsByPaymentCred(credential, queryParams, options)
             .then((request) => request(this.axios));
     }
 

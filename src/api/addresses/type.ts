@@ -78,3 +78,42 @@ export interface TxsByAddressQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for fetching transactions by payment credential.
+ * @export
+ * @interface TxsByPaymentCredQueryParams
+ *
+ */
+export interface TxsByPaymentCredQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof TxsByPaymentCredQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted, by transaction age
+     * @type {TxsByAddressOrderEnum}
+     * @memberof TxsByPaymentCredQueryParams
+     */
+    order?: TxsByPaymentCredOrderEnum;
+    /**
+     * Return only transactions minted on or after a specific slot
+     * @type {number | null}
+     * @memberof TxsByPaymentCredQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only transactions minted on or before a specific slot
+     * @type {number | null}
+     * @memberof TxsByPaymentCredQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof TxsByPaymentCredQueryParams
+     */
+    cursor?: string | null;
+}
