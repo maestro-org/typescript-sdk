@@ -185,3 +185,24 @@ export interface AssetUtxosQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for policyAccounts.
+ * @export
+ * @interface PolicyAccountsQueryParams
+ *
+ */
+export interface PolicyAccountsQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PolicyAccountsQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PolicyAccountsQueryParams
+     */
+    cursor?: string | null;
+}

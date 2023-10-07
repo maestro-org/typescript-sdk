@@ -10,6 +10,7 @@ import {
     AssetUpdatesQueryParams,
     AssetUtxosOrderEnum,
     AssetUtxosQueryParams,
+    PolicyAccountsQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -114,15 +115,14 @@ export class AssetsApi extends BaseAPI {
      * Returns a list of accounts (as stake/reward addresses) associated with addresses which control some of an asset of the specified policy; in other words, instead of returning the addresses which hold the assets, the addresses are merged by their delegation part/account. Assets controlled by Byron, enterprise, or pointer addresses are omitted.  CAUTION: An asset being associated with a particular stake account does not necessarily mean the owner of that account controls the asset; use \"asset addresses\" unless you are sure you want to work with stake keys. Read more [here]( https://medium.com/adamant-security/multi-sig-concerns-mangled-addresses-and-the-dangers-of-using-stake-keys-in-your-cardano-project-94894319b1d8).
      * @summary Accounts of addresses holding assets of specific policy
      * @param {string} policy Hex encoded Policy ID
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PolicyAccountsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public policyAccounts(policy: string, count?: number | null, cursor?: string | null, options?: AxiosRequestConfig) {
+    public policyAccounts(policy: string, queryParams?: PolicyAccountsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .policyAccounts(policy, count, cursor, options)
+            .policyAccounts(policy, queryParams, options)
             .then((request) => request(this.axios));
     }
 
