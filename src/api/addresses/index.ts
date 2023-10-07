@@ -9,6 +9,7 @@ import {
     UtxosByAddressQueryParams,
     UtxosByAddressesQueryParams,
     UtxosByPaymentCredOrderEnum,
+    UtxosByPaymentCredQueryParams,
 } from './type';
 
 /**
@@ -133,30 +134,18 @@ export class AddressesApi extends BaseAPI {
      * Return detailed information on UTxOs controlled by addresses which use the specified payment credential
      * @summary UTxOs by payment credential
      * @param {string} credential Payment credential in bech32 format
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-     * @param {number | null} [count] The max number of results per page
-     * @param {UtxosByPaymentCredOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created on or before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxosByPaymentCredQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
     public utxosByPaymentCred(
         credential: string,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
-        count?: number | null,
-        order?: UtxosByPaymentCredOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
+        queryParams?: UtxosByPaymentCredQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration)
-            .utxosByPaymentCred(credential, resolveDatums, withCbor, count, order, from, to, cursor, options)
+            .utxosByPaymentCred(credential, queryParams, options)
             .then((request) => request(this.axios));
     }
 }

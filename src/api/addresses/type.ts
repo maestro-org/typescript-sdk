@@ -240,3 +240,54 @@ export interface UtxosByAddressesQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for utxosByPaymentCred.
+ * @export
+ * @interface UtxosByPaymentCredQueryParams
+ *
+ */
+export interface UtxosByPaymentCredQueryParams {
+    /**
+     * Try find and include the corresponding datums for datum hashes
+     * @type {boolean | null}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    resolveDatums?: boolean | null;
+    /**
+     * Include the CBOR encodings of the transaction outputs in the response
+     * @type {boolean | null}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    withCbor?: boolean | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by slot at which UTxO was produced)
+     * @type {UtxosByPaymentCredOrderEnum}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    order?: UtxosByPaymentCredOrderEnum;
+    /**
+     * Return only UTxOs created on or after a specific slot
+     * @type {number | null}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only UTxOs created on or before a specific slot
+     * @type {number | null}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof UtxosByPaymentCredQueryParams
+     */
+    cursor?: string | null;
+}

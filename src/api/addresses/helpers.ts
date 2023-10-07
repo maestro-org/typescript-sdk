@@ -29,6 +29,7 @@ import {
     UtxosByAddressQueryParams,
     UtxosByAddressesQueryParams,
     UtxosByPaymentCredOrderEnum,
+    UtxosByPaymentCredQueryParams,
 } from './type';
 
 /**
@@ -327,25 +328,13 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
          * Return detailed information on UTxOs controlled by addresses which use the specified payment credential
          * @summary UTxOs by payment credential
          * @param {string} credential Payment credential in bech32 format
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-         * @param {number | null} [count] The max number of results per page
-         * @param {UtxosByPaymentCredOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created on or before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxosByPaymentCredQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         utxosByPaymentCred: async (
             credential: string,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            count?: number | null,
-            order?: UtxosByPaymentCredOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: UtxosByPaymentCredQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'credential' is not null or undefined
@@ -360,38 +349,9 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (resolveDatums !== undefined) {
-                localVarQueryParameter.resolve_datums = resolveDatums;
-            }
-
-            if (withCbor !== undefined) {
-                localVarQueryParameter.with_cbor = withCbor;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (from !== undefined) {
-                localVarQueryParameter.from = from;
-            }
-
-            if (to !== undefined) {
-                localVarQueryParameter.to = to;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -536,36 +496,18 @@ export const AddressesApiFp = function (configuration: Configuration) {
          * Return detailed information on UTxOs controlled by addresses which use the specified payment credential
          * @summary UTxOs by payment credential
          * @param {string} credential Payment credential in bech32 format
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-         * @param {number | null} [count] The max number of results per page
-         * @param {UtxosByPaymentCredOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created on or before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxosByPaymentCredQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async utxosByPaymentCred(
             credential: string,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            count?: number | null,
-            order?: UtxosByPaymentCredOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            queryParams?: UtxosByPaymentCredQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByPaymentCred(
                 credential,
-                resolveDatums,
-                withCbor,
-                count,
-                order,
-                from,
-                to,
-                cursor,
+                queryParams,
                 options,
             );
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
