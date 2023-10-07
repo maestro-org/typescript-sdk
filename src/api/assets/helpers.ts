@@ -26,7 +26,7 @@ import {
     AssetAddressesQueryParams,
     AssetTxsQueryParams,
     AssetUpdatesQueryParams,
-    AssetUtxosOrderEnum,
+    AssetUtxosQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -232,23 +232,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns references for UTxOs which contain some of the specified asset, each paired with the amount of the asset contained in the UTxO
          * @summary Native asset UTxOs
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {string | null} [address] Return only UTxOs controlled by a specific address (bech32 encoding)
-         * @param {number | null} [count] The max number of results per page
-         * @param {AssetUtxosOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetUpdatesQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         assetUtxos: async (
             asset: string,
-            address?: string | null,
-            count?: number | null,
-            order?: AssetUtxosOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: AssetUpdatesQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -260,34 +250,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (address !== undefined) {
-                localVarQueryParameter.address = address;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (from !== undefined) {
-                localVarQueryParameter.from = from;
-            }
-
-            if (to !== undefined) {
-                localVarQueryParameter.to = to;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -686,35 +651,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns references for UTxOs which contain some of the specified asset, each paired with the amount of the asset contained in the UTxO
          * @summary Native asset UTxOs
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {string | null} [address] Return only UTxOs controlled by a specific address (bech32 encoding)
-         * @param {number | null} [count] The max number of results per page
-         * @param {AssetUtxosOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetUpdatesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async assetUtxos(
             asset: string,
-            address?: string | null,
-            count?: number | null,
-            order?: AssetUtxosOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            queryParams?: AssetUtxosQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetUtxo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetUtxos(
-                asset,
-                address,
-                count,
-                order,
-                from,
-                to,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.assetUtxos(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

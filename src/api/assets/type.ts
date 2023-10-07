@@ -140,3 +140,48 @@ export interface AssetUpdatesQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for assetUtxos.
+ * @export
+ * @interface AssetUtxosQueryParams
+ *
+ */
+export interface AssetUtxosQueryParams {
+    /**
+     * Return only UTxOs controlled by a specific address (bech32 encoding)
+     * @type {string | null}
+     * @memberof AssetUtxosQueryParams
+     */
+    address?: string | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AssetUtxosQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by slot at which UTxO was produced)
+     * @type {AssetUtxosOrderEnum}
+     * @memberof AssetUtxosQueryParams
+     */
+    order?: AssetUtxosOrderEnum;
+    /**
+     * Return only UTxOs created on or after a specific slot
+     * @type {number | null}
+     * @memberof AssetUtxosQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only UTxOs created before a specific slot
+     * @type {number | null}
+     * @memberof AssetUtxosQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AssetUtxosQueryParams
+     */
+    cursor?: string | null;
+}

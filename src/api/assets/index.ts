@@ -9,6 +9,7 @@ import {
     AssetUpdatesOrderEnum,
     AssetUpdatesQueryParams,
     AssetUtxosOrderEnum,
+    AssetUtxosQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -98,28 +99,14 @@ export class AssetsApi extends BaseAPI {
      * Returns references for UTxOs which contain some of the specified asset, each paired with the amount of the asset contained in the UTxO
      * @summary Native asset UTxOs
      * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-     * @param {string | null} [address] Return only UTxOs controlled by a specific address (bech32 encoding)
-     * @param {number | null} [count] The max number of results per page
-     * @param {AssetUtxosOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AssetUtxosQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public assetUtxos(
-        asset: string,
-        address?: string | null,
-        count?: number | null,
-        order?: AssetUtxosOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public assetUtxos(asset: string, queryParams?: AssetUtxosQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .assetUtxos(asset, address, count, order, from, to, cursor, options)
+            .assetUtxos(asset, queryParams, options)
             .then((request) => request(this.axios));
     }
 
