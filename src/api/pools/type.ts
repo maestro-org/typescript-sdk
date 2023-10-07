@@ -89,3 +89,36 @@ export interface PoolDelegatorsQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for poolHistory.
+ * @export
+ * @interface PoolHistoryQueryParams
+ *
+ */
+export interface PoolHistoryQueryParams {
+    /**
+     * Epoch number to fetch results for
+     * @type {number | null}
+     * @memberof PoolHistoryQueryParams
+     */
+    epochNo?: number | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PoolHistoryQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by block absolute slot)
+     * @type {PoolHistoryOrderEnum}
+     * @memberof PoolHistoryQueryParams
+     */
+    order?: PoolHistoryOrderEnum;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PoolHistoryQueryParams
+     */
+    cursor?: string | null;
+}
