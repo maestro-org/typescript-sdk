@@ -7,6 +7,7 @@ import {
     AssetTxsOrderEnum,
     AssetTxsQueryParams,
     AssetUpdatesOrderEnum,
+    AssetUpdatesQueryParams,
     AssetUtxosOrderEnum,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
@@ -82,22 +83,14 @@ export class AssetsApi extends BaseAPI {
      * Returns a list of transactions in which some of the specified asset was minted or burned
      * @summary Native asset updates
      * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-     * @param {number | null} [count] The max number of results per page
-     * @param {AssetUpdatesOrderEnum} [order] The order in which the results are sorted (by block height)
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AssetUpdatesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public assetUpdates(
-        asset: string,
-        count?: number | null,
-        order?: AssetUpdatesOrderEnum,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public assetUpdates(asset: string, queryParams?: AssetUpdatesQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .assetUpdates(asset, count, order, cursor, options)
+            .assetUpdates(asset, queryParams, options)
             .then((request) => request(this.axios));
     }
 

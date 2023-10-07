@@ -19,16 +19,11 @@ import {
     PaginatedUtxoWithSlot,
 } from '../type';
 import {
-    TxsByAddressOrderEnum,
     TxsByAddressQueryParams,
-    TxsByPaymentCredOrderEnum,
     TxsByPaymentCredQueryParams,
-    UtxoRefsAtAddressOrderEnum,
     UtxoRefsAtAddressQueryParams,
-    UtxosByAddressOrderEnum,
     UtxosByAddressQueryParams,
     UtxosByAddressesQueryParams,
-    UtxosByPaymentCredOrderEnum,
     UtxosByPaymentCredQueryParams,
 } from './type';
 

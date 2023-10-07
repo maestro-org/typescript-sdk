@@ -4,11 +4,8 @@ import { AddressesApiFp } from './helpers';
 import {
     TxsByAddressQueryParams,
     TxsByPaymentCredQueryParams,
-    UtxoRefsAtAddressOrderEnum,
-    UtxosByAddressOrderEnum,
     UtxosByAddressQueryParams,
     UtxosByAddressesQueryParams,
-    UtxosByPaymentCredOrderEnum,
     UtxosByPaymentCredQueryParams,
 } from './type';
 

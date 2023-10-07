@@ -24,9 +24,8 @@ import {
 import {
     AssetAccountsQueryParams,
     AssetAddressesQueryParams,
-    AssetTxsOrderEnum,
     AssetTxsQueryParams,
-    AssetUpdatesOrderEnum,
+    AssetUpdatesQueryParams,
     AssetUtxosOrderEnum,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
@@ -194,17 +193,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns a list of transactions in which some of the specified asset was minted or burned
          * @summary Native asset updates
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {number | null} [count] The max number of results per page
-         * @param {AssetUpdatesOrderEnum} [order] The order in which the results are sorted (by block height)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetUpdatesQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         assetUpdates: async (
             asset: string,
-            count?: number | null,
-            order?: AssetUpdatesOrderEnum,
-            cursor?: string | null,
+            localVarQueryParameter: AssetUpdatesQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -216,22 +211,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -688,26 +670,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns a list of transactions in which some of the specified asset was minted or burned
          * @summary Native asset updates
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {number | null} [count] The max number of results per page
-         * @param {AssetUpdatesOrderEnum} [order] The order in which the results are sorted (by block height)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetUpdatesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async assetUpdates(
             asset: string,
-            count?: number | null,
-            order?: AssetUpdatesOrderEnum,
-            cursor?: string | null,
+            queryParams?: AssetUpdatesQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedMintingTx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetUpdates(
-                asset,
-                count,
-                order,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.assetUpdates(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

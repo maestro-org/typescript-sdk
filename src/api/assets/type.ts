@@ -84,7 +84,7 @@ export interface AssetAddressesQueryParams {
 /**
  * Query parameters for assetTxs.
  * @export
- * @interface AssetAddressesQueryParams
+ * @interface AssetTxsQueryParams
  *
  */
 export interface AssetTxsQueryParams {
@@ -110,6 +110,33 @@ export interface AssetTxsQueryParams {
      * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
      * @type {string | null}
      * @memberof AssetTxsQueryParams
+     */
+    cursor?: string | null;
+}
+
+/**
+ * Query parameters for assetUpdates.
+ * @export
+ * @interface AssetUpdatesQueryParams
+ *
+ */
+export interface AssetUpdatesQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AssetUpdatesQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by block height)
+     * @type {AssetUpdatesOrderEnum}
+     * @memberof AssetUpdatesQueryParams
+     */
+    order?: AssetUpdatesOrderEnum;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AssetUpdatesQueryParams
      */
     cursor?: string | null;
 }
