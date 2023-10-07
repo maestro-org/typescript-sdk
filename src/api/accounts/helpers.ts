@@ -29,7 +29,7 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
          * Returns a list of addresses seen on-chain which use the specified stake key
          * @summary Stake account addresses
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {AccountAddressesQueryParams | null} [localVarQueryParameter] Query parameters.
+         * @param {AccountAddressesQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -460,7 +460,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
          * Returns a list of addresses seen on-chain which use the specified stake key
          * @summary Stake account addresses
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {AccountAddressesQueryParams | null} [queryParams] Query parameters.
+         * @param {AccountAddressesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */

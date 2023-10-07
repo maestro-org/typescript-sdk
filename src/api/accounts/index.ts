@@ -14,7 +14,7 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of addresses seen on-chain which use the specified stake key
      * @summary Stake account addresses
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {AccountAddressesQueryParams | null} [queryParams] Query parameters.
+     * @param {AccountAddressesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
