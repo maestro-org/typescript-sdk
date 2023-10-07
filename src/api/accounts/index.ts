@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AccountsApiFp } from './helpers';
-import { AccountAddressesQueryParams } from './type';
+import { AccountAddressesQueryParams, AccountAssetsQueryParams } from './type';
 
 /**
  * AccountsApi - object-oriented interface
@@ -33,22 +33,14 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of native assets which are owned by addresses with the specified stake key
      * @summary Stake account assets
      * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
-     * @param {string | null} [policy] Filter results to only show assets of the specified policy
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountAssetsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountAssets(
-        stakeAddr: string,
-        policy?: string | null,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountAssets(stakeAddr: string, queryParams?: AccountAssetsQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountAssets(stakeAddr, policy, count, cursor, options)
+            .accountAssets(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 

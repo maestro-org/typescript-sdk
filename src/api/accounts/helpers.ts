@@ -17,7 +17,7 @@ import {
     PaginatedAccountReward,
     PaginatedAccountUpdate,
 } from '../type';
-import { AccountAddressesQueryParams } from './type';
+import { AccountAddressesQueryParams, AccountAssetsQueryParams } from './type';
 
 /**
  * AccountsApi - axios parameter creator
@@ -71,17 +71,13 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
          * Returns a list of native assets which are owned by addresses with the specified stake key
          * @summary Stake account assets
          * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
-         * @param {string | null} [policy] Filter results to only show assets of the specified policy
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountAssetsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         accountAssets: async (
             stakeAddr: string,
-            policy?: string | null,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: AccountAssetsQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'stakeAddr' is not null or undefined
@@ -96,22 +92,9 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (policy !== undefined) {
-                localVarQueryParameter.policy = policy;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -332,122 +315,122 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
     };
 };
 
-/**
- * AccountsApi - factory interface
- * @export
- */
-export const AccountsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AccountsApiFp(configuration);
-    return {
-        /**
-         * Returns a list of addresses seen on-chain which use the specified stake key
-         * @summary Stake account addresses
-         * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {AccountAddressesQueryParams} [queryParams] Query parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountAddresses(
-            stakeAddr: string,
-            queryParams: AccountAddressesQueryParams,
-            options?: any,
-        ): AxiosPromise<PaginatedAddress> {
-            return localVarFp
-                .accountAddresses(stakeAddr, queryParams, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of native assets which are owned by addresses with the specified stake key
-         * @summary Stake account assets
-         * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
-         * @param {string | null} [policy] Filter results to only show assets of the specified policy
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountAssets(
-            stakeAddr: string,
-            policy?: string | null,
-            count?: number | null,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedAsset> {
-            return localVarFp
-                .accountAssets(stakeAddr, policy, count, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns per-epoch history for the specified stake key
-         * @summary Stake account history
-         * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [epochNo] Fetch result for only a specific epoch
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountHistory(
-            stakeAddr: string,
-            epochNo?: number | null,
-            count?: number | null,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedAccountHistory> {
-            return localVarFp
-                .accountHistory(stakeAddr, epochNo, count, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns various information regarding a stake account
-         * @summary Stake account information
-         * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountInfo(stakeAddr: string, options?: any): AxiosPromise<TimestampedAccountInfo> {
-            return localVarFp.accountInfo(stakeAddr, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
-         * @summary Stake account rewards
-         * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountRewards(
-            stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedAccountReward> {
-            return localVarFp
-                .accountRewards(stakeAddr, count, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of updates relating to the specified stake key ( `registration`, `deregistration`, `delegation`, `withdrawal`)
-         * @summary Stake account updates
-         * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountUpdates(
-            stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
-            options?: any,
-        ): AxiosPromise<PaginatedAccountUpdate> {
-            return localVarFp
-                .accountUpdates(stakeAddr, count, cursor, options)
-                .then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * AccountsApi - factory interface
+//  * @export
+//  */
+// export const AccountsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = AccountsApiFp(configuration);
+//     return {
+//         /**
+//          * Returns a list of addresses seen on-chain which use the specified stake key
+//          * @summary Stake account addresses
+//          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+//          * @param {AccountAddressesQueryParams} [queryParams] Query parameters.
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         accountAddresses(
+//             stakeAddr: string,
+//             queryParams: AccountAddressesQueryParams,
+//             options?: any,
+//         ): AxiosPromise<PaginatedAddress> {
+//             return localVarFp
+//                 .accountAddresses(stakeAddr, queryParams, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a list of native assets which are owned by addresses with the specified stake key
+//          * @summary Stake account assets
+//          * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
+//          * @param {string | null} [policy] Filter results to only show assets of the specified policy
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         accountAssets(
+//             stakeAddr: string,
+//             policy?: string | null,
+//             count?: number | null,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedAsset> {
+//             return localVarFp
+//                 .accountAssets(stakeAddr, policy, count, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns per-epoch history for the specified stake key
+//          * @summary Stake account history
+//          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+//          * @param {number | null} [epochNo] Fetch result for only a specific epoch
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         accountHistory(
+//             stakeAddr: string,
+//             epochNo?: number | null,
+//             count?: number | null,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedAccountHistory> {
+//             return localVarFp
+//                 .accountHistory(stakeAddr, epochNo, count, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns various information regarding a stake account
+//          * @summary Stake account information
+//          * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         accountInfo(stakeAddr: string, options?: any): AxiosPromise<TimestampedAccountInfo> {
+//             return localVarFp.accountInfo(stakeAddr, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
+//          * @summary Stake account rewards
+//          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         accountRewards(
+//             stakeAddr: string,
+//             count?: number | null,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedAccountReward> {
+//             return localVarFp
+//                 .accountRewards(stakeAddr, count, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a list of updates relating to the specified stake key ( `registration`, `deregistration`, `delegation`, `withdrawal`)
+//          * @summary Stake account updates
+//          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+//          * @param {number | null} [count] The max number of results per page
+//          * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         accountUpdates(
+//             stakeAddr: string,
+//             count?: number | null,
+//             cursor?: string | null,
+//             options?: any,
+//         ): AxiosPromise<PaginatedAccountUpdate> {
+//             return localVarFp
+//                 .accountUpdates(stakeAddr, count, cursor, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//     };
+// };
 
 /**
  * AccountsApi - functional programming interface
@@ -476,26 +459,16 @@ export const AccountsApiFp = function (configuration: Configuration) {
          * Returns a list of native assets which are owned by addresses with the specified stake key
          * @summary Stake account assets
          * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
-         * @param {string | null} [policy] Filter results to only show assets of the specified policy
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountAssetsQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async accountAssets(
             stakeAddr: string,
-            policy?: string | null,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: AccountAssetsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAssets(
-                stakeAddr,
-                policy,
-                count,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAssets(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
