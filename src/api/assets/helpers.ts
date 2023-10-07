@@ -31,6 +31,7 @@ import {
     PolicyAddressesQueryParams,
     PolicyInfoQueryParams,
     PolicyTxsOrderEnum,
+    PolicyTxsQueryParams,
     PolicyUtxosOrderEnum,
 } from './type';
 
@@ -397,19 +398,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns a list of transactions in which a transaction input or output contains some of at least one asset of the specified minting policy ID
          * @summary Transactions moving assets of specific policy
          * @param {string} policy Hex encoded policy ID
-         * @param {number | null} [fromHeight] Return only transactions after supplied block height
-         * @param {number | null} [count] The max number of results per page
-         * @param {PolicyTxsOrderEnum} [order] The order in which the results are sorted (by block height)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyTxsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         policyTxs: async (
             policy: string,
-            fromHeight?: number | null,
-            count?: number | null,
-            order?: PolicyTxsOrderEnum,
-            cursor?: string | null,
+            localVarQueryParameter: PolicyTxsQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'policy' is not null or undefined
@@ -424,26 +419,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (fromHeight !== undefined) {
-                localVarQueryParameter.from_height = fromHeight;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -685,29 +663,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns a list of transactions in which a transaction input or output contains some of at least one asset of the specified minting policy ID
          * @summary Transactions moving assets of specific policy
          * @param {string} policy Hex encoded policy ID
-         * @param {number | null} [fromHeight] Return only transactions after supplied block height
-         * @param {number | null} [count] The max number of results per page
-         * @param {PolicyTxsOrderEnum} [order] The order in which the results are sorted (by block height)
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyTxsQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async policyTxs(
             policy: string,
-            fromHeight?: number | null,
-            count?: number | null,
-            order?: PolicyTxsOrderEnum,
-            cursor?: string | null,
+            queryParams?: PolicyTxsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetTx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyTxs(
-                policy,
-                fromHeight,
-                count,
-                order,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.policyTxs(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

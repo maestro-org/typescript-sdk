@@ -14,6 +14,7 @@ import {
     PolicyAddressesQueryParams,
     PolicyInfoQueryParams,
     PolicyTxsOrderEnum,
+    PolicyTxsQueryParams,
     PolicyUtxosOrderEnum,
 } from './type';
 
@@ -162,24 +163,14 @@ export class AssetsApi extends BaseAPI {
      * Returns a list of transactions in which a transaction input or output contains some of at least one asset of the specified minting policy ID
      * @summary Transactions moving assets of specific policy
      * @param {string} policy Hex encoded policy ID
-     * @param {number | null} [fromHeight] Return only transactions after supplied block height
-     * @param {number | null} [count] The max number of results per page
-     * @param {PolicyTxsOrderEnum} [order] The order in which the results are sorted (by block height)
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PolicyTxsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public policyTxs(
-        policy: string,
-        fromHeight?: number | null,
-        count?: number | null,
-        order?: PolicyTxsOrderEnum,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public policyTxs(policy: string, queryParams?: PolicyTxsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .policyTxs(policy, fromHeight, count, order, cursor, options)
+            .policyTxs(policy, queryParams, options)
             .then((request) => request(this.axios));
     }
 

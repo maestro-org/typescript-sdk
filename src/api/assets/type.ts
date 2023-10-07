@@ -248,3 +248,36 @@ export interface PolicyInfoQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for policyTxs.
+ * @export
+ * @interface PolicyTxsQueryParams
+ *
+ */
+export interface PolicyTxsQueryParams {
+    /**
+     * Return only transactions after supplied block height
+     * @type {number | null}
+     * @memberof PolicyTxsQueryParams
+     */
+    fromHeight?: number | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PolicyTxsQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by block height)
+     * @type {AssetTxsOrderEnum}
+     * @memberof PolicyTxsQueryParams
+     */
+    order?: AssetTxsOrderEnum;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PolicyTxsQueryParams
+     */
+    cursor?: string | null;
+}
