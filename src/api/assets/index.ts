@@ -12,6 +12,7 @@ import {
     AssetUtxosQueryParams,
     PolicyAccountsQueryParams,
     PolicyAddressesQueryParams,
+    PolicyInfoQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -146,15 +147,14 @@ export class AssetsApi extends BaseAPI {
      * Returns information about assets of the specified minting policy ID
      * @summary Information on assets of specific policy
      * @param {string} policy Hex encoded policy ID
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PolicyInfoQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public policyInfo(policy: string, count?: number | null, cursor?: string | null, options?: AxiosRequestConfig) {
+    public policyInfo(policy: string, queryParams?: PolicyInfoQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .policyInfo(policy, count, cursor, options)
+            .policyInfo(policy, queryParams, options)
             .then((request) => request(this.axios));
     }
 

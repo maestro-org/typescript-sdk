@@ -29,6 +29,7 @@ import {
     AssetUtxosQueryParams,
     PolicyAccountsQueryParams,
     PolicyAddressesQueryParams,
+    PolicyInfoQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -357,15 +358,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns information about assets of the specified minting policy ID
          * @summary Information on assets of specific policy
          * @param {string} policy Hex encoded policy ID
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyInfoQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         policyInfo: async (
             policy: string,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: PolicyInfoQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'policy' is not null or undefined
@@ -377,18 +376,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -679,18 +669,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns information about assets of the specified minting policy ID
          * @summary Information on assets of specific policy
          * @param {string} policy Hex encoded policy ID
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyInfoQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async policyInfo(
             policy: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: PolicyInfoQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyInfo(policy, count, cursor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.policyInfo(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
