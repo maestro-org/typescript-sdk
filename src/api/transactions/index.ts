@@ -78,20 +78,18 @@ export class TransactionsApi extends BaseAPI {
      * Returns the specified transaction outputs
      * @summary Transaction outputs by output references
      * @param {Array<string>} requestBody
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+     * @param {TxosByTxoRefsQueryParams} [queryParams] Query Parameters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TransactionsApi
      */
     public txosByTxoRefs(
         requestBody: Array<string>,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
+        queryParams?: TxoByTxoRefQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return TransactionsApiFp(this.configuration)
-            .txosByTxoRefs(requestBody, resolveDatums, withCbor, options)
+            .txosByTxoRefs(requestBody, queryParams, options)
             .then((request) => request(this.axios));
     }
 }

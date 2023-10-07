@@ -17,7 +17,7 @@ import {
     TimestampedUtxo,
     PaginatedUtxoWithBytes,
 } from '../type';
-import { TxoByTxoRefQueryParams } from './type';
+import { TxoByTxoRefQueryParams, TxosByTxoRefsQueryParams } from './type';
 
 /**
  * TransactionsApi - axios parameter creator
@@ -190,15 +190,13 @@ export const TransactionsApiAxiosParamCreator = function (configuration: Configu
          * Returns the specified transaction outputs
          * @summary Transaction outputs by output references
          * @param {Array<string>} requestBody
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+         * @param {TxosByTxoRefsQueryParams} [localVarQueryParameter] Query Parameters
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         txosByTxoRefs: async (
             requestBody: Array<string>,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
+            localVarQueryParameter: TxosByTxoRefsQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'requestBody' is not null or undefined
@@ -210,18 +208,9 @@ export const TransactionsApiAxiosParamCreator = function (configuration: Configu
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (resolveDatums !== undefined) {
-                localVarQueryParameter.resolve_datums = resolveDatums;
-            }
-
-            if (withCbor !== undefined) {
-                localVarQueryParameter.with_cbor = withCbor;
-            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -315,23 +304,16 @@ export const TransactionsApiFp = function (configuration: Configuration) {
          * Returns the specified transaction outputs
          * @summary Transaction outputs by output references
          * @param {Array<string>} requestBody
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+         * @param {TxosByTxoRefsQueryParams} [queryParams] Query Parameters
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async txosByTxoRefs(
             requestBody: Array<string>,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
+            queryParams?: TxosByTxoRefsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithBytes>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txosByTxoRefs(
-                requestBody,
-                resolveDatums,
-                withCbor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txosByTxoRefs(requestBody, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
     };
