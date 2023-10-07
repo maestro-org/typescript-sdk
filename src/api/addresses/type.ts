@@ -156,3 +156,54 @@ export interface UtxoRefsAtAddressQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for utxoRefsAtAddress.
+ * @export
+ * @interface UtxosByAddressQueryParams
+ *
+ */
+export interface UtxosByAddressQueryParams {
+    /**
+     * Try find and include the corresponding datums for datum hashes
+     * @type {boolean | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    resolveDatums?: boolean | null;
+    /**
+     * Include the CBOR encodings of the transaction outputs in the response
+     * @type {boolean | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    withCbor?: boolean | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by slot at which UTxO was produced)
+     * @type {UtxosByAddressOrderEnum}
+     * @memberof UtxosByAddressQueryParams
+     */
+    order?: UtxosByAddressOrderEnum;
+    /**
+     * Return only UTxOs created on or after a specific slot
+     * @type {number | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only UTxOs created before a specific slot
+     * @type {number | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    cursor?: string | null;
+}

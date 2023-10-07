@@ -6,6 +6,7 @@ import {
     TxsByPaymentCredQueryParams,
     UtxoRefsAtAddressOrderEnum,
     UtxosByAddressOrderEnum,
+    UtxosByAddressQueryParams,
     UtxosByPaymentCredOrderEnum,
 } from './type';
 
@@ -97,30 +98,14 @@ export class AddressesApi extends BaseAPI {
      * Return detailed information on UTxOs controlled by an address
      * @summary UTxOs at an address
      * @param {string} address Address in bech32 format
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-     * @param {number | null} [count] The max number of results per page
-     * @param {UtxosByAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxosByAddressQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public utxosByAddress(
-        address: string,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
-        count?: number | null,
-        order?: UtxosByAddressOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public utxosByAddress(address: string, queryParams?: UtxosByAddressQueryParams, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration)
-            .utxosByAddress(address, resolveDatums, withCbor, count, order, from, to, cursor, options)
+            .utxosByAddress(address, queryParams, options)
             .then((request) => request(this.axios));
     }
 

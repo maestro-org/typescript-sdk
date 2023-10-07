@@ -26,6 +26,7 @@ import {
     UtxoRefsAtAddressOrderEnum,
     UtxoRefsAtAddressQueryParams,
     UtxosByAddressOrderEnum,
+    UtxosByAddressQueryParams,
     UtxosByPaymentCredOrderEnum,
 } from './type';
 
@@ -241,25 +242,13 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
          * Return detailed information on UTxOs controlled by an address
          * @summary UTxOs at an address
          * @param {string} address Address in bech32 format
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-         * @param {number | null} [count] The max number of results per page
-         * @param {UtxosByAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxosByAddressQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         utxosByAddress: async (
             address: string,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            count?: number | null,
-            order?: UtxosByAddressOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter?: UtxosByAddressQueryParams,
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'address' is not null or undefined
@@ -274,38 +263,9 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (resolveDatums !== undefined) {
-                localVarQueryParameter.resolve_datums = resolveDatums;
-            }
-
-            if (withCbor !== undefined) {
-                localVarQueryParameter.with_cbor = withCbor;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (from !== undefined) {
-                localVarQueryParameter.from = from;
-            }
-
-            if (to !== undefined) {
-                localVarQueryParameter.to = to;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -562,38 +522,16 @@ export const AddressesApiFp = function (configuration: Configuration) {
          * Return detailed information on UTxOs controlled by an address
          * @summary UTxOs at an address
          * @param {string} address Address in bech32 format
-         * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-         * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-         * @param {number | null} [count] The max number of results per page
-         * @param {UtxosByAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {UtxosByAddressQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async utxosByAddress(
             address: string,
-            resolveDatums?: boolean | null,
-            withCbor?: boolean | null,
-            count?: number | null,
-            order?: UtxosByAddressOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            queryParams?: UtxosByAddressQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByAddress(
-                address,
-                resolveDatums,
-                withCbor,
-                count,
-                order,
-                from,
-                to,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByAddress(address, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
