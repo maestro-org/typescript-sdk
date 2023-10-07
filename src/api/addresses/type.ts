@@ -165,6 +165,12 @@ export interface UtxoRefsAtAddressQueryParams {
  */
 export interface UtxosByAddressQueryParams {
     /**
+     * Return only UTxOs which contain some of a specific asset (asset formatted as concatenation of hex encoded policy and asset name)
+     * @type {string | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    asset?: string | null;
+    /**
      * Try find and include the corresponding datums for datum hashes
      * @type {boolean | null}
      * @memberof UtxosByAddressQueryParams
@@ -248,6 +254,12 @@ export interface UtxosByAddressesQueryParams {
  *
  */
 export interface UtxosByPaymentCredQueryParams {
+    /**
+     * Return only UTxOs which contain some of a specific asset (asset formatted as concatenation of hex encoded policy and asset name)
+     * @type {string | null}
+     * @memberof UtxosByAddressQueryParams
+     */
+    asset?: string | null;
     /**
      * Try find and include the corresponding datums for datum hashes
      * @type {boolean | null}
