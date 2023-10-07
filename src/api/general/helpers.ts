@@ -204,48 +204,48 @@ export const GeneralApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * GeneralApi - factory interface
- * @export
- */
-export const GeneralApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GeneralApiFp(configuration);
-    return {
-        /**
-         * Returns the identifier of the most recently processed block on the network
-         * @summary Chain tip
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        chainTip(options?: any): AxiosPromise<TimestampedChainTip> {
-            return localVarFp.chainTip(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the blockchain era history
-         * @summary Era history
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        eraHistory(options?: any): AxiosPromise<TimestampedEraSummaries> {
-            return localVarFp.eraHistory(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the current blockchain protocol parameters
-         * @summary Protocol parameters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        protocolParams(options?: any): AxiosPromise<TimestampedProtocolParameters> {
-            return localVarFp.protocolParams(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the blockchain system start time
-         * @summary Blockchain system start
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        systemStart(options?: any): AxiosPromise<TimestampedSystemStart> {
-            return localVarFp.systemStart(options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * GeneralApi - factory interface
+//  * @export
+//  */
+// export const GeneralApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = GeneralApiFp(configuration);
+//     return {
+//         /**
+//          * Returns the identifier of the most recently processed block on the network
+//          * @summary Chain tip
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         chainTip(options?: any): AxiosPromise<TimestampedChainTip> {
+//             return localVarFp.chainTip(options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the blockchain era history
+//          * @summary Era history
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         eraHistory(options?: any): AxiosPromise<TimestampedEraSummaries> {
+//             return localVarFp.eraHistory(options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the current blockchain protocol parameters
+//          * @summary Protocol parameters
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         protocolParams(options?: any): AxiosPromise<TimestampedProtocolParameters> {
+//             return localVarFp.protocolParams(options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the blockchain system start time
+//          * @summary Blockchain system start
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         systemStart(options?: any): AxiosPromise<TimestampedSystemStart> {
+//             return localVarFp.systemStart(options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

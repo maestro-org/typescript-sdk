@@ -82,22 +82,22 @@ export const EcosystemApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * EcosystemApi - factory interface
- * @export
- */
-export const EcosystemApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = EcosystemApiFp(configuration);
-    return {
-        /**
-         * Returns the Cardano address corresponding to an ADA Handle
-         * @summary Resolve ADA Handle
-         * @param {string} handle Ada Handle to resolve
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adahandleResolve(handle: string, options?: any): AxiosPromise<TimestampedAddress> {
-            return localVarFp.adahandleResolve(handle, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * EcosystemApi - factory interface
+//  * @export
+//  */
+// export const EcosystemApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = EcosystemApiFp(configuration);
+//     return {
+//         /**
+//          * Returns the Cardano address corresponding to an ADA Handle
+//          * @summary Resolve ADA Handle
+//          * @param {string} handle Ada Handle to resolve
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         adahandleResolve(handle: string, options?: any): AxiosPromise<TimestampedAddress> {
+//             return localVarFp.adahandleResolve(handle, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

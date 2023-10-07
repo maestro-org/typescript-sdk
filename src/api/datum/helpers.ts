@@ -82,22 +82,22 @@ export const DatumApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * DatumApi - factory interface
- * @export
- */
-export const DatumApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = DatumApiFp(configuration);
-    return {
-        /**
-         * Returns the datum corresponding to the specified datum hash, if the datum has been seen on-chain
-         * @summary Datum by datum hash
-         * @param {string} datumHash Hex encoded datum hash
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        lookupDatum(datumHash: string, options?: any): AxiosPromise<TimestampedDatum> {
-            return localVarFp.lookupDatum(datumHash, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * DatumApi - factory interface
+//  * @export
+//  */
+// export const DatumApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = DatumApiFp(configuration);
+//     return {
+//         /**
+//          * Returns the datum corresponding to the specified datum hash, if the datum has been seen on-chain
+//          * @summary Datum by datum hash
+//          * @param {string} datumHash Hex encoded datum hash
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         lookupDatum(datumHash: string, options?: any): AxiosPromise<TimestampedDatum> {
+//             return localVarFp.lookupDatum(datumHash, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

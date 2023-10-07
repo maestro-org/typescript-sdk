@@ -1,6 +1,6 @@
 {
   "name": "@maestro-org/typescript-sdk",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "TypeScript SDK for the Maestro Dapp Platform",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
