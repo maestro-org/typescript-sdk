@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AccountsApiFp } from './helpers';
+import { AccountAddressesQueryParams } from './type';
 
 /**
  * AccountsApi - object-oriented interface
@@ -13,20 +14,18 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of addresses seen on-chain which use the specified stake key
      * @summary Stake account addresses
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountAddressesQueryParams | null} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
     public accountAddresses(
         stakeAddr: string,
-        count?: number | null,
-        cursor?: string | null,
+        queryParams?: AccountAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AccountsApiFp(this.configuration)
-            .accountAddresses(stakeAddr, count, cursor, options)
+            .accountAddresses(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -132,3 +131,5 @@ export class AccountsApi extends BaseAPI {
             .then((request) => request(this.axios));
     }
 }
+
+export * from './type';

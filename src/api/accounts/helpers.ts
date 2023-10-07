@@ -17,6 +17,7 @@ import {
     PaginatedAccountReward,
     PaginatedAccountUpdate,
 } from '../type';
+import { AccountAddressesQueryParams } from './type';
 
 /**
  * AccountsApi - axios parameter creator
@@ -28,15 +29,13 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
          * Returns a list of addresses seen on-chain which use the specified stake key
          * @summary Stake account addresses
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountAddressesQueryParams | null} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         accountAddresses: async (
             stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: AccountAddressesQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'stakeAddr' is not null or undefined
@@ -51,18 +50,9 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -353,19 +343,17 @@ export const AccountsApiFactory = function (configuration: Configuration, basePa
          * Returns a list of addresses seen on-chain which use the specified stake key
          * @summary Stake account addresses
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountAddressesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         accountAddresses(
             stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams: AccountAddressesQueryParams,
             options?: any,
         ): AxiosPromise<PaginatedAddress> {
             return localVarFp
-                .accountAddresses(stakeAddr, count, cursor, options)
+                .accountAddresses(stakeAddr, queryParams, options)
                 .then((request) => request(axios, basePath));
         },
         /**
@@ -472,23 +460,16 @@ export const AccountsApiFp = function (configuration: Configuration) {
          * Returns a list of addresses seen on-chain which use the specified stake key
          * @summary Stake account addresses
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountAddressesQueryParams | null} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async accountAddresses(
             stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: AccountAddressesQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAddress>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAddresses(
-                stakeAddr,
-                count,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAddresses(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
