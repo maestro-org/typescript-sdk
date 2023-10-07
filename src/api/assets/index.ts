@@ -11,6 +11,7 @@ import {
     AssetUtxosOrderEnum,
     AssetUtxosQueryParams,
     PolicyAccountsQueryParams,
+    PolicyAddressesQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -130,20 +131,14 @@ export class AssetsApi extends BaseAPI {
      * Returns a list of addresses which hold some of an asset of the specified policy ID
      * @summary Addresses holding assets of specific policy
      * @param {string} policy Hex encoded Policy ID
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PolicyAddressesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public policyAddresses(
-        policy: string,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public policyAddresses(policy: string, queryParams?: PolicyAddressesQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .policyAddresses(policy, count, cursor, options)
+            .policyAddresses(policy, queryParams, options)
             .then((request) => request(this.axios));
     }
 

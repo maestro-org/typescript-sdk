@@ -206,3 +206,24 @@ export interface PolicyAccountsQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for policyAddresses.
+ * @export
+ * @interface PolicyAddressesQueryParams
+ *
+ */
+export interface PolicyAddressesQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PolicyAddressesQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PolicyAddressesQueryParams
+     */
+    cursor?: string | null;
+}

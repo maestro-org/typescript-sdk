@@ -28,6 +28,7 @@ import {
     AssetUpdatesQueryParams,
     AssetUtxosQueryParams,
     PolicyAccountsQueryParams,
+    PolicyAddressesQueryParams,
     PolicyTxsOrderEnum,
     PolicyUtxosOrderEnum,
 } from './type';
@@ -314,15 +315,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns a list of addresses which hold some of an asset of the specified policy ID
          * @summary Addresses holding assets of specific policy
          * @param {string} policy Hex encoded Policy ID
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyAddressesQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         policyAddresses: async (
             policy: string,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: PolicyAddressesQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'policy' is not null or undefined
@@ -337,18 +336,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -673,18 +663,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns a list of addresses which hold some of an asset of the specified policy ID
          * @summary Addresses holding assets of specific policy
          * @param {string} policy Hex encoded Policy ID
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyAddressesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async policyAddresses(
             policy: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: PolicyAddressesQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyHolder>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyAddresses(policy, count, cursor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.policyAddresses(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
