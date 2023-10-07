@@ -4,18 +4,14 @@ import { AssetsApiFp } from './helpers';
 import {
     AssetAccountsQueryParams,
     AssetAddressesQueryParams,
-    AssetTxsOrderEnum,
     AssetTxsQueryParams,
-    AssetUpdatesOrderEnum,
     AssetUpdatesQueryParams,
-    AssetUtxosOrderEnum,
     AssetUtxosQueryParams,
     PolicyAccountsQueryParams,
     PolicyAddressesQueryParams,
     PolicyInfoQueryParams,
-    PolicyTxsOrderEnum,
     PolicyTxsQueryParams,
-    PolicyUtxosOrderEnum,
+    PolicyUtxosQueryParams,
 } from './type';
 
 /**
@@ -178,26 +174,14 @@ export class AssetsApi extends BaseAPI {
      * Returns UTxO references of UTxOs which contain some of at least one asset of the specified policy ID, each paired with a list of assets of the policy contained in the UTxO and the corresponding amounts
      * @summary UTxOs containing assets of specific policy
      * @param {string} policy Hex encoded policy ID
-     * @param {number | null} [count] The max number of results per page
-     * @param {PolicyUtxosOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PolicyUtxosQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public policyUtxos(
-        policy: string,
-        count?: number | null,
-        order?: PolicyUtxosOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public policyUtxos(policy: string, queryParams?: PolicyUtxosQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .policyUtxos(policy, count, order, from, to, cursor, options)
+            .policyUtxos(policy, queryParams, options)
             .then((request) => request(this.axios));
     }
 }

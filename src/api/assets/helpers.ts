@@ -30,9 +30,8 @@ import {
     PolicyAccountsQueryParams,
     PolicyAddressesQueryParams,
     PolicyInfoQueryParams,
-    PolicyTxsOrderEnum,
     PolicyTxsQueryParams,
-    PolicyUtxosOrderEnum,
+    PolicyUtxosQueryParams,
 } from './type';
 
 /**
@@ -440,21 +439,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns UTxO references of UTxOs which contain some of at least one asset of the specified policy ID, each paired with a list of assets of the policy contained in the UTxO and the corresponding amounts
          * @summary UTxOs containing assets of specific policy
          * @param {string} policy Hex encoded policy ID
-         * @param {number | null} [count] The max number of results per page
-         * @param {PolicyUtxosOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyUtxosQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         policyUtxos: async (
             policy: string,
-            count?: number | null,
-            order?: PolicyUtxosOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: PolicyUtxosQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'policy' is not null or undefined
@@ -469,30 +460,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (order !== undefined) {
-                localVarQueryParameter.order = order;
-            }
-
-            if (from !== undefined) {
-                localVarQueryParameter.from = from;
-            }
-
-            if (to !== undefined) {
-                localVarQueryParameter.to = to;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -679,32 +649,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns UTxO references of UTxOs which contain some of at least one asset of the specified policy ID, each paired with a list of assets of the policy contained in the UTxO and the corresponding amounts
          * @summary UTxOs containing assets of specific policy
          * @param {string} policy Hex encoded policy ID
-         * @param {number | null} [count] The max number of results per page
-         * @param {PolicyUtxosOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-         * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-         * @param {number | null} [to] Return only UTxOs created before a specific slot
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PolicyUtxosQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async policyUtxos(
             policy: string,
-            count?: number | null,
-            order?: PolicyUtxosOrderEnum,
-            from?: number | null,
-            to?: number | null,
-            cursor?: string | null,
+            queryParams?: PolicyUtxosQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyUtxo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyUtxos(
-                policy,
-                count,
-                order,
-                from,
-                to,
-                cursor,
-                options,
-            );
+            const localVarAxiosArgs = await localVarAxiosParamCreator.policyUtxos(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
     };

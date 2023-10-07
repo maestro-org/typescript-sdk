@@ -270,14 +270,53 @@ export interface PolicyTxsQueryParams {
     count?: number | null;
     /**
      * The order in which the results are sorted (by block height)
-     * @type {AssetTxsOrderEnum}
+     * @type {PolicyTxsOrderEnum}
      * @memberof PolicyTxsQueryParams
      */
-    order?: AssetTxsOrderEnum;
+    order?: PolicyTxsOrderEnum;
     /**
      * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
      * @type {string | null}
      * @memberof PolicyTxsQueryParams
+     */
+    cursor?: string | null;
+}
+
+/**
+ * Query parameters for policyUtxos.
+ * @export
+ * @interface PolicyUtxosQueryParams
+ *
+ */
+export interface PolicyUtxosQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PolicyUtxosQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by slot at which UTxO was produced)
+     * @type {PolicyUtxosOrderEnum}
+     * @memberof PolicyUtxosQueryParams
+     */
+    order?: PolicyUtxosOrderEnum;
+    /**
+     * Return only UTxOs created on or after a specific slot
+     * @type {number | null}
+     * @memberof PolicyUtxosQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only UTxOs created before a specific slot
+     * @type {number | null}
+     * @memberof PolicyUtxosQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PolicyUtxosQueryParams
      */
     cursor?: string | null;
 }
