@@ -6,6 +6,7 @@ import {
     AccountAssetsQueryParams,
     AccountHistoryQueryParams,
     AccountRewardsQueryParams,
+    AccountUpdatesQueryParams,
 } from './type';
 
 /**
@@ -97,20 +98,14 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of updates relating to the specified stake key ( `registration`, `deregistration`, `delegation`, `withdrawal`)
      * @summary Stake account updates
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountUpdatesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountUpdates(
-        stakeAddr: string,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountUpdates(stakeAddr: string, queryParams?: AccountUpdatesQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountUpdates(stakeAddr, count, cursor, options)
+            .accountUpdates(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 }

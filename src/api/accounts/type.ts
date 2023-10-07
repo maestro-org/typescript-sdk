@@ -93,3 +93,24 @@ export interface AccountRewardsQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for fetching account updates.
+ * @export
+ * @interface AccountUpdatesQueryParams
+ *
+ */
+export interface AccountUpdatesQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AccountUpdatesQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AccountUpdatesQueryParams
+     */
+    cursor?: string | null;
+}
