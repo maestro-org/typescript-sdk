@@ -68,3 +68,24 @@ export interface PoolBlocksQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for poolDelegators.
+ * @export
+ * @interface PoolDelegatorsQueryParams
+ *
+ */
+export interface PoolDelegatorsQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PoolDelegatorsQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PoolDelegatorsQueryParams
+     */
+    cursor?: string | null;
+}

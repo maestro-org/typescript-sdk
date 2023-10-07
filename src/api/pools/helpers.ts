@@ -19,7 +19,13 @@ import {
     TimestampedPoolRelays,
     TimestampedPoolUpdates,
 } from '../type';
-import { ListPoolsQueryParams, PoolBlocksOrderEnum, PoolBlocksQueryParams, PoolHistoryOrderEnum } from './type';
+import {
+    ListPoolsQueryParams,
+    PoolBlocksOrderEnum,
+    PoolBlocksQueryParams,
+    PoolDelegatorsQueryParams,
+    PoolHistoryOrderEnum,
+} from './type';
 
 /**
  * PoolsApi - axios parameter creator
@@ -108,15 +114,13 @@ export const PoolsApiAxiosParamCreator = function (configuration: Configuration)
          * Returns a list of delegators of the specified pool
          * @summary Stake pool delegators
          * @param {string} poolId Pool ID in bech32 format
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PoolDelegatorsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         poolDelegators: async (
             poolId: string,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: PoolDelegatorsQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'poolId' is not null or undefined
@@ -131,18 +135,9 @@ export const PoolsApiAxiosParamCreator = function (configuration: Configuration)
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -415,18 +410,16 @@ export const PoolsApiFp = function (configuration: Configuration) {
          * Returns a list of delegators of the specified pool
          * @summary Stake pool delegators
          * @param {string} poolId Pool ID in bech32 format
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {PoolDelegatorsQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async poolDelegators(
             poolId: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: PoolDelegatorsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedDelegatorInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolDelegators(poolId, count, cursor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.poolDelegators(poolId, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
