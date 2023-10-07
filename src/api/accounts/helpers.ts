@@ -17,7 +17,12 @@ import {
     PaginatedAccountReward,
     PaginatedAccountUpdate,
 } from '../type';
-import { AccountAddressesQueryParams, AccountAssetsQueryParams, AccountHistoryQueryParams } from './type';
+import {
+    AccountAddressesQueryParams,
+    AccountAssetsQueryParams,
+    AccountHistoryQueryParams,
+    AccountRewardsQueryParams,
+} from './type';
 
 /**
  * AccountsApi - axios parameter creator
@@ -193,15 +198,13 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
          * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
          * @summary Stake account rewards
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountRewardsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         accountRewards: async (
             stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: AccountRewardsQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'stakeAddr' is not null or undefined
@@ -216,18 +219,9 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -488,18 +482,16 @@ export const AccountsApiFp = function (configuration: Configuration) {
          * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
          * @summary Stake account rewards
          * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AccountRewardsQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async accountRewards(
             stakeAddr: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: AccountRewardsQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountReward>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountRewards(stakeAddr, count, cursor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accountRewards(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

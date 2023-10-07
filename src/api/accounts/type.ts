@@ -72,3 +72,24 @@ export interface AccountHistoryQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for fetching account rewards.
+ * @export
+ * @interface AccountRewardsQueryParams
+ *
+ */
+export interface AccountRewardsQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AccountRewardsQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AccountRewardsQueryParams
+     */
+    cursor?: string | null;
+}

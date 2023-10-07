@@ -1,7 +1,12 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AccountsApiFp } from './helpers';
-import { AccountAddressesQueryParams, AccountAssetsQueryParams, AccountHistoryQueryParams } from './type';
+import {
+    AccountAddressesQueryParams,
+    AccountAssetsQueryParams,
+    AccountHistoryQueryParams,
+    AccountRewardsQueryParams,
+} from './type';
 
 /**
  * AccountsApi - object-oriented interface
@@ -77,20 +82,14 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
      * @summary Stake account rewards
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountRewardsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountRewards(
-        stakeAddr: string,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountRewards(stakeAddr: string, queryParams?: AccountRewardsQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountRewards(stakeAddr, count, cursor, options)
+            .accountRewards(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
