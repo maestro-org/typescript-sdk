@@ -3,6 +3,7 @@ import { BaseAPI } from '../../base';
 import { AssetsApiFp } from './helpers';
 import {
     AssetAccountsQueryParams,
+    AssetAddressesQueryParams,
     AssetTxsOrderEnum,
     AssetUpdatesOrderEnum,
     AssetUtxosOrderEnum,
@@ -36,15 +37,14 @@ export class AssetsApi extends BaseAPI {
      * Returns a list of addresses which control some amount of the specified asset
      * @summary Native asset addresses
      * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AssetAddressesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public assetAddresses(asset: string, count?: number | null, cursor?: string | null, options?: AxiosRequestConfig) {
+    public assetAddresses(asset: string, queryParams?: AssetAddressesQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
-            .assetAddresses(asset, count, cursor, options)
+            .assetAddresses(asset, queryParams, options)
             .then((request) => request(this.axios));
     }
 

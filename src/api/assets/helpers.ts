@@ -23,6 +23,7 @@ import {
 } from '../type';
 import {
     AssetAccountsQueryParams,
+    AssetAddressesQueryParams,
     AssetTxsOrderEnum,
     AssetUpdatesOrderEnum,
     AssetUtxosOrderEnum,
@@ -40,7 +41,7 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns a list of accounts (as stake/reward addresses) associated with addresses which control some of the specified asset; in other words, instead of returning the addresses which hold some of the asset, the addresses are merged by their delegation part/account. Assets controlled by Byron, enterprise, or pointer addresses are omitted.  CAUTION: An asset being associated with a particular stake account does not necessarily mean the owner of that account controls the asset; use \"asset addresses\" unless you are sure you want to work with stake keys. Read more [here]( https://medium.com/adamant-security/multi-sig-concerns-mangled-addresses-and-the-dangers-of-using-stake-keys-in-your-cardano-project-94894319b1d8).
          * @summary Accounts of addresses holding specific asset
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {AssetAccountsQueryParams} [queryParams] Query parameters.
+         * @param {AssetAccountsQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -79,15 +80,13 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
          * Returns a list of addresses which control some amount of the specified asset
          * @summary Native asset addresses
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetAddressesQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         assetAddresses: async (
             asset: string,
-            count?: number | null,
-            cursor?: string | null,
+            localVarQueryParameter: AssetAddressesQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -99,18 +98,9 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter.cursor = cursor;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -674,18 +664,16 @@ export const AssetsApiFp = function (configuration: Configuration) {
          * Returns a list of addresses which control some amount of the specified asset
          * @summary Native asset addresses
          * @param {string} asset Asset, encoded as concatenation of hex of policy ID and asset name
-         * @param {number | null} [count] The max number of results per page
-         * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+         * @param {AssetAddressesQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async assetAddresses(
             asset: string,
-            count?: number | null,
-            cursor?: string | null,
+            queryParams?: AssetAddressesQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetHolder>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetAddresses(asset, count, cursor, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.assetAddresses(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**

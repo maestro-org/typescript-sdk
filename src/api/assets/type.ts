@@ -59,3 +59,24 @@ export interface AssetAccountsQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for assetAddresses.
+ * @export
+ * @interface AssetAddressesQueryParams
+ *
+ */
+export interface AssetAddressesQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AssetAddressesQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AssetAddressesQueryParams
+     */
+    cursor?: string | null;
+}
