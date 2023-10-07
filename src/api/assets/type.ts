@@ -38,3 +38,24 @@ export const PolicyUtxosOrderEnum = {
     Desc: 'desc',
 } as const;
 export type PolicyUtxosOrderEnum = (typeof PolicyUtxosOrderEnum)[keyof typeof PolicyUtxosOrderEnum];
+
+/**
+ * Query parameters for assetAccounts.
+ * @export
+ * @interface AssetAccountsQueryParams
+ *
+ */
+export interface AssetAccountsQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AssetAccountsQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AssetAccountsQueryParams
+     */
+    cursor?: string | null;
+}
