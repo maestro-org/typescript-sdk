@@ -19,14 +19,7 @@ import {
     TimestampedPoolRelays,
     TimestampedPoolUpdates,
 } from '../type';
-import {
-    ListPoolsQueryParams,
-    PoolBlocksOrderEnum,
-    PoolBlocksQueryParams,
-    PoolDelegatorsQueryParams,
-    PoolHistoryOrderEnum,
-    PoolHistoryQueryParams,
-} from './type';
+import { ListPoolsQueryParams, PoolBlocksQueryParams, PoolDelegatorsQueryParams, PoolHistoryQueryParams } from './type';
 
 /**
  * PoolsApi - axios parameter creator
