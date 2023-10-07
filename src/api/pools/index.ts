@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { PoolsApiFp } from './helpers';
-import { ListPoolsQueryParams, PoolBlocksOrderEnum, PoolHistoryOrderEnum } from './type';
+import { ListPoolsQueryParams, PoolBlocksOrderEnum, PoolBlocksQueryParams, PoolHistoryOrderEnum } from './type';
 
 /**
  * PoolsApi - object-oriented interface
@@ -28,24 +28,14 @@ export class PoolsApi extends BaseAPI {
      * Return information about blocks minted by a given pool for all epochs (or just for epoch `epoch_no` if provided)
      * @summary Stake pool blocks
      * @param {string} poolId Pool ID in bech32 format
-     * @param {number | null} [epochNo] Epoch number to fetch results for
-     * @param {number | null} [count] The max number of results per page
-     * @param {PoolBlocksOrderEnum} [order] The order in which the results are sorted (by block absolute slot)
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PoolBlocksQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PoolsApi
      */
-    public poolBlocks(
-        poolId: string,
-        epochNo?: number | null,
-        count?: number | null,
-        order?: PoolBlocksOrderEnum,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public poolBlocks(poolId: string, queryParams?: PoolBlocksQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
-            .poolBlocks(poolId, epochNo, count, order, cursor, options)
+            .poolBlocks(poolId, queryParams, options)
             .then((request) => request(this.axios));
     }
 

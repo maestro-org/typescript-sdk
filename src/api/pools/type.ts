@@ -35,3 +35,36 @@ export interface ListPoolsQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for poolBlocks.
+ * @export
+ * @interface PoolBlocksQueryParams
+ *
+ */
+export interface PoolBlocksQueryParams {
+    /**
+     * Epoch number to fetch results for
+     * @type {number | null}
+     * @memberof PoolBlocksQueryParams
+     */
+    epochNo?: number | null;
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof PoolBlocksQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted (by block absolute slot)
+     * @type {PoolBlocksOrderEnum}
+     * @memberof PoolBlocksQueryParams
+     */
+    order?: PoolBlocksOrderEnum;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof PoolBlocksQueryParams
+     */
+    cursor?: string | null;
+}
