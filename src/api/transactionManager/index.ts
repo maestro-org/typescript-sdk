@@ -41,7 +41,7 @@ export class TransactionManagerApi extends BaseAPI {
     /**
      * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
      * @summary Submit transaction
-     * @param {string} body CBOR encoded transaction
+     * @param {string | Uint8Array} body CBOR encoded transaction
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TransactionManagerApi
@@ -55,12 +55,12 @@ export class TransactionManagerApi extends BaseAPI {
     /**
      * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
      * @summary Turbo submit transaction
-     * @param {string} body CBOR encoded transaction
+     * @param {string | Uint8Array} body CBOR encoded transaction
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TransactionManagerApi
      */
-    public txManagerTurboSubmit(body: string, options?: AxiosRequestConfig) {
+    public txManagerTurboSubmit(body: string | Uint8Array, options?: AxiosRequestConfig) {
         return TransactionManagerApiFp(this.configuration)
             .txManagerTurboSubmit(body, options)
             .then((request) => request(this.axios));

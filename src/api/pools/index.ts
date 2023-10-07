@@ -1,14 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { PoolsApiFp } from './helpers';
-import {
-    ListPoolsQueryParams,
-    PoolBlocksOrderEnum,
-    PoolBlocksQueryParams,
-    PoolDelegatorsQueryParams,
-    PoolHistoryOrderEnum,
-    PoolHistoryQueryParams,
-} from './type';
+import { ListPoolsQueryParams, PoolBlocksQueryParams, PoolDelegatorsQueryParams, PoolHistoryQueryParams } from './type';
 
 /**
  * PoolsApi - object-oriented interface

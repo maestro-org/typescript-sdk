@@ -95,7 +95,7 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
          * @summary Submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -123,7 +123,6 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
-            // localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
             localVarRequestOptions.data = typeof body === 'string' ? Buffer.from(body, 'hex') : Buffer.from(body);
             return {
                 url: toPathString(localVarUrlObj),
@@ -133,11 +132,14 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
          * @summary Turbo submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        txManagerTurboSubmit: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        txManagerTurboSubmit: async (
+            body: string | Uint8Array,
+            options: AxiosRequestConfig = {},
+        ): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('txManagerTurboSubmit', 'body', body);
             const localVarPath = `/txmanager/turbosubmit`;
@@ -161,8 +163,7 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
-
+            localVarRequestOptions.data = typeof body === 'string' ? Buffer.from(body, 'hex') : Buffer.from(body);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -209,7 +210,7 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
          * @summary Submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -223,12 +224,12 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
          * @summary Turbo submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async txManagerTurboSubmit(
-            body: string,
+            body: string | Uint8Array,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerTurboSubmit(body, options);
