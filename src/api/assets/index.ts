@@ -185,3 +185,5 @@ export class AssetsApi extends BaseAPI {
             .then((request) => request(this.axios));
     }
 }
+
+export * from './type';
