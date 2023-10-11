@@ -212,3 +212,5 @@ export class AddressesApi extends BaseAPI {
             .then((request) => request(this.axios));
     }
 }
+
+export * from './type';
