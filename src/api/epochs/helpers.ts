@@ -126,31 +126,31 @@ export const EpochsApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * EpochsApi - factory interface
- * @export
- */
-export const EpochsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = EpochsApiFp(configuration);
-    return {
-        /**
-         * Returns a summary of information about the current epoch
-         * @summary Current epoch details
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        currentEpoch(options?: any): AxiosPromise<TimestampedCurrentEpochInfo> {
-            return localVarFp.currentEpoch(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a summary of information about a specific epoch
-         * @summary Specific epoch details
-         * @param {number} epochNo Epoch number to return information about
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        epochInfo(epochNo: number, options?: any): AxiosPromise<TimestampedEpochInfo> {
-            return localVarFp.epochInfo(epochNo, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * EpochsApi - factory interface
+//  * @export
+//  */
+// export const EpochsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = EpochsApiFp(configuration);
+//     return {
+//         /**
+//          * Returns a summary of information about the current epoch
+//          * @summary Current epoch details
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         currentEpoch(options?: any): AxiosPromise<TimestampedCurrentEpochInfo> {
+//             return localVarFp.currentEpoch(options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns a summary of information about a specific epoch
+//          * @summary Specific epoch details
+//          * @param {number} epochNo Epoch number to return information about
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         epochInfo(epochNo: number, options?: any): AxiosPromise<TimestampedEpochInfo> {
+//             return localVarFp.epochInfo(epochNo, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

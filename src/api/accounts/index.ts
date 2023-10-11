@@ -1,6 +1,13 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AccountsApiFp } from './helpers';
+import {
+    AccountAddressesQueryParams,
+    AccountAssetsQueryParams,
+    AccountHistoryQueryParams,
+    AccountRewardsQueryParams,
+    AccountUpdatesQueryParams,
+} from './type';
 
 /**
  * AccountsApi - object-oriented interface
@@ -13,20 +20,18 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of addresses seen on-chain which use the specified stake key
      * @summary Stake account addresses
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountAddressesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
     public accountAddresses(
         stakeAddr: string,
-        count?: number | null,
-        cursor?: string | null,
+        queryParams?: AccountAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AccountsApiFp(this.configuration)
-            .accountAddresses(stakeAddr, count, cursor, options)
+            .accountAddresses(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -34,22 +39,14 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of native assets which are owned by addresses with the specified stake key
      * @summary Stake account assets
      * @param {string} stakeAddr Bech32 encoded reward/stake address (\&#39;stake1...\&#39;)
-     * @param {string | null} [policy] Filter results to only show assets of the specified policy
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountAssetsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountAssets(
-        stakeAddr: string,
-        policy?: string | null,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountAssets(stakeAddr: string, queryParams?: AccountAssetsQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountAssets(stakeAddr, policy, count, cursor, options)
+            .accountAssets(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -57,22 +54,14 @@ export class AccountsApi extends BaseAPI {
      * Returns per-epoch history for the specified stake key
      * @summary Stake account history
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [epochNo] Fetch result for only a specific epoch
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountHistoryQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountHistory(
-        stakeAddr: string,
-        epochNo?: number | null,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountHistory(stakeAddr: string, queryParams?: AccountHistoryQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountHistory(stakeAddr, epochNo, count, cursor, options)
+            .accountHistory(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -94,20 +83,14 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
      * @summary Stake account rewards
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountRewardsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountRewards(
-        stakeAddr: string,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountRewards(stakeAddr: string, queryParams?: AccountRewardsQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountRewards(stakeAddr, count, cursor, options)
+            .accountRewards(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -115,20 +98,16 @@ export class AccountsApi extends BaseAPI {
      * Returns a list of updates relating to the specified stake key ( `registration`, `deregistration`, `delegation`, `withdrawal`)
      * @summary Stake account updates
      * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {AccountUpdatesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public accountUpdates(
-        stakeAddr: string,
-        count?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public accountUpdates(stakeAddr: string, queryParams?: AccountUpdatesQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration)
-            .accountUpdates(stakeAddr, count, cursor, options)
+            .accountUpdates(stakeAddr, queryParams, options)
             .then((request) => request(this.axios));
     }
 }
+
+export * from './type';

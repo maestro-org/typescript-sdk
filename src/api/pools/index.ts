@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { PoolsApiFp } from './helpers';
-import { PoolBlocksOrderEnum, PoolHistoryOrderEnum } from './type';
+import { ListPoolsQueryParams, PoolBlocksQueryParams, PoolDelegatorsQueryParams, PoolHistoryQueryParams } from './type';
 
 /**
  * PoolsApi - object-oriented interface
@@ -13,15 +13,14 @@ export class PoolsApi extends BaseAPI {
     /**
      * Returns a list of currently registered stake pools
      * @summary List registered stake pools
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {ListPoolsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PoolsApi
      */
-    public listPools(count?: number | null, cursor?: string | null, options?: AxiosRequestConfig) {
+    public listPools(queryParams?: ListPoolsQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
-            .listPools(count, cursor, options)
+            .listPools(queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -29,24 +28,14 @@ export class PoolsApi extends BaseAPI {
      * Return information about blocks minted by a given pool for all epochs (or just for epoch `epoch_no` if provided)
      * @summary Stake pool blocks
      * @param {string} poolId Pool ID in bech32 format
-     * @param {number | null} [epochNo] Epoch number to fetch results for
-     * @param {number | null} [count] The max number of results per page
-     * @param {PoolBlocksOrderEnum} [order] The order in which the results are sorted (by block absolute slot)
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PoolBlocksQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PoolsApi
      */
-    public poolBlocks(
-        poolId: string,
-        epochNo?: number | null,
-        count?: number | null,
-        order?: PoolBlocksOrderEnum,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public poolBlocks(poolId: string, queryParams?: PoolBlocksQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
-            .poolBlocks(poolId, epochNo, count, order, cursor, options)
+            .poolBlocks(poolId, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -54,15 +43,14 @@ export class PoolsApi extends BaseAPI {
      * Returns a list of delegators of the specified pool
      * @summary Stake pool delegators
      * @param {string} poolId Pool ID in bech32 format
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {PoolDelegatorsQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PoolsApi
      */
-    public poolDelegators(poolId: string, count?: number | null, cursor?: string | null, options?: AxiosRequestConfig) {
+    public poolDelegators(poolId: string, queryParams?: PoolDelegatorsQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
-            .poolDelegators(poolId, count, cursor, options)
+            .poolDelegators(poolId, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -70,24 +58,14 @@ export class PoolsApi extends BaseAPI {
      * Returns per-epoch information about the specified pool (or just for epoch `epoch_no` if provided)
      * @summary Stake pool history
      * @param {string} poolId Pool ID in bech32 format
-     * @param {number | null} [epochNo] Epoch number to fetch results for
-     * @param {number | null} [count] The max number of results per page
-     * @param {PoolHistoryOrderEnum} [order] The order in which the results are sorted (by epoch number)
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param  {PoolHistoryQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PoolsApi
      */
-    public poolHistory(
-        poolId: string,
-        epochNo?: number | null,
-        count?: number | null,
-        order?: PoolHistoryOrderEnum,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public poolHistory(poolId: string, queryParams?: PoolHistoryQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
-            .poolHistory(poolId, epochNo, count, order, cursor, options)
+            .poolHistory(poolId, queryParams, options)
             .then((request) => request(this.axios));
     }
 

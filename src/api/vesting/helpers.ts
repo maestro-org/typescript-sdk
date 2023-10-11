@@ -213,54 +213,54 @@ export const VestingApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * VestingApi - factory interface
- * @export
- */
-export const VestingApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = VestingApiFp(configuration);
-    return {
-        /**
-         * Collect assets from the vesting contract
-         * @summary Collect assets
-         * @param {string} beneficiary Beneficiary\&#39;s bech32 address
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        contractsVestingCollectBeneficiaryPost(
-            beneficiary: string,
-            options?: any,
-        ): AxiosPromise<ContractsVestingLockPost200Response> {
-            return localVarFp
-                .contractsVestingCollectBeneficiaryPost(beneficiary, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Lock assets into the vesting contract
-         * @summary Lock assets
-         * @param {ContractsVestingLockPostRequest} contractsVestingLockPostRequest
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        contractsVestingLockPost(
-            contractsVestingLockPostRequest: ContractsVestingLockPostRequest,
-            options?: any,
-        ): AxiosPromise<ContractsVestingLockPost200Response> {
-            return localVarFp
-                .contractsVestingLockPost(contractsVestingLockPostRequest, options)
-                .then((request) => request(axios, basePath));
-        },
-        /**
-         * Detailed list of vesting assets at a beneficiary address
-         * @summary State of vesting assets
-         * @param {string} beneficiary Beneficiary bech32 address
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        contractsVestingStateBeneficiaryGet(beneficiary: string, options?: any): AxiosPromise<VestingState> {
-            return localVarFp
-                .contractsVestingStateBeneficiaryGet(beneficiary, options)
-                .then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * VestingApi - factory interface
+//  * @export
+//  */
+// export const VestingApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = VestingApiFp(configuration);
+//     return {
+//         /**
+//          * Collect assets from the vesting contract
+//          * @summary Collect assets
+//          * @param {string} beneficiary Beneficiary\&#39;s bech32 address
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         contractsVestingCollectBeneficiaryPost(
+//             beneficiary: string,
+//             options?: any,
+//         ): AxiosPromise<ContractsVestingLockPost200Response> {
+//             return localVarFp
+//                 .contractsVestingCollectBeneficiaryPost(beneficiary, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Lock assets into the vesting contract
+//          * @summary Lock assets
+//          * @param {ContractsVestingLockPostRequest} contractsVestingLockPostRequest
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         contractsVestingLockPost(
+//             contractsVestingLockPostRequest: ContractsVestingLockPostRequest,
+//             options?: any,
+//         ): AxiosPromise<ContractsVestingLockPost200Response> {
+//             return localVarFp
+//                 .contractsVestingLockPost(contractsVestingLockPostRequest, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Detailed list of vesting assets at a beneficiary address
+//          * @summary State of vesting assets
+//          * @param {string} beneficiary Beneficiary bech32 address
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         contractsVestingStateBeneficiaryGet(beneficiary: string, options?: any): AxiosPromise<VestingState> {
+//             return localVarFp
+//                 .contractsVestingStateBeneficiaryGet(beneficiary, options)
+//                 .then((request) => request(axios, basePath));
+//         },
+//     };
+// };

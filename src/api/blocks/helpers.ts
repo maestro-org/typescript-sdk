@@ -82,22 +82,22 @@ export const BlocksApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * BlocksApi - factory interface
- * @export
- */
-export const BlocksApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BlocksApiFp(configuration);
-    return {
-        /**
-         * Returns information about the specified block including more advanced technical properties
-         * @summary Block information
-         * @param {string} hashOrHeight Block height or hex encoded block hash
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        blockInfo(hashOrHeight: string, options?: any): AxiosPromise<TimestampedBlockInfo> {
-            return localVarFp.blockInfo(hashOrHeight, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * BlocksApi - factory interface
+//  * @export
+//  */
+// export const BlocksApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = BlocksApiFp(configuration);
+//     return {
+//         /**
+//          * Returns information about the specified block including more advanced technical properties
+//          * @summary Block information
+//          * @param {string} hashOrHeight Block height or hex encoded block hash
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         blockInfo(hashOrHeight: string, options?: any): AxiosPromise<TimestampedBlockInfo> {
+//             return localVarFp.blockInfo(hashOrHeight, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };
