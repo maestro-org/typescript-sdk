@@ -6,11 +6,11 @@ import {
     setSearchParams,
     toPathString,
     assertParamExists,
-    serializeDataIfNeeded,
     createRequestFunction,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import { TxManagerState } from '../type';
+import { TxManagerHistoryQueryParams } from './type';
 
 /**
  * TransactionManagerApi - axios parameter creator
@@ -21,14 +21,12 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
         /**
          * Returns the history of submitted transactions
          * @summary Transactions history
-         * @param {number} [count] The max number of results per pagination page
-         * @param {number} [page] Pagination page number to show results for
+         * @param {TxManagerHistoryQueryParams} [localVarQueryParameter] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         txManagerHistory: async (
-            count?: number,
-            page?: number,
+            localVarQueryParameter: TxManagerHistoryQueryParams = {},
             options: AxiosRequestConfig = {},
         ): Promise<RequestArgs> => {
             const localVarPath = `/txmanager/history`;
@@ -38,18 +36,9 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
-
-            if (count !== undefined) {
-                localVarQueryParameter.count = count;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter.page = page;
-            }
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -105,7 +94,7 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
          * @summary Submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -133,7 +122,6 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
-            // localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
             localVarRequestOptions.data = typeof body === 'string' ? Buffer.from(body, 'hex') : Buffer.from(body);
             return {
                 url: toPathString(localVarUrlObj),
@@ -143,11 +131,14 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
          * @summary Turbo submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        txManagerTurboSubmit: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        txManagerTurboSubmit: async (
+            body: string | Uint8Array,
+            options: AxiosRequestConfig = {},
+        ): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('txManagerTurboSubmit', 'body', body);
             const localVarPath = `/txmanager/turbosubmit`;
@@ -171,8 +162,7 @@ export const TransactionManagerApiAxiosParamCreator = function (configuration: C
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration);
-
+            localVarRequestOptions.data = typeof body === 'string' ? Buffer.from(body, 'hex') : Buffer.from(body);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -191,17 +181,15 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
         /**
          * Returns the history of submitted transactions
          * @summary Transactions history
-         * @param {number} [count] The max number of results per pagination page
-         * @param {number} [page] Pagination page number to show results for
+         * @param {TxManagerHistoryQueryParams} [queryParams] Query parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async txManagerHistory(
-            count?: number,
-            page?: number,
+            queryParams?: TxManagerHistoryQueryParams,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TxManagerState>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerHistory(count, page, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerHistory(queryParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
         },
         /**
@@ -221,7 +209,7 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
          * @summary Submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -235,12 +223,12 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
         /**
          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
          * @summary Turbo submit transaction
-         * @param {string} body CBOR encoded transaction
+         * @param {string | Uint8Array} body CBOR encoded transaction
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async txManagerTurboSubmit(
-            body: string,
+            body: string | Uint8Array,
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerTurboSubmit(body, options);
@@ -249,57 +237,57 @@ export const TransactionManagerApiFp = function (configuration: Configuration) {
     };
 };
 
-/**
- * TransactionManagerApi - factory interface
- * @export
- */
-export const TransactionManagerApiFactory = function (
-    configuration: Configuration,
-    basePath?: string,
-    axios?: AxiosInstance,
-) {
-    const localVarFp = TransactionManagerApiFp(configuration);
-    return {
-        /**
-         * Returns the history of submitted transactions
-         * @summary Transactions history
-         * @param {number} [count] The max number of results per pagination page
-         * @param {number} [page] Pagination page number to show results for
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txManagerHistory(count?: number, page?: number, options?: any): AxiosPromise<Array<TxManagerState>> {
-            return localVarFp.txManagerHistory(count, page, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the most recent state of a transaction
-         * @summary Transaction state
-         * @param {string} txHash Hex encoded transaction hash
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txManagerState(txHash: string, options?: any): AxiosPromise<TxManagerState> {
-            return localVarFp.txManagerState(txHash, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
-         * @summary Submit transaction
-         * @param {string} body CBOR encoded transaction
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txManagerSubmit(body: string, options?: any): AxiosPromise<string> {
-            return localVarFp.txManagerSubmit(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
-         * @summary Turbo submit transaction
-         * @param {string} body CBOR encoded transaction
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        txManagerTurboSubmit(body: string, options?: any): AxiosPromise<string> {
-            return localVarFp.txManagerTurboSubmit(body, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * TransactionManagerApi - factory interface
+//  * @export
+//  */
+// export const TransactionManagerApiFactory = function (
+//     configuration: Configuration,
+//     basePath?: string,
+//     axios?: AxiosInstance,
+// ) {
+//     const localVarFp = TransactionManagerApiFp(configuration);
+//     return {
+//         /**
+//          * Returns the history of submitted transactions
+//          * @summary Transactions history
+//          * @param {number} [count] The max number of results per pagination page
+//          * @param {number} [page] Pagination page number to show results for
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txManagerHistory(count?: number, page?: number, options?: any): AxiosPromise<Array<TxManagerState>> {
+//             return localVarFp.txManagerHistory(count, page, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Returns the most recent state of a transaction
+//          * @summary Transaction state
+//          * @param {string} txHash Hex encoded transaction hash
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txManagerState(txHash: string, options?: any): AxiosPromise<TxManagerState> {
+//             return localVarFp.txManagerState(txHash, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [monitored by Maestro](../Dapp%20Platform/Transaction%20Manager).
+//          * @summary Submit transaction
+//          * @param {string} body CBOR encoded transaction
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txManagerSubmit(body: string, options?: any): AxiosPromise<string> {
+//             return localVarFp.txManagerSubmit(body, options).then((request) => request(axios, basePath));
+//         },
+//         /**
+//          * Submit a signed and serialized transaction to the network. A transaction submited with this endpoint will be [Turbo Submitted and Monitored by Maestro](../Dapp%20Platform/Turbo%20Transaction).
+//          * @summary Turbo submit transaction
+//          * @param {string} body CBOR encoded transaction
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         txManagerTurboSubmit(body: string, options?: any): AxiosPromise<string> {
+//             return localVarFp.txManagerTurboSubmit(body, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

@@ -2,11 +2,11 @@ import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { AddressesApiFp } from './helpers';
 import {
-    TxsByAddressOrderEnum,
-    TxsByPaymentCredOrderEnum,
-    UtxoRefsAtAddressOrderEnum,
-    UtxosByAddressOrderEnum,
-    UtxosByPaymentCredOrderEnum,
+    TxsByAddressQueryParams,
+    TxsByPaymentCredQueryParams,
+    UtxosByAddressQueryParams,
+    UtxosByAddressesQueryParams,
+    UtxosByPaymentCredQueryParams,
 } from './type';
 
 /**
@@ -48,26 +48,14 @@ export class AddressesApi extends BaseAPI {
      * Returns transactions in which the specified address spent or received funds.  Specifically, the transactions where: the address controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
      * @summary Address transactions
      * @param {string} address Address in bech32 format
-     * @param {number | null} [count] The max number of results per page
-     * @param {TxsByAddressOrderEnum} [order] The order in which the results are sorted, by transaction age)
-     * @param {number | null} [from] Return only transactions minted on or after a specific slot
-     * @param {number | null} [to] Return only transactions minted on or before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {TxsByAddressQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public txsByAddress(
-        address: string,
-        count?: number | null,
-        order?: TxsByAddressOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public txsByAddress(address: string, queryParams?: TxsByAddressQueryParams, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration)
-            .txsByAddress(address, count, order, from, to, cursor, options)
+            .txsByAddress(address, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -75,26 +63,18 @@ export class AddressesApi extends BaseAPI {
      * Returns transactions in which the specified payment credential spent or received funds.  Specifically, the transactions where: the payment credential was used in an address which controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
      * @summary Payment credential transactions
      * @param {string} credential Payment credential in bech32 format
-     * @param {number | null} [count] The max number of results per page
-     * @param {TxsByPaymentCredOrderEnum} [order] The order in which the results are sorted, by transaction age)
-     * @param {number | null} [from] Return only transactions minted on or after a specific slot
-     * @param {number | null} [to] Return only transactions minted on or before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {TxsByPaymentCredQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
     public txsByPaymentCred(
         credential: string,
-        count?: number | null,
-        order?: TxsByPaymentCredOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
+        queryParams?: TxsByPaymentCredQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration)
-            .txsByPaymentCred(credential, count, order, from, to, cursor, options)
+            .txsByPaymentCred(credential, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -102,26 +82,14 @@ export class AddressesApi extends BaseAPI {
      * Returns references (pair of transaction hash and output index in transaction) for UTxOs controlled by the specified address
      * @summary UTxO references at an address
      * @param {string} address Address in bech32 format
-     * @param {number | null} [count] The max number of results per page
-     * @param {UtxoRefsAtAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxoRefsAtAddressQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public utxoRefsAtAddress(
-        address: string,
-        count?: number | null,
-        order?: UtxoRefsAtAddressOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public utxoRefsAtAddress(address: string, queryParams?: TxsByPaymentCredQueryParams, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration)
-            .utxoRefsAtAddress(address, count, order, from, to, cursor, options)
+            .utxoRefsAtAddress(address, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -129,30 +97,14 @@ export class AddressesApi extends BaseAPI {
      * Return detailed information on UTxOs controlled by an address
      * @summary UTxOs at an address
      * @param {string} address Address in bech32 format
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-     * @param {number | null} [count] The max number of results per page
-     * @param {UtxosByAddressOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxosByAddressQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
-    public utxosByAddress(
-        address: string,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
-        count?: number | null,
-        order?: UtxosByAddressOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
-        options?: AxiosRequestConfig,
-    ) {
+    public utxosByAddress(address: string, queryParams?: UtxosByAddressQueryParams, options?: AxiosRequestConfig) {
         return AddressesApiFp(this.configuration)
-            .utxosByAddress(address, resolveDatums, withCbor, count, order, from, to, cursor, options)
+            .utxosByAddress(address, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -160,24 +112,18 @@ export class AddressesApi extends BaseAPI {
      * Return detailed information on UTxOs which are controlled by some address in the specified list of addresses
      * @summary UTxOs at multiple addresses
      * @param {Array<string>} requestBody
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-     * @param {number | null} [count] The max number of results per page
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxosByAddressesQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
     public utxosByAddresses(
         requestBody: Array<string>,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
-        count?: number | null,
-        cursor?: string | null,
+        queryParams?: UtxosByAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration)
-            .utxosByAddresses(requestBody, resolveDatums, withCbor, count, cursor, options)
+            .utxosByAddresses(requestBody, queryParams, options)
             .then((request) => request(this.axios));
     }
 
@@ -185,30 +131,20 @@ export class AddressesApi extends BaseAPI {
      * Return detailed information on UTxOs controlled by addresses which use the specified payment credential
      * @summary UTxOs by payment credential
      * @param {string} credential Payment credential in bech32 format
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encodings of the transaction outputs in the response
-     * @param {number | null} [count] The max number of results per page
-     * @param {UtxosByPaymentCredOrderEnum} [order] The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param {number | null} [from] Return only UTxOs created on or after a specific slot
-     * @param {number | null} [to] Return only UTxOs created on or before a specific slot
-     * @param {string | null} [cursor] Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @param {UtxosByPaymentCredQueryParams} [queryParams] Query parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AddressesApi
      */
     public utxosByPaymentCred(
         credential: string,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
-        count?: number | null,
-        order?: UtxosByPaymentCredOrderEnum,
-        from?: number | null,
-        to?: number | null,
-        cursor?: string | null,
+        queryParams?: UtxosByPaymentCredQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration)
-            .utxosByPaymentCred(credential, resolveDatums, withCbor, count, order, from, to, cursor, options)
+            .utxosByPaymentCred(credential, queryParams, options)
             .then((request) => request(this.axios));
     }
 }
+
+export * from './type';
