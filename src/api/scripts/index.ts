@@ -20,6 +20,6 @@ export class ScriptsApi extends BaseAPI {
     public scriptByHash(scriptHash: string, options?: AxiosRequestConfig) {
         return ScriptsApiFp(this.configuration)
             .scriptByHash(scriptHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

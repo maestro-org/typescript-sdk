@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -77,7 +77,7 @@ export const BlocksApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedBlockInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.blockInfo(hashOrHeight, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };

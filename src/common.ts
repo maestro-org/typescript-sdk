@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import type { Configuration } from './configuration';
 import type { RequestArgs } from './base';
 import { RequiredError } from './base';
@@ -87,13 +87,9 @@ export const toPathString = function (url: URL) {
  *
  * @export
  */
-export const createRequestFunction = function (
-    axiosArgs: RequestArgs,
-    globalAxios: AxiosInstance,
-    configuration: Configuration,
-) {
-    return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios) => {
+export const createRequestFunction = function (axiosArgs: RequestArgs, configuration: Configuration) {
+    return <T = unknown, R = AxiosResponse<T>>() => {
         const axiosRequestArgs = { ...axiosArgs.options, url: configuration.baseUrl + axiosArgs.url };
-        return axios.request<T, R>(axiosRequestArgs);
+        return configuration.axiosInstance.request<T, R>(axiosRequestArgs);
     };
 };

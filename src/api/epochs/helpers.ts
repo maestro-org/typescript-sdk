@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     DUMMY_BASE_URL,
@@ -107,7 +107,7 @@ export const EpochsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedCurrentEpochInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.currentEpoch(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a summary of information about a specific epoch
@@ -121,7 +121,7 @@ export const EpochsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedEpochInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.epochInfo(epochNo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };

@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -39,7 +39,7 @@ export const VestingApiAxiosParamCreator = function (configuration: Configuratio
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             const { baseOptions } = configuration;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -169,12 +169,12 @@ export const VestingApiFp = function (configuration: Configuration) {
         async contractsVestingCollectBeneficiaryPost(
             beneficiary: string,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContractsVestingLockPost200Response>> {
+        ): Promise<(basePath?: string) => AxiosPromise<ContractsVestingLockPost200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingCollectBeneficiaryPost(
                 beneficiary,
                 options,
             );
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Lock assets into the vesting contract
@@ -191,7 +191,7 @@ export const VestingApiFp = function (configuration: Configuration) {
                 contractsVestingLockPostRequest,
                 options,
             );
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Detailed list of vesting assets at a beneficiary address
@@ -208,7 +208,7 @@ export const VestingApiFp = function (configuration: Configuration) {
                 beneficiary,
                 options,
             );
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };

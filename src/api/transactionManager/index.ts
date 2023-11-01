@@ -21,7 +21,7 @@ export class TransactionManagerApi extends BaseAPI {
     public txManagerHistory(queryParams?: TxManagerHistoryQueryParams, options?: AxiosRequestConfig) {
         return TransactionManagerApiFp(this.configuration)
             .txManagerHistory(queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -35,7 +35,7 @@ export class TransactionManagerApi extends BaseAPI {
     public txManagerState(txHash: string, options?: AxiosRequestConfig) {
         return TransactionManagerApiFp(this.configuration)
             .txManagerState(txHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -49,7 +49,7 @@ export class TransactionManagerApi extends BaseAPI {
     public txManagerSubmit(body: string | Uint8Array, options?: AxiosRequestConfig) {
         return TransactionManagerApiFp(this.configuration)
             .txManagerSubmit(body, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -63,6 +63,6 @@ export class TransactionManagerApi extends BaseAPI {
     public txManagerTurboSubmit(body: string | Uint8Array, options?: AxiosRequestConfig) {
         return TransactionManagerApiFp(this.configuration)
             .txManagerTurboSubmit(body, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

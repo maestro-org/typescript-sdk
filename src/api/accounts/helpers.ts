@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -420,7 +420,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAddress>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountAddresses(stakeAddr, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of native assets which are owned by addresses with the specified stake key
@@ -436,7 +436,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAsset>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountAssets(stakeAddr, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns per-epoch history for the specified stake key
@@ -452,7 +452,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountHistory>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountHistory(stakeAddr, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns various information regarding a stake account
@@ -466,7 +466,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedAccountInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountInfo(stakeAddr, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of staking-related rewards for the specified stake key (pool `member` or `leader` rewards, deposit `refund`)
@@ -482,7 +482,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountReward>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountRewards(stakeAddr, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of updates relating to the specified stake key ( `registration`, `deregistration`, `delegation`, `withdrawal`)
@@ -498,7 +498,7 @@ export const AccountsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountUpdate>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountUpdates(stakeAddr, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };

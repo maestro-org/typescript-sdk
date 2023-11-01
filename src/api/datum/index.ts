@@ -20,6 +20,6 @@ export class DatumApi extends BaseAPI {
     public lookupDatum(datumHash: string, options?: AxiosRequestConfig) {
         return DatumApiFp(this.configuration)
             .lookupDatum(datumHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

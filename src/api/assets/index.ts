@@ -33,7 +33,7 @@ export class AssetsApi extends BaseAPI {
     public assetAccounts(asset: string, queryParams?: AssetAccountsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .assetAccounts(asset, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -48,7 +48,7 @@ export class AssetsApi extends BaseAPI {
     public assetAddresses(asset: string, queryParams?: AssetAddressesQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .assetAddresses(asset, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -62,7 +62,7 @@ export class AssetsApi extends BaseAPI {
     public assetInfo(asset: string, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .assetInfo(asset, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -77,7 +77,7 @@ export class AssetsApi extends BaseAPI {
     public assetTxs(asset: string, queryParams?: AssetTxsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .assetTxs(asset, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -92,7 +92,7 @@ export class AssetsApi extends BaseAPI {
     public assetUpdates(asset: string, queryParams?: AssetUpdatesQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .assetUpdates(asset, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -107,7 +107,7 @@ export class AssetsApi extends BaseAPI {
     public assetUtxos(asset: string, queryParams?: AssetUtxosQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .assetUtxos(asset, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -122,7 +122,7 @@ export class AssetsApi extends BaseAPI {
     public policyAccounts(policy: string, queryParams?: PolicyAccountsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .policyAccounts(policy, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -137,7 +137,7 @@ export class AssetsApi extends BaseAPI {
     public policyAddresses(policy: string, queryParams?: PolicyAddressesQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .policyAddresses(policy, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -152,7 +152,7 @@ export class AssetsApi extends BaseAPI {
     public policyInfo(policy: string, queryParams?: PolicyInfoQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .policyInfo(policy, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -167,7 +167,7 @@ export class AssetsApi extends BaseAPI {
     public policyTxs(policy: string, queryParams?: PolicyTxsQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .policyTxs(policy, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -182,7 +182,7 @@ export class AssetsApi extends BaseAPI {
     public policyUtxos(policy: string, queryParams?: PolicyUtxosQueryParams, options?: AxiosRequestConfig) {
         return AssetsApiFp(this.configuration)
             .policyUtxos(policy, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }
 
