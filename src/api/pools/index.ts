@@ -21,7 +21,7 @@ export class PoolsApi extends BaseAPI {
     public listPools(queryParams?: ListPoolsQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .listPools(queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -36,7 +36,7 @@ export class PoolsApi extends BaseAPI {
     public poolBlocks(poolId: string, queryParams?: PoolBlocksQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolBlocks(poolId, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -51,7 +51,7 @@ export class PoolsApi extends BaseAPI {
     public poolDelegators(poolId: string, queryParams?: PoolDelegatorsQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolDelegators(poolId, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -66,7 +66,7 @@ export class PoolsApi extends BaseAPI {
     public poolHistory(poolId: string, queryParams?: PoolHistoryQueryParams, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolHistory(poolId, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -80,7 +80,7 @@ export class PoolsApi extends BaseAPI {
     public poolInfo(poolId: string, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolInfo(poolId, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -94,7 +94,7 @@ export class PoolsApi extends BaseAPI {
     public poolMetadata(poolId: string, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolMetadata(poolId, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -108,7 +108,7 @@ export class PoolsApi extends BaseAPI {
     public poolRelays(poolId: string, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolRelays(poolId, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -122,7 +122,7 @@ export class PoolsApi extends BaseAPI {
     public poolUpdates(poolId: string, options?: AxiosRequestConfig) {
         return PoolsApiFp(this.configuration)
             .poolUpdates(poolId, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }
 

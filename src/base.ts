@@ -18,7 +18,7 @@ export interface RequestArgs {
  * @class BaseAPI
  */
 export class BaseAPI {
-    constructor(protected configuration: Configuration, protected axios: AxiosInstance = globalAxios) {}
+    constructor(protected configuration: Configuration) {}
 }
 
 /**

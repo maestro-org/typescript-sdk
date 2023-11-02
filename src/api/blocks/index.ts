@@ -20,6 +20,6 @@ export class BlocksApi extends BaseAPI {
     public blockInfo(hashOrHeight: string, options?: AxiosRequestConfig) {
         return BlocksApiFp(this.configuration)
             .blockInfo(hashOrHeight, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

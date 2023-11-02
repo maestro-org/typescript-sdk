@@ -22,7 +22,7 @@ export class TransactionsApi extends BaseAPI {
     public addressByTxo(txHash: string, index: number, options?: AxiosRequestConfig) {
         return TransactionsApiFp(this.configuration)
             .addressByTxo(txHash, index, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -36,7 +36,7 @@ export class TransactionsApi extends BaseAPI {
     public txCborByTxHash(txHash: string, options?: AxiosRequestConfig) {
         return TransactionsApiFp(this.configuration)
             .txCborByTxHash(txHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -50,7 +50,7 @@ export class TransactionsApi extends BaseAPI {
     public txInfo(txHash: string, options?: AxiosRequestConfig) {
         return TransactionsApiFp(this.configuration)
             .txInfo(txHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -71,7 +71,7 @@ export class TransactionsApi extends BaseAPI {
     ) {
         return TransactionsApiFp(this.configuration)
             .txoByTxoRef(txHash, index, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -90,6 +90,6 @@ export class TransactionsApi extends BaseAPI {
     ) {
         return TransactionsApiFp(this.configuration)
             .txosByTxoRefs(requestBody, queryParams, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

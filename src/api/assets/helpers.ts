@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -501,7 +501,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetHolderAccount>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.assetAccounts(asset, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of addresses which control some amount of the specified asset
@@ -517,7 +517,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetHolder>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.assetAddresses(asset, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Return a summary of information about an asset
@@ -531,7 +531,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedAssetInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.assetInfo(asset, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of transactions in which a transaction input or output contains some of the specified asset
@@ -547,7 +547,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetTx>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.assetTxs(asset, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of transactions in which some of the specified asset was minted or burned
@@ -563,7 +563,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedMintingTx>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.assetUpdates(asset, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns references for UTxOs which contain some of the specified asset, each paired with the amount of the asset contained in the UTxO
@@ -579,7 +579,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetUtxo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.assetUtxos(asset, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of accounts (as stake/reward addresses) associated with addresses which control some of an asset of the specified policy; in other words, instead of returning the addresses which hold the assets, the addresses are merged by their delegation part/account. Assets controlled by Byron, enterprise, or pointer addresses are omitted.  CAUTION: An asset being associated with a particular stake account does not necessarily mean the owner of that account controls the asset; use \"asset addresses\" unless you are sure you want to work with stake keys. Read more [here]( https://medium.com/adamant-security/multi-sig-concerns-mangled-addresses-and-the-dangers-of-using-stake-keys-in-your-cardano-project-94894319b1d8).
@@ -595,7 +595,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyHolderAccount>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.policyAccounts(policy, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of addresses which hold some of an asset of the specified policy ID
@@ -611,7 +611,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyHolder>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.policyAddresses(policy, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns information about assets of the specified minting policy ID
@@ -627,7 +627,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.policyInfo(policy, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of transactions in which a transaction input or output contains some of at least one asset of the specified minting policy ID
@@ -643,7 +643,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetTx>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.policyTxs(policy, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns UTxO references of UTxOs which contain some of at least one asset of the specified policy ID, each paired with a list of assets of the policy contained in the UTxO and the corresponding amounts
@@ -659,7 +659,7 @@ export const AssetsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyUtxo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.policyUtxos(policy, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };

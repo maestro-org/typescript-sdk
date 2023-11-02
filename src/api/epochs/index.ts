@@ -19,7 +19,7 @@ export class EpochsApi extends BaseAPI {
     public currentEpoch(options?: AxiosRequestConfig) {
         return EpochsApiFp(this.configuration)
             .currentEpoch(options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -33,6 +33,6 @@ export class EpochsApi extends BaseAPI {
     public epochInfo(epochNo: number, options?: AxiosRequestConfig) {
         return EpochsApiFp(this.configuration)
             .epochInfo(epochNo, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     DUMMY_BASE_URL,
@@ -359,7 +359,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolListInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPools(queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Return information about blocks minted by a given pool for all epochs (or just for epoch `epoch_no` if provided)
@@ -375,7 +375,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolBlock>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolBlocks(poolId, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of delegators of the specified pool
@@ -391,7 +391,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedDelegatorInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolDelegators(poolId, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns per-epoch information about the specified pool (or just for epoch `epoch_no` if provided)
@@ -407,7 +407,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolHistory>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolHistory(poolId, queryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns current information about the specified pool
@@ -421,7 +421,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolInfo(poolId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns the metadata declared on-chain by the specified stake pool
@@ -435,7 +435,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolMetadata>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolMetadata(poolId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of relays declared on-chain by the specified stake pool
@@ -449,7 +449,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolRelays>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolRelays(poolId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
          * Returns a list of updates relating to the specified pool
@@ -463,7 +463,7 @@ export const PoolsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolUpdates>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.poolUpdates(poolId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };
