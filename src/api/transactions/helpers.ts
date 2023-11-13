@@ -220,6 +220,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration: Configu
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
             };
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 

@@ -108,6 +108,7 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
             };
 
             return {

@@ -274,7 +274,7 @@ export interface Asset {
      * @type {number}
      * @memberof Asset
      */
-    amount: number;
+    amount: string;
     /**
      * Asset (either `lovelace` or concatenation of hex encoded policy ID and asset name for native asset)
      * @type {string}

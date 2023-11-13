@@ -270,6 +270,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
             };
 
             return {
@@ -311,6 +312,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
             };
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 
@@ -354,6 +356,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
             };
 
             return {
