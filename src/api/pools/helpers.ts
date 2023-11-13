@@ -216,6 +216,7 @@ export const PoolsApiAxiosParamCreator = function (configuration: Configuration)
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
             };
 
             return {
