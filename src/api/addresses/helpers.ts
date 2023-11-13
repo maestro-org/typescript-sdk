@@ -8,6 +8,7 @@ import {
     toPathString,
     serializeDataIfNeeded,
     createRequestFunction,
+    HEADER_AMOUNTS_AS_STRING,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import {
@@ -270,7 +271,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
-                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
+                ...HEADER_AMOUNTS_AS_STRING,
             };
 
             return {
@@ -312,7 +313,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
-                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
+                ...HEADER_AMOUNTS_AS_STRING,
             };
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 
@@ -356,7 +357,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
-                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
+                ...HEADER_AMOUNTS_AS_STRING,
             };
 
             return {

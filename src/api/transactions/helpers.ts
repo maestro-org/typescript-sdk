@@ -8,6 +8,7 @@ import {
     toPathString,
     serializeDataIfNeeded,
     createRequestFunction,
+    HEADER_AMOUNTS_AS_STRING,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import {
@@ -220,7 +221,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration: Configu
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
-                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
+                ...HEADER_AMOUNTS_AS_STRING,
             };
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 

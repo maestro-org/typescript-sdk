@@ -7,6 +7,7 @@ import {
     setSearchParams,
     toPathString,
     createRequestFunction,
+    HEADER_AMOUNTS_AS_STRING,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import {
@@ -108,7 +109,7 @@ export const AccountsApiAxiosParamCreator = function (configuration: Configurati
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
-                'amounts-as-string': 'true', // temporary header until this becomes default behaviour
+                ...HEADER_AMOUNTS_AS_STRING,
             };
 
             return {
