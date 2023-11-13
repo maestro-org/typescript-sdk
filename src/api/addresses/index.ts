@@ -145,6 +145,25 @@ export class AddressesApi extends BaseAPI {
             .utxosByPaymentCred(credential, queryParams, options)
             .then((request) => request());
     }
+
+    /**
+     * Return detailed information on UTxOs which are controlled by some payment creds in the specified list of payment creds
+     * @summary UTxOs at multiple payment creds
+     * @param {Array<string>} requestBody
+     * @param {UtxosByAddressesQueryParams} [queryParams] Query parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressesApi
+     */
+    public utxosByPaymentCreds(
+        requestBody: Array<string>,
+        queryParams?: UtxosByAddressesQueryParams,
+        options?: AxiosRequestConfig,
+    ) {
+        return AddressesApiFp(this.configuration)
+            .utxosByPaymentCreds(requestBody, queryParams, options)
+            .then((request) => request());
+    }
 }
 
 export * from './type';

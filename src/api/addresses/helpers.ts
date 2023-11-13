@@ -8,6 +8,7 @@ import {
     toPathString,
     serializeDataIfNeeded,
     createRequestFunction,
+    HEADER_AMOUNTS_AS_STRING,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import {
@@ -270,6 +271,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                ...HEADER_AMOUNTS_AS_STRING,
             };
 
             return {
@@ -311,6 +313,7 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                ...HEADER_AMOUNTS_AS_STRING,
             };
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 
@@ -354,7 +357,51 @@ export const AddressesApiAxiosParamCreator = function (configuration: Configurat
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                ...HEADER_AMOUNTS_AS_STRING,
             };
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return detailed information on UTxOs which are controlled by some payment credentials in the specified list of payment credentials
+         * @summary UTxOs at multiple payment credentials
+         * @param {Array<string>} requestBody
+         * @param {UtxosByAddressesQueryParams} [localVarQueryParameter] Query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        utxosByPaymentCreds: async (
+            requestBody: Array<string>,
+            localVarQueryParameter: UtxosByAddressesQueryParams = {},
+            options: AxiosRequestConfig = {},
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('utxosByPaymentCreds', 'requestBody', requestBody);
+            const localVarPath = `/addresses/cred/utxos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            const { baseOptions } = configuration;
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {} as any;
+
+            // authentication api-key required
+            setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {
+                ...localVarHeaderParameter,
+                ...headersFromBaseOptions,
+                ...options.headers,
+                ...HEADER_AMOUNTS_AS_STRING,
+            };
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -502,6 +549,26 @@ export const AddressesApiFp = function (configuration: Configuration) {
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByPaymentCred(
                 credential,
+                queryParams,
+                options,
+            );
+            return createRequestFunction(localVarAxiosArgs, configuration);
+        },
+        /**
+         * Return detailed information on UTxOs which are controlled by some payment credentials in the specified list of payment credentials
+         * @summary UTxOs at multiple payment credentials
+         * @param {Array<string>} requestBody
+         * @param {UtxosByAddressesQueryParams} [queryParams] Query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async utxosByPaymentCreds(
+            requestBody: Array<string>,
+            queryParams?: UtxosByAddressesQueryParams,
+            options?: AxiosRequestConfig,
+        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByPaymentCreds(
+                requestBody,
                 queryParams,
                 options,
             );

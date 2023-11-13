@@ -7,6 +7,7 @@ import {
     toPathString,
     assertParamExists,
     createRequestFunction,
+    HEADER_AMOUNTS_AS_STRING,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import {
@@ -216,6 +217,7 @@ export const PoolsApiAxiosParamCreator = function (configuration: Configuration)
                 ...localVarHeaderParameter,
                 ...headersFromBaseOptions,
                 ...options.headers,
+                ...HEADER_AMOUNTS_AS_STRING,
             };
 
             return {

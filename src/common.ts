@@ -10,6 +10,15 @@ import { RequiredError } from './base';
 export const DUMMY_BASE_URL = 'https://example.com';
 
 /**
+ * temporary header used by some endpoints to indicate that the amounts
+ * should be returned as strings instead of numbers
+ * @export
+ */
+export const HEADER_AMOUNTS_AS_STRING = {
+    'amounts-as-string': 'true',
+};
+
+/**
  *
  * @throws {RequiredError}
  * @export
