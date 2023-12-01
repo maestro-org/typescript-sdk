@@ -78,6 +78,8 @@ export const DatumApiAxiosParamCreator = function (configuration: Configuration)
             // authentication api-key required
             setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
 
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {
