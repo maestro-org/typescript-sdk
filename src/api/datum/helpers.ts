@@ -7,6 +7,7 @@ import {
     setSearchParams,
     toPathString,
     createRequestFunction,
+    serializeDataIfNeeded,
 } from '../../common';
 import { Configuration } from '../../configuration';
 import { TimestampedDatum, TimestampedDatums } from '../type';
@@ -84,6 +85,7 @@ export const DatumApiAxiosParamCreator = function (configuration: Configuration)
                 ...headersFromBaseOptions,
                 ...options.headers,
             };
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 
             return {
                 url: toPathString(localVarUrlObj),
