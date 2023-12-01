@@ -3216,6 +3216,25 @@ export interface TimestampedDatum {
 /**
  * Timestamped response. Returns the endpoint response data along with the chain-tip of the indexer, which details at which point in the chain\'s history the data was correct as-of.
  * @export
+ * @interface TimestampedDatums
+ */
+export interface TimestampedDatums {
+    /**
+     * Record of Datum by datum hash
+     * @type {Record<string, Datum | undefined>}
+     * @memberof TimestampedDatum
+     */
+    data: Record<string, Datum | undefined>;
+    /**
+     *
+     * @type {LastUpdated}
+     * @memberof TimestampedDatum
+     */
+    last_updated: LastUpdated;
+}
+/**
+ * Timestamped response. Returns the endpoint response data along with the chain-tip of the indexer, which details at which point in the chain\'s history the data was correct as-of.
+ * @export
  * @interface TimestampedEpochInfo
  */
 export interface TimestampedEpochInfo {

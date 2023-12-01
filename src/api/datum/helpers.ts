@@ -9,7 +9,7 @@ import {
     createRequestFunction,
 } from '../../common';
 import { Configuration } from '../../configuration';
-import { TimestampedDatum } from '../type';
+import { TimestampedDatum, TimestampedDatums } from '../type';
 
 /**
  * DatumApi - axios parameter creator
@@ -27,7 +27,7 @@ export const DatumApiAxiosParamCreator = function (configuration: Configuration)
         lookupDatum: async (datumHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'datumHash' is not null or undefined
             assertParamExists('lookupDatum', 'datumHash', datumHash);
-            const localVarPath = `/datum/{datum_hash}`.replace(
+            const localVarPath = `/datums/{datum_hash}`.replace(
                 `{${'datum_hash'}}`,
                 encodeURIComponent(String(datumHash)),
             );
@@ -36,6 +36,41 @@ export const DatumApiAxiosParamCreator = function (configuration: Configuration)
             const { baseOptions } = configuration;
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api-key required
+            setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {
+                ...localVarHeaderParameter,
+                ...headersFromBaseOptions,
+                ...options.headers,
+            };
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the datums corresponding to the specified datum hashes, for the datums which have been seen on-chain
+         * @summary Datums by datum hashes
+         * @param {Array<string>} requestBody Array of hex encoded datum hashes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        lookupDatums: async (requestBody: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('lookupDatums', 'requestBody', requestBody);
+            const localVarPath = `/datums`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            const { baseOptions } = configuration;
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -77,6 +112,20 @@ export const DatumApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedDatum>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.lookupDatum(datumHash, options);
+            return createRequestFunction(localVarAxiosArgs, configuration);
+        },
+        /**
+         * Returns the datums corresponding to the specified datum hashes, for the datums which have been seen on-chain
+         * @summary Datums by datum hashes
+         * @param {Array<string>} requestBody Array of hex encoded datum hashes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async lookupDatums(
+            requestBody: Array<string>,
+            options?: AxiosRequestConfig,
+        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedDatums>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lookupDatums(requestBody, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
