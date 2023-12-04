@@ -15,7 +15,7 @@ export const DUMMY_BASE_URL = 'https://example.com';
  * @export
  */
 export const HEADER_AMOUNTS_AS_STRING = {
-    'amounts-as-string': 'true',
+    'amounts-as-strings': 'true',
 };
 
 /**

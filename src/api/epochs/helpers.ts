@@ -59,10 +59,7 @@ export const EpochsApiAxiosParamCreator = function (configuration: Configuration
         epochInfo: async (epochNo: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'epochNo' is not null or undefined
             assertParamExists('epochInfo', 'epochNo', epochNo);
-            const localVarPath = `/epochs/{epoch_no}/info`.replace(
-                `{${'epoch_no'}}`,
-                encodeURIComponent(String(epochNo)),
-            );
+            const localVarPath = `/epochs/{epoch_no}`.replace(`{${'epoch_no'}}`, encodeURIComponent(String(epochNo)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             const { baseOptions } = configuration;

@@ -1029,6 +1029,18 @@ export interface DelegatorInfo {
  */
 export interface EpochInfo {
     /**
+     * Total active stake in the epoch
+     * @type {number}
+     * @memberof EpochInfo
+     */
+    active_stake?: string | null;
+    /**
+     * Average reward in the epoch
+     * @type {number}
+     * @memberof EpochInfo
+     */
+    average_reward?: string | null;
+    /**
      * Total blocks in the epoch
      * @type {number}
      * @memberof EpochInfo
@@ -3206,6 +3218,25 @@ export interface TimestampedDatum {
      * @memberof TimestampedDatum
      */
     data: Datum;
+    /**
+     *
+     * @type {LastUpdated}
+     * @memberof TimestampedDatum
+     */
+    last_updated: LastUpdated;
+}
+/**
+ * Timestamped response. Returns the endpoint response data along with the chain-tip of the indexer, which details at which point in the chain\'s history the data was correct as-of.
+ * @export
+ * @interface TimestampedDatums
+ */
+export interface TimestampedDatums {
+    /**
+     * Record of Datum by datum hash
+     * @type {Record<string, Datum | undefined>}
+     * @memberof TimestampedDatum
+     */
+    data: Record<string, Datum | undefined>;
     /**
      *
      * @type {LastUpdated}
