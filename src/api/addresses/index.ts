@@ -4,6 +4,7 @@ import { AddressesApiFp } from './helpers';
 import {
     TxsByAddressQueryParams,
     TxsByPaymentCredQueryParams,
+    TxsByPaymentCredsQueryParams,
     UtxosByAddressQueryParams,
     UtxosByAddressesQueryParams,
     UtxosByPaymentCredQueryParams,
@@ -80,6 +81,23 @@ export class AddressesApi extends BaseAPI {
         options?: AxiosRequestConfig,
     ) {
         return AddressesApiFp(this.configuration).txsByPaymentCred(credential, queryParams, options)();
+    }
+
+    /**
+     * Returns transactions in which the specified payment credentials spent or received funds.  Specifically, the transactions where: the payment credentials were used in an address which controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
+     * @summary Payment credentials transactions
+     * @param {Array<string>} requestBody Payment credentials in bech32 format
+     * @param {TxsByPaymentCredQueryParams} [localVarQueryParameter] Query parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public async txsByPaymentCreds(
+        requestBody: Array<string>,
+        queryParams?: TxsByPaymentCredsQueryParams,
+        options?: AxiosRequestConfig,
+    ) {
+        const request = await AddressesApiFp(this.configuration).txsByPaymentCreds(requestBody, queryParams, options);
+        return request();
     }
 
     /**
