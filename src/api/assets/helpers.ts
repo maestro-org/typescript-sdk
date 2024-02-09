@@ -168,7 +168,10 @@ export const AssetsApiAxiosParamCreator = function (configuration: Configuration
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('assetTxs', 'asset', asset);
-            const localVarPath = `/assets/{asset}/txs`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
+            const localVarPath = `/assets/{asset}/transactions`.replace(
+                `{${'asset'}}`,
+                encodeURIComponent(String(asset)),
+            );
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             const { baseOptions } = configuration;
