@@ -271,10 +271,10 @@ export interface AddressTransaction {
 export interface Asset {
     /**
      * Amount of the asset
-     * @type {number}
+     * @type {string}
      * @memberof Asset
      */
-    amount: number;
+    amount: string;
     /**
      * Asset (either `lovelace` or concatenation of hex encoded policy ID and asset name for native asset)
      * @type {string}
@@ -1028,6 +1028,18 @@ export interface DelegatorInfo {
  * @interface EpochInfo
  */
 export interface EpochInfo {
+    /**
+     * Total active stake in the epoch
+     * @type {number}
+     * @memberof EpochInfo
+     */
+    active_stake?: string | null;
+    /**
+     * Average reward in the epoch
+     * @type {number}
+     * @memberof EpochInfo
+     */
+    average_reward?: string | null;
     /**
      * Total blocks in the epoch
      * @type {number}
@@ -2237,10 +2249,10 @@ export interface PoolInfo {
     active_epoch_no: number;
     /**
      * Active stake
-     * @type {number}
+     * @type {string}
      * @memberof PoolInfo
      */
-    active_stake?: number | null;
+    active_stake?: string | null;
     /**
      * Number of blocks created
      * @type {number}
@@ -2249,10 +2261,10 @@ export interface PoolInfo {
     block_count?: number | null;
     /**
      * Pool fixed cost
-     * @type {number}
+     * @type {string}
      * @memberof PoolInfo
      */
-    fixed_cost: number;
+    fixed_cost: string;
     /**
      * Number of current delegators
      * @type {number}
@@ -2261,10 +2273,10 @@ export interface PoolInfo {
     live_delegators: number;
     /**
      * Account balance of pool owners
-     * @type {number}
+     * @type {string}
      * @memberof PoolInfo
      */
-    live_pledge?: number | null;
+    live_pledge?: string | null;
     /**
      * Live saturation
      * @type {string}
@@ -2273,16 +2285,16 @@ export interface PoolInfo {
     live_saturation?: string | null;
     /**
      * Live stake
-     * @type {number}
+     * @type {string}
      * @memberof PoolInfo
      */
-    live_stake?: number | null;
+    live_stake?: string | null;
     /**
      * Pool margin
-     * @type {number}
+     * @type {string}
      * @memberof PoolInfo
      */
-    margin: number;
+    margin: string;
     /**
      * Hash of the pool metadata
      * @type {string}
@@ -2321,10 +2333,10 @@ export interface PoolInfo {
     owners: Array<string>;
     /**
      * Pool pledge
-     * @type {number}
+     * @type {string}
      * @memberof PoolInfo
      */
-    pledge: number;
+    pledge: string;
     /**
      * Bech32 encoded pool ID
      * @type {string}
@@ -3206,6 +3218,25 @@ export interface TimestampedDatum {
      * @memberof TimestampedDatum
      */
     data: Datum;
+    /**
+     *
+     * @type {LastUpdated}
+     * @memberof TimestampedDatum
+     */
+    last_updated: LastUpdated;
+}
+/**
+ * Timestamped response. Returns the endpoint response data along with the chain-tip of the indexer, which details at which point in the chain\'s history the data was correct as-of.
+ * @export
+ * @interface TimestampedDatums
+ */
+export interface TimestampedDatums {
+    /**
+     * Record of Datum by datum hash
+     * @type {Record<string, Datum | undefined>}
+     * @memberof TimestampedDatum
+     */
+    data: Record<string, Datum | undefined>;
     /**
      *
      * @type {LastUpdated}

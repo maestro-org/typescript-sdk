@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -77,27 +77,27 @@ export const ScriptsApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedScript>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.scriptByHash(scriptHash, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };
 
-/**
- * ScriptsApi - factory interface
- * @export
- */
-export const ScriptsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ScriptsApiFp(configuration);
-    return {
-        /**
-         * Returns the script corresponding to the specified script hash, if the script has been seen on-chain
-         * @summary Script by script hash
-         * @param {string} scriptHash Hex encoded script hash
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        scriptByHash(scriptHash: string, options?: any): AxiosPromise<TimestampedScript> {
-            return localVarFp.scriptByHash(scriptHash, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * ScriptsApi - factory interface
+//  * @export
+//  */
+// export const ScriptsApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = ScriptsApiFp(configuration);
+//     return {
+//         /**
+//          * Returns the script corresponding to the specified script hash, if the script has been seen on-chain
+//          * @summary Script by script hash
+//          * @param {string} scriptHash Hex encoded script hash
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         scriptByHash(scriptHash: string, options?: any): AxiosPromise<TimestampedScript> {
+//             return localVarFp.scriptByHash(scriptHash, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };

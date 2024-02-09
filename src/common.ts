@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import type { Configuration } from './configuration';
 import type { RequestArgs } from './base';
 import { RequiredError } from './base';
@@ -8,6 +8,15 @@ import { RequiredError } from './base';
  * @export
  */
 export const DUMMY_BASE_URL = 'https://example.com';
+
+/**
+ * temporary header used by some endpoints to indicate that the amounts
+ * should be returned as strings instead of numbers
+ * @export
+ */
+export const HEADER_AMOUNTS_AS_STRING = {
+    'amounts-as-strings': 'true',
+};
 
 /**
  *
@@ -87,13 +96,9 @@ export const toPathString = function (url: URL) {
  *
  * @export
  */
-export const createRequestFunction = function (
-    axiosArgs: RequestArgs,
-    globalAxios: AxiosInstance,
-    configuration: Configuration,
-) {
-    return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios) => {
+export const createRequestFunction = function (axiosArgs: RequestArgs, configuration: Configuration) {
+    return <T = unknown, R = AxiosResponse<T>>() => {
         const axiosRequestArgs = { ...axiosArgs.options, url: configuration.baseUrl + axiosArgs.url };
-        return axios.request<T, R>(axiosRequestArgs);
+        return configuration.axiosInstance.request<T, R>(axiosRequestArgs);
     };
 };

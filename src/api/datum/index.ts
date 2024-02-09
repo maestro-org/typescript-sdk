@@ -17,9 +17,21 @@ export class DatumApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatumApi
      */
-    public lookupDatum(datumHash: string, options?: AxiosRequestConfig) {
-        return DatumApiFp(this.configuration)
-            .lookupDatum(datumHash, options)
-            .then((request) => request(this.axios));
+    public async lookupDatum(datumHash: string, options?: AxiosRequestConfig) {
+        const request = await DatumApiFp(this.configuration).lookupDatum(datumHash, options);
+        return request();
+    }
+
+    /**
+     * Returns the datums corresponding to the specified datum hashes, for the datums which have been seen on-chain
+     * @summary Datums by datum hashes
+     * @param {Array<string>} requestBody Array of hex encoded datum hashes
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatumApi
+     */
+    public async lookupDatums(requestBody: Array<string>, options?: AxiosRequestConfig) {
+        const request = await DatumApiFp(this.configuration).lookupDatums(requestBody, options);
+        return request();
     }
 }

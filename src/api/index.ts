@@ -11,3 +11,4 @@ export * from './scripts';
 export * from './transactions';
 export * from './transactionManager';
 export * from './vesting';
+export * from './type';

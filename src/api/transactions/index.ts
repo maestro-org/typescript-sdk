@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { TransactionsApiFp } from './helpers';
+import { TxoByTxoRefQueryParams } from './type';
 
 /**
  * TransactionsApi - object-oriented interface
@@ -21,7 +22,7 @@ export class TransactionsApi extends BaseAPI {
     public addressByTxo(txHash: string, index: number, options?: AxiosRequestConfig) {
         return TransactionsApiFp(this.configuration)
             .addressByTxo(txHash, index, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -35,7 +36,7 @@ export class TransactionsApi extends BaseAPI {
     public txCborByTxHash(txHash: string, options?: AxiosRequestConfig) {
         return TransactionsApiFp(this.configuration)
             .txCborByTxHash(txHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -49,7 +50,7 @@ export class TransactionsApi extends BaseAPI {
     public txInfo(txHash: string, options?: AxiosRequestConfig) {
         return TransactionsApiFp(this.configuration)
             .txInfo(txHash, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -57,35 +58,38 @@ export class TransactionsApi extends BaseAPI {
      * @summary Transaction output by output reference
      * @param {string} txHash Transaction Hash
      * @param {number} index Output Index
-     * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+     * @param {TxoByTxoRefQueryParams} [queryParams] Query Parameters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TransactionsApi
      */
-    public txoByTxoRef(txHash: string, index: number, withCbor?: boolean | null, options?: AxiosRequestConfig) {
+    public txoByTxoRef(
+        txHash: string,
+        index: number,
+        queryParams?: TxoByTxoRefQueryParams,
+        options?: AxiosRequestConfig,
+    ) {
         return TransactionsApiFp(this.configuration)
-            .txoByTxoRef(txHash, index, withCbor, options)
-            .then((request) => request(this.axios));
+            .txoByTxoRef(txHash, index, queryParams, options)
+            .then((request) => request());
     }
 
     /**
      * Returns the specified transaction outputs
      * @summary Transaction outputs by output references
      * @param {Array<string>} requestBody
-     * @param {boolean | null} [resolveDatums] Try find and include the corresponding datums for datum hashes
-     * @param {boolean | null} [withCbor] Include the CBOR encoding of the transaction output in the response
+     * @param {TxosByTxoRefsQueryParams} [queryParams] Query Parameters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TransactionsApi
      */
     public txosByTxoRefs(
         requestBody: Array<string>,
-        resolveDatums?: boolean | null,
-        withCbor?: boolean | null,
+        queryParams?: TxoByTxoRefQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return TransactionsApiFp(this.configuration)
-            .txosByTxoRefs(requestBody, resolveDatums, withCbor, options)
-            .then((request) => request(this.axios));
+            .txosByTxoRefs(requestBody, queryParams, options)
+            .then((request) => request());
     }
 }

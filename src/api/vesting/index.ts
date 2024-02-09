@@ -21,7 +21,7 @@ export class VestingApi extends BaseAPI {
     public contractsVestingCollectBeneficiaryPost(beneficiary: string, options?: AxiosRequestConfig) {
         return VestingApiFp(this.configuration)
             .contractsVestingCollectBeneficiaryPost(beneficiary, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -38,7 +38,7 @@ export class VestingApi extends BaseAPI {
     ) {
         return VestingApiFp(this.configuration)
             .contractsVestingLockPost(contractsVestingLockPostRequest, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -52,6 +52,6 @@ export class VestingApi extends BaseAPI {
     public contractsVestingStateBeneficiaryGet(beneficiary: string, options?: AxiosRequestConfig) {
         return VestingApiFp(this.configuration)
             .contractsVestingStateBeneficiaryGet(beneficiary, options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

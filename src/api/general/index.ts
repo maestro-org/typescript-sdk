@@ -19,7 +19,7 @@ export class GeneralApi extends BaseAPI {
     public chainTip(options?: AxiosRequestConfig) {
         return GeneralApiFp(this.configuration)
             .chainTip(options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -32,7 +32,7 @@ export class GeneralApi extends BaseAPI {
     public eraHistory(options?: AxiosRequestConfig) {
         return GeneralApiFp(this.configuration)
             .eraHistory(options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -45,7 +45,7 @@ export class GeneralApi extends BaseAPI {
     public protocolParams(options?: AxiosRequestConfig) {
         return GeneralApiFp(this.configuration)
             .protocolParams(options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 
     /**
@@ -58,6 +58,6 @@ export class GeneralApi extends BaseAPI {
     public systemStart(options?: AxiosRequestConfig) {
         return GeneralApiFp(this.configuration)
             .systemStart(options)
-            .then((request) => request(this.axios));
+            .then((request) => request());
     }
 }

@@ -1,9 +1,12 @@
+import globalAxios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+
 export type MaestroSupportedNetworks = 'Mainnet' | 'Preprod' | 'Preview';
 
 export interface ConfigurationParameters {
-    apiKey: string;
-    network: MaestroSupportedNetworks;
-    baseOptions?: any;
+    readonly apiKey: string;
+    readonly network: MaestroSupportedNetworks;
+    readonly baseOptions?: AxiosRequestConfig;
+    readonly axiosInstance?: AxiosInstance;
 }
 
 export class Configuration {
@@ -12,7 +15,7 @@ export class Configuration {
      * @param name security name
      * @memberof Configuration
      */
-    apiKey: string;
+    readonly apiKey: string;
 
     /**
      * base url of network request
@@ -20,20 +23,23 @@ export class Configuration {
      * @type {string}
      * @memberof Configuration
      */
-    baseUrl: string;
+    readonly baseUrl: string;
 
     /**
      * base options for axios calls
      *
-     * @type {any}
+     * @type {AxiosRequestConfig}
      * @memberof Configuration
      */
-    baseOptions?: any;
+    readonly baseOptions?: AxiosRequestConfig;
+
+    readonly axiosInstance: AxiosInstance;
 
     constructor(param: ConfigurationParameters) {
         this.apiKey = param.apiKey;
         this.baseUrl = `https://${param.network}.gomaestro-api.org/v1`;
         this.baseOptions = param.baseOptions;
+        this.axiosInstance = param.axiosInstance ?? globalAxios;
     }
 
     /**

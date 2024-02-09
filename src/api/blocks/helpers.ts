@@ -1,4 +1,4 @@
-import globalAxios, { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -77,27 +77,27 @@ export const BlocksApiFp = function (configuration: Configuration) {
             options?: AxiosRequestConfig,
         ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedBlockInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.blockInfo(hashOrHeight, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, configuration);
+            return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
 };
 
-/**
- * BlocksApi - factory interface
- * @export
- */
-export const BlocksApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BlocksApiFp(configuration);
-    return {
-        /**
-         * Returns information about the specified block including more advanced technical properties
-         * @summary Block information
-         * @param {string} hashOrHeight Block height or hex encoded block hash
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        blockInfo(hashOrHeight: string, options?: any): AxiosPromise<TimestampedBlockInfo> {
-            return localVarFp.blockInfo(hashOrHeight, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+// /**
+//  * BlocksApi - factory interface
+//  * @export
+//  */
+// export const BlocksApiFactory = function (configuration: Configuration, basePath?: string, axios?: AxiosInstance) {
+//     const localVarFp = BlocksApiFp(configuration);
+//     return {
+//         /**
+//          * Returns information about the specified block including more advanced technical properties
+//          * @summary Block information
+//          * @param {string} hashOrHeight Block height or hex encoded block hash
+//          * @param {*} [options] Override http request option.
+//          * @throws {RequiredError}
+//          */
+//         blockInfo(hashOrHeight: string, options?: any): AxiosPromise<TimestampedBlockInfo> {
+//             return localVarFp.blockInfo(hashOrHeight, options).then((request) => request(axios, basePath));
+//         },
+//     };
+// };
