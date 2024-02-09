@@ -27,7 +27,7 @@ export const DatumApiAxiosParamCreator = function (configuration: Configuration)
         lookupDatum: async (datumHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'datumHash' is not null or undefined
             assertParamExists('lookupDatum', 'datumHash', datumHash);
-            const localVarPath = `/datum/{datum_hash}`.replace(
+            const localVarPath = `/datums/{datum_hash}`.replace(
                 `{${'datum_hash'}}`,
                 encodeURIComponent(String(datumHash)),
             );
