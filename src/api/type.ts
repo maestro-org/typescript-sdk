@@ -438,17 +438,17 @@ export interface AssetStandards {
  */
 export interface AssetTx {
     /**
-     * The height of the block which included the transaction
+     * Absolute slot of the block which includes the transaction
      * @type {number}
      * @memberof AssetTx
      */
-    block_height: number;
+    slot: number;
     /**
-     * Epoch in which the transaction occurred
-     * @type {number}
+     * UTC timestamp of the block which includes the transaction
+     * @type {string}
      * @memberof AssetTx
      */
-    epoch_no: number;
+    timestamp: string;
     /**
      * Transaction hash
      * @type {string}
