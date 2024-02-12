@@ -1,5 +1,5 @@
-import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import globalAxios from 'axios';
+/* eslint-disable max-classes-per-file */
+import type { AxiosRequestConfig } from 'axios';
 import type { Configuration } from './configuration';
 
 /**
