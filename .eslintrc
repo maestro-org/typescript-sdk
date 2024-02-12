@@ -29,7 +29,7 @@
         "prefer-regex-literals": "warn",
         "no-control-regex": "warn",
         "no-use-before-define": "warn",
-        "no-param-reassign": "warn",
+        "no-param-reassign": "off",
         "max-classes-per-file": "warn",
         "no-useless-constructor": "off"
     },

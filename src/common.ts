@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AxiosResponse } from 'axios';
 import type { Configuration } from './configuration';
 import type { RequestArgs } from './base';
@@ -23,7 +24,7 @@ export const HEADER_AMOUNTS_AS_STRING = {
  * @throws {RequiredError}
  * @export
  */
-export const assertParamExists = function (functionName: string, paramName: string, paramValue: unknown) {
+export const assertParamExists = (functionName: string, paramName: string, paramValue: unknown) => {
     if (paramValue === null || paramValue === undefined) {
         throw new RequiredError(
             paramName,
@@ -36,8 +37,12 @@ export const assertParamExists = function (functionName: string, paramName: stri
  *
  * @export
  */
-export const setApiKeyToObject = function (object: any, keyParamName: string, configuration: Configuration) {
-    object[keyParamName] = configuration.apiKey;
+export const setApiKeyToObject = (
+    targetObject: Record<string, string>,
+    keyParamName: string,
+    configuration: Configuration,
+) => {
+    targetObject[keyParamName] = configuration.apiKey;
 };
 
 function setFlattenedQueryParams(urlSearchParams: URLSearchParams, parameter: any, key: string = ''): void {
@@ -65,7 +70,7 @@ function setFlattenedQueryParams(urlSearchParams: URLSearchParams, parameter: an
  *
  * @export
  */
-export const setSearchParams = function (url: URL, ...objects: any[]) {
+export const setSearchParams = (url: URL, ...objects: any[]) => {
     const searchParams = new URLSearchParams(url.search);
     setFlattenedQueryParams(searchParams, objects);
     url.search = searchParams.toString();
@@ -75,7 +80,7 @@ export const setSearchParams = function (url: URL, ...objects: any[]) {
  *
  * @export
  */
-export const serializeDataIfNeeded = function (value: any, requestOptions: any, configuration?: Configuration) {
+export const serializeDataIfNeeded = (value: any, requestOptions: any, configuration?: Configuration) => {
     const nonString = typeof value !== 'string';
     const needsSerialization =
         nonString && configuration && configuration.isJsonMime
@@ -88,17 +93,16 @@ export const serializeDataIfNeeded = function (value: any, requestOptions: any, 
  *
  * @export
  */
-export const toPathString = function (url: URL) {
-    return url.pathname + url.search + url.hash;
-};
+export const toPathString = (url: URL) => url.pathname + url.search + url.hash;
 
 /**
  *
  * @export
  */
-export const createRequestFunction = function (axiosArgs: RequestArgs, configuration: Configuration) {
-    return <T = unknown, R = AxiosResponse<T>>() => {
+export const createRequestFunction =
+    <T>(axiosArgs: RequestArgs, configuration: Configuration) =>
+    async () => {
         const axiosRequestArgs = { ...axiosArgs.options, url: configuration.baseUrl + axiosArgs.url };
-        return configuration.axiosInstance.request<T, R>(axiosRequestArgs);
+        const response = await configuration.axiosInstance.request<T, AxiosResponse<T>>(axiosRequestArgs);
+        return response.data;
     };
-};
