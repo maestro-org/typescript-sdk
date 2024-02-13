@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     DUMMY_BASE_URL,
@@ -24,10 +24,10 @@ export const TransactionManagerApiAxiosParamCreator = (configuration: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txManagerHistory: async (
+    txManagerHistory: (
         localVarQueryParameter: TxManagerHistoryQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         const localVarPath = `/txmanager/history`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -59,7 +59,7 @@ export const TransactionManagerApiAxiosParamCreator = (configuration: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txManagerState: async (txHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    txManagerState: (txHash: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'txHash' is not null or undefined
         assertParamExists('txManagerState', 'txHash', txHash);
         const localVarPath = `/txmanager/{tx_hash}/state`.replace(`{${'tx_hash'}}`, encodeURIComponent(String(txHash)));
@@ -94,7 +94,7 @@ export const TransactionManagerApiAxiosParamCreator = (configuration: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txManagerSubmit: async (body: string | Uint8Array, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    txManagerSubmit: (body: string | Uint8Array, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'body' is not null or undefined
         assertParamExists('txManagerSubmit', 'body', body);
         const localVarPath = `/txmanager`;
@@ -131,7 +131,7 @@ export const TransactionManagerApiAxiosParamCreator = (configuration: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txManagerTurboSubmit: async (body: string | Uint8Array, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    txManagerTurboSubmit: (body: string | Uint8Array, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'body' is not null or undefined
         assertParamExists('txManagerTurboSubmit', 'body', body);
         const localVarPath = `/txmanager/turbosubmit`;
@@ -177,11 +177,11 @@ export const TransactionManagerApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txManagerHistory(
+        txManagerHistory(
             queryParams?: TxManagerHistoryQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TxManagerState>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerHistory(queryParams, options);
+        ): () => Promise<Array<TxManagerState>> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txManagerHistory(queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -191,11 +191,8 @@ export const TransactionManagerApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txManagerState(
-            txHash: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TxManagerState>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerState(txHash, options);
+        txManagerState(txHash: string, options?: AxiosRequestConfig): () => Promise<TxManagerState> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txManagerState(txHash, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -205,11 +202,8 @@ export const TransactionManagerApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txManagerSubmit(
-            body: string | Uint8Array,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerSubmit(body, options);
+        txManagerSubmit(body: string | Uint8Array, options?: AxiosRequestConfig): () => Promise<string> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txManagerSubmit(body, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -219,11 +213,8 @@ export const TransactionManagerApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txManagerTurboSubmit(
-            body: string | Uint8Array,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txManagerTurboSubmit(body, options);
+        txManagerTurboSubmit(body: string | Uint8Array, options?: AxiosRequestConfig): () => Promise<string> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txManagerTurboSubmit(body, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

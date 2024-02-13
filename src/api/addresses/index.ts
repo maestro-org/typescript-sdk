@@ -25,9 +25,7 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public decodeAddress(address: string, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration)
-            .decodeAddress(address, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).decodeAddress(address, options)();
     }
 
     /**
@@ -39,9 +37,7 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public txCountByAddress(address: string, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration)
-            .txCountByAddress(address, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).txCountByAddress(address, options)();
     }
 
     /**
@@ -54,9 +50,7 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public txsByAddress(address: string, queryParams?: TxsByAddressQueryParams, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration)
-            .txsByAddress(address, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).txsByAddress(address, queryParams, options)();
     }
 
     /**
@@ -73,9 +67,7 @@ export class AddressesApi extends BaseAPI {
         queryParams?: TxsByPaymentCredQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return AddressesApiFp(this.configuration)
-            .txsByPaymentCred(credential, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).txsByPaymentCred(credential, queryParams, options)();
     }
 
     /**
@@ -88,9 +80,7 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public utxoRefsAtAddress(address: string, queryParams?: TxsByPaymentCredQueryParams, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration)
-            .utxoRefsAtAddress(address, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).utxoRefsAtAddress(address, queryParams, options)();
     }
 
     /**
@@ -103,9 +93,7 @@ export class AddressesApi extends BaseAPI {
      * @memberof AddressesApi
      */
     public utxosByAddress(address: string, queryParams?: UtxosByAddressQueryParams, options?: AxiosRequestConfig) {
-        return AddressesApiFp(this.configuration)
-            .utxosByAddress(address, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).utxosByAddress(address, queryParams, options)();
     }
 
     /**
@@ -122,9 +110,7 @@ export class AddressesApi extends BaseAPI {
         queryParams?: UtxosByAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return AddressesApiFp(this.configuration)
-            .utxosByAddresses(requestBody, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).utxosByAddresses(requestBody, queryParams, options)();
     }
 
     /**
@@ -141,9 +127,7 @@ export class AddressesApi extends BaseAPI {
         queryParams?: UtxosByPaymentCredQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return AddressesApiFp(this.configuration)
-            .utxosByPaymentCred(credential, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).utxosByPaymentCred(credential, queryParams, options)();
     }
 
     /**
@@ -160,9 +144,7 @@ export class AddressesApi extends BaseAPI {
         queryParams?: UtxosByAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return AddressesApiFp(this.configuration)
-            .utxosByPaymentCreds(requestBody, queryParams, options)
-            .then((request) => request());
+        return AddressesApiFp(this.configuration).utxosByPaymentCreds(requestBody, queryParams, options)();
     }
 }
 

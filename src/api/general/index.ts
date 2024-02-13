@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { BaseAPI, RequiredError } from '../../base';
+import { BaseAPI } from '../../base';
 import { GeneralApiFp } from './helpers';
 
 /**
@@ -17,9 +17,7 @@ export class GeneralApi extends BaseAPI {
      * @memberof GeneralApi
      */
     public chainTip(options?: AxiosRequestConfig) {
-        return GeneralApiFp(this.configuration)
-            .chainTip(options)
-            .then((request) => request());
+        return GeneralApiFp(this.configuration).chainTip(options)();
     }
 
     /**
@@ -30,9 +28,7 @@ export class GeneralApi extends BaseAPI {
      * @memberof GeneralApi
      */
     public eraHistory(options?: AxiosRequestConfig) {
-        return GeneralApiFp(this.configuration)
-            .eraHistory(options)
-            .then((request) => request());
+        return GeneralApiFp(this.configuration).eraHistory(options)();
     }
 
     /**
@@ -43,9 +39,7 @@ export class GeneralApi extends BaseAPI {
      * @memberof GeneralApi
      */
     public protocolParams(options?: AxiosRequestConfig) {
-        return GeneralApiFp(this.configuration)
-            .protocolParams(options)
-            .then((request) => request());
+        return GeneralApiFp(this.configuration).protocolParams(options)();
     }
 
     /**
@@ -56,8 +50,6 @@ export class GeneralApi extends BaseAPI {
      * @memberof GeneralApi
      */
     public systemStart(options?: AxiosRequestConfig) {
-        return GeneralApiFp(this.configuration)
-            .systemStart(options)
-            .then((request) => request());
+        return GeneralApiFp(this.configuration).systemStart(options)();
     }
 }

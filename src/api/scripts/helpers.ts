@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -23,7 +23,7 @@ export const ScriptsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    scriptByHash: async (scriptHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    scriptByHash: (scriptHash: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'scriptHash' is not null or undefined
         assertParamExists('scriptByHash', 'scriptHash', scriptHash);
         const localVarPath = `/scripts/{script_hash}`.replace(
@@ -70,11 +70,8 @@ export const ScriptsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async scriptByHash(
-            scriptHash: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedScript>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.scriptByHash(scriptHash, options);
+        scriptByHash(scriptHash: string, options?: AxiosRequestConfig): () => Promise<TimestampedScript> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.scriptByHash(scriptHash, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -40,7 +40,7 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    decodeAddress: async (address: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    decodeAddress: (address: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'address' is not null or undefined
         assertParamExists('decodeAddress', 'address', address);
         const localVarPath = `/addresses/{address}/decode`.replace(
@@ -78,7 +78,7 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txCountByAddress: async (address: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    txCountByAddress: (address: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'address' is not null or undefined
         assertParamExists('txCountByAddress', 'address', address);
         const localVarPath = `/addresses/{address}/transactions/count`.replace(
@@ -117,11 +117,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txsByAddress: async (
+    txsByAddress: (
         address: string,
         localVarQueryParameter?: TxsByAddressQueryParams,
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'address' is not null or undefined
         assertParamExists('txsByAddress', 'address', address);
         const localVarPath = `/addresses/{address}/transactions`.replace(
@@ -159,11 +159,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txsByPaymentCred: async (
+    txsByPaymentCred: (
         credential: string,
         localVarQueryParameter: TxsByPaymentCredQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'credential' is not null or undefined
         assertParamExists('txsByPaymentCred', 'credential', credential);
         const localVarPath = `/addresses/cred/{credential}/transactions`.replace(
@@ -201,11 +201,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    utxoRefsAtAddress: async (
+    utxoRefsAtAddress: (
         address: string,
         localVarQueryParameter: UtxoRefsAtAddressQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'address' is not null or undefined
         assertParamExists('utxoRefsAtAddress', 'address', address);
         const localVarPath = `/addresses/{address}/utxo_refs`.replace(
@@ -243,11 +243,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    utxosByAddress: async (
+    utxosByAddress: (
         address: string,
         localVarQueryParameter: UtxosByAddressQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'address' is not null or undefined
         assertParamExists('utxosByAddress', 'address', address);
         const localVarPath = `/addresses/{address}/utxos`.replace(
@@ -286,11 +286,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    utxosByAddresses: async (
+    utxosByAddresses: (
         requestBody: Array<string>,
         localVarQueryParameter: UtxosByAddressesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'requestBody' is not null or undefined
         assertParamExists('utxosByAddresses', 'requestBody', requestBody);
         const localVarPath = `/addresses/utxos`;
@@ -329,11 +329,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    utxosByPaymentCred: async (
+    utxosByPaymentCred: (
         credential: string,
         localVarQueryParameter: UtxosByPaymentCredQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'credential' is not null or undefined
         assertParamExists('utxosByPaymentCred', 'credential', credential);
         const localVarPath = `/addresses/cred/{credential}/utxos`.replace(
@@ -372,11 +372,11 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    utxosByPaymentCreds: async (
+    utxosByPaymentCreds: (
         requestBody: Array<string>,
         localVarQueryParameter: UtxosByAddressesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'requestBody' is not null or undefined
         assertParamExists('utxosByPaymentCreds', 'requestBody', requestBody);
         const localVarPath = `/addresses/cred/utxos`;
@@ -423,11 +423,8 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async decodeAddress(
-            address: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddressInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.decodeAddress(address, options);
+        decodeAddress(address: string, options?: AxiosRequestConfig): () => Promise<AddressInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.decodeAddress(address, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -437,11 +434,8 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txCountByAddress(
-            address: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedTxCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txCountByAddress(address, options);
+        txCountByAddress(address: string, options?: AxiosRequestConfig): () => Promise<TimestampedTxCount> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txCountByAddress(address, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -452,12 +446,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txsByAddress(
+        txsByAddress(
             address: string,
             queryParams?: TxsByAddressQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAddressTransaction>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsByAddress(address, queryParams, options);
+        ): () => Promise<PaginatedAddressTransaction> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txsByAddress(address, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -468,16 +462,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txsByPaymentCred(
+        txsByPaymentCred(
             credential: string,
             queryParams?: TxsByPaymentCredQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPaymentCredentialTransaction>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txsByPaymentCred(
-                credential,
-                queryParams,
-                options,
-            );
+        ): () => Promise<PaginatedPaymentCredentialTransaction> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txsByPaymentCred(credential, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -488,12 +478,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async utxoRefsAtAddress(
+        utxoRefsAtAddress(
             address: string,
             queryParams?: UtxoRefsAtAddressQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoRef>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxoRefsAtAddress(address, queryParams, options);
+        ): () => Promise<PaginatedUtxoRef> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.utxoRefsAtAddress(address, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -504,12 +494,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async utxosByAddress(
+        utxosByAddress(
             address: string,
             queryParams?: UtxosByAddressQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByAddress(address, queryParams, options);
+        ): () => Promise<PaginatedUtxoWithSlot> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.utxosByAddress(address, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -520,16 +510,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async utxosByAddresses(
+        utxosByAddresses(
             requestBody: Array<string>,
             queryParams?: UtxosByAddressesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByAddresses(
-                requestBody,
-                queryParams,
-                options,
-            );
+        ): () => Promise<PaginatedUtxoWithSlot> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.utxosByAddresses(requestBody, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -540,16 +526,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async utxosByPaymentCred(
+        utxosByPaymentCred(
             credential: string,
             queryParams?: UtxosByPaymentCredQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByPaymentCred(
-                credential,
-                queryParams,
-                options,
-            );
+        ): () => Promise<PaginatedUtxoWithSlot> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.utxosByPaymentCred(credential, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -560,16 +542,12 @@ export const AddressesApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async utxosByPaymentCreds(
+        utxosByPaymentCreds(
             requestBody: Array<string>,
             queryParams?: UtxosByAddressesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithSlot>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.utxosByPaymentCreds(
-                requestBody,
-                queryParams,
-                options,
-            );
+        ): () => Promise<PaginatedUtxoWithSlot> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.utxosByPaymentCreds(requestBody, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

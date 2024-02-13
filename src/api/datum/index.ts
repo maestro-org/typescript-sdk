@@ -17,9 +17,8 @@ export class DatumApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatumApi
      */
-    public async lookupDatum(datumHash: string, options?: AxiosRequestConfig) {
-        const request = await DatumApiFp(this.configuration).lookupDatum(datumHash, options);
-        return request();
+    public lookupDatum(datumHash: string, options?: AxiosRequestConfig) {
+        return DatumApiFp(this.configuration).lookupDatum(datumHash, options)();
     }
 
     /**
@@ -30,8 +29,7 @@ export class DatumApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatumApi
      */
-    public async lookupDatums(requestBody: Array<string>, options?: AxiosRequestConfig) {
-        const request = await DatumApiFp(this.configuration).lookupDatums(requestBody, options);
-        return request();
+    public lookupDatums(requestBody: Array<string>, options?: AxiosRequestConfig) {
+        return DatumApiFp(this.configuration).lookupDatums(requestBody, options)();
     }
 }

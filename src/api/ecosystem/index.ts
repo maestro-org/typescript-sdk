@@ -18,8 +18,6 @@ export class EcosystemApi extends BaseAPI {
      * @memberof EcosystemApi
      */
     public adahandleResolve(handle: string, options?: AxiosRequestConfig) {
-        return EcosystemApiFp(this.configuration)
-            .adahandleResolve(handle, options)
-            .then((request) => request());
+        return EcosystemApiFp(this.configuration).adahandleResolve(handle, options)();
     }
 }

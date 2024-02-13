@@ -30,9 +30,7 @@ export class AccountsApi extends BaseAPI {
         queryParams?: AccountAddressesQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return AccountsApiFp(this.configuration)
-            .accountAddresses(stakeAddr, queryParams, options)
-            .then((request) => request());
+        return AccountsApiFp(this.configuration).accountAddresses(stakeAddr, queryParams, options)();
     }
 
     /**
@@ -45,9 +43,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public accountAssets(stakeAddr: string, queryParams?: AccountAssetsQueryParams, options?: AxiosRequestConfig) {
-        return AccountsApiFp(this.configuration)
-            .accountAssets(stakeAddr, queryParams, options)
-            .then((request) => request());
+        return AccountsApiFp(this.configuration).accountAssets(stakeAddr, queryParams, options)();
     }
 
     /**
@@ -60,9 +56,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public accountHistory(stakeAddr: string, queryParams?: AccountHistoryQueryParams, options?: AxiosRequestConfig) {
-        return AccountsApiFp(this.configuration)
-            .accountHistory(stakeAddr, queryParams, options)
-            .then((request) => request());
+        return AccountsApiFp(this.configuration).accountHistory(stakeAddr, queryParams, options)();
     }
 
     /**
@@ -74,9 +68,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public accountInfo(stakeAddr: string, options?: AxiosRequestConfig) {
-        return AccountsApiFp(this.configuration)
-            .accountInfo(stakeAddr, options)
-            .then((request) => request());
+        return AccountsApiFp(this.configuration).accountInfo(stakeAddr, options)();
     }
 
     /**
@@ -89,9 +81,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public accountRewards(stakeAddr: string, queryParams?: AccountRewardsQueryParams, options?: AxiosRequestConfig) {
-        return AccountsApiFp(this.configuration)
-            .accountRewards(stakeAddr, queryParams, options)
-            .then((request) => request());
+        return AccountsApiFp(this.configuration).accountRewards(stakeAddr, queryParams, options)();
     }
 
     /**
@@ -104,9 +94,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public accountUpdates(stakeAddr: string, queryParams?: AccountUpdatesQueryParams, options?: AxiosRequestConfig) {
-        return AccountsApiFp(this.configuration)
-            .accountUpdates(stakeAddr, queryParams, options)
-            .then((request) => request());
+        return AccountsApiFp(this.configuration).accountUpdates(stakeAddr, queryParams, options)();
     }
 }
 

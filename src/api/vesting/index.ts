@@ -19,9 +19,7 @@ export class VestingApi extends BaseAPI {
      * @memberof VestingApi
      */
     public contractsVestingCollectBeneficiaryPost(beneficiary: string, options?: AxiosRequestConfig) {
-        return VestingApiFp(this.configuration)
-            .contractsVestingCollectBeneficiaryPost(beneficiary, options)
-            .then((request) => request());
+        return VestingApiFp(this.configuration).contractsVestingCollectBeneficiaryPost(beneficiary, options)();
     }
 
     /**
@@ -36,9 +34,7 @@ export class VestingApi extends BaseAPI {
         contractsVestingLockPostRequest: ContractsVestingLockPostRequest,
         options?: AxiosRequestConfig,
     ) {
-        return VestingApiFp(this.configuration)
-            .contractsVestingLockPost(contractsVestingLockPostRequest, options)
-            .then((request) => request());
+        return VestingApiFp(this.configuration).contractsVestingLockPost(contractsVestingLockPostRequest, options)();
     }
 
     /**
@@ -50,8 +46,6 @@ export class VestingApi extends BaseAPI {
      * @memberof VestingApi
      */
     public contractsVestingStateBeneficiaryGet(beneficiary: string, options?: AxiosRequestConfig) {
-        return VestingApiFp(this.configuration)
-            .contractsVestingStateBeneficiaryGet(beneficiary, options)
-            .then((request) => request());
+        return VestingApiFp(this.configuration).contractsVestingStateBeneficiaryGet(beneficiary, options)();
     }
 }
