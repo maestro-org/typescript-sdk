@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     DUMMY_BASE_URL,
@@ -22,7 +22,7 @@ export const EpochsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    currentEpoch: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    currentEpoch: (options: AxiosRequestConfig = {}): RequestArgs => {
         const localVarPath = `/epochs/current`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -55,7 +55,7 @@ export const EpochsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    epochInfo: async (epochNo: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    epochInfo: (epochNo: number, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'epochNo' is not null or undefined
         assertParamExists('epochInfo', 'epochNo', epochNo);
         const localVarPath = `/epochs/{epoch_no}`.replace(`{${'epoch_no'}}`, encodeURIComponent(String(epochNo)));
@@ -98,10 +98,8 @@ export const EpochsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async currentEpoch(
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedCurrentEpochInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.currentEpoch(options);
+        currentEpoch(options?: AxiosRequestConfig): () => Promise<TimestampedCurrentEpochInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.currentEpoch(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -111,11 +109,8 @@ export const EpochsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async epochInfo(
-            epochNo: number,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedEpochInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.epochInfo(epochNo, options);
+        epochInfo(epochNo: number, options?: AxiosRequestConfig): () => Promise<TimestampedEpochInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.epochInfo(epochNo, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

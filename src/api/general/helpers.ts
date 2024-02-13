@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import { DUMMY_BASE_URL, setApiKeyToObject, setSearchParams, toPathString, createRequestFunction } from '../../common';
 import { Configuration } from '../../configuration';
@@ -20,7 +20,7 @@ export const GeneralApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    chainTip: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    chainTip: (options: AxiosRequestConfig = {}): RequestArgs => {
         const localVarPath = `/chain-tip`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -52,7 +52,7 @@ export const GeneralApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    eraHistory: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    eraHistory: (options: AxiosRequestConfig = {}): RequestArgs => {
         const localVarPath = `/era-history`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -84,7 +84,7 @@ export const GeneralApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    protocolParams: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    protocolParams: (options: AxiosRequestConfig = {}): RequestArgs => {
         const localVarPath = `/protocol-params`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -116,7 +116,7 @@ export const GeneralApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    systemStart: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    systemStart: (options: AxiosRequestConfig = {}): RequestArgs => {
         const localVarPath = `/system-start`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -157,10 +157,8 @@ export const GeneralApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async chainTip(
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedChainTip>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.chainTip(options);
+        chainTip(options?: AxiosRequestConfig): () => Promise<TimestampedChainTip> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.chainTip(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -169,10 +167,8 @@ export const GeneralApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async eraHistory(
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedEraSummaries>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.eraHistory(options);
+        eraHistory(options?: AxiosRequestConfig): () => Promise<TimestampedEraSummaries> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.eraHistory(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -181,10 +177,8 @@ export const GeneralApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async protocolParams(
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedProtocolParameters>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.protocolParams(options);
+        protocolParams(options?: AxiosRequestConfig): () => Promise<TimestampedProtocolParameters> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.protocolParams(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -193,10 +187,8 @@ export const GeneralApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async systemStart(
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedSystemStart>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.systemStart(options);
+        systemStart(options?: AxiosRequestConfig): () => Promise<TimestampedSystemStart> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.systemStart(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

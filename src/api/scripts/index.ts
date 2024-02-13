@@ -18,8 +18,6 @@ export class ScriptsApi extends BaseAPI {
      * @memberof ScriptsApi
      */
     public scriptByHash(scriptHash: string, options?: AxiosRequestConfig) {
-        return ScriptsApiFp(this.configuration)
-            .scriptByHash(scriptHash, options)
-            .then((request) => request());
+        return ScriptsApiFp(this.configuration).scriptByHash(scriptHash, options)();
     }
 }

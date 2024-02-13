@@ -20,9 +20,7 @@ export class TransactionsApi extends BaseAPI {
      * @memberof TransactionsApi
      */
     public addressByTxo(txHash: string, index: number, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration)
-            .addressByTxo(txHash, index, options)
-            .then((request) => request());
+        return TransactionsApiFp(this.configuration).addressByTxo(txHash, index, options)();
     }
 
     /**
@@ -34,9 +32,7 @@ export class TransactionsApi extends BaseAPI {
      * @memberof TransactionsApi
      */
     public txCborByTxHash(txHash: string, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration)
-            .txCborByTxHash(txHash, options)
-            .then((request) => request());
+        return TransactionsApiFp(this.configuration).txCborByTxHash(txHash, options)();
     }
 
     /**
@@ -48,9 +44,7 @@ export class TransactionsApi extends BaseAPI {
      * @memberof TransactionsApi
      */
     public txInfo(txHash: string, options?: AxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration)
-            .txInfo(txHash, options)
-            .then((request) => request());
+        return TransactionsApiFp(this.configuration).txInfo(txHash, options)();
     }
 
     /**
@@ -69,9 +63,7 @@ export class TransactionsApi extends BaseAPI {
         queryParams?: TxoByTxoRefQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return TransactionsApiFp(this.configuration)
-            .txoByTxoRef(txHash, index, queryParams, options)
-            .then((request) => request());
+        return TransactionsApiFp(this.configuration).txoByTxoRef(txHash, index, queryParams, options)();
     }
 
     /**
@@ -88,8 +80,6 @@ export class TransactionsApi extends BaseAPI {
         queryParams?: TxoByTxoRefQueryParams,
         options?: AxiosRequestConfig,
     ) {
-        return TransactionsApiFp(this.configuration)
-            .txosByTxoRefs(requestBody, queryParams, options)
-            .then((request) => request());
+        return TransactionsApiFp(this.configuration).txosByTxoRefs(requestBody, queryParams, options)();
     }
 }

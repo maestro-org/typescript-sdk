@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -24,7 +24,7 @@ export const DatumApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    lookupDatum: async (datumHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    lookupDatum: (datumHash: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'datumHash' is not null or undefined
         assertParamExists('lookupDatum', 'datumHash', datumHash);
         const localVarPath = `/datums/{datum_hash}`.replace(`{${'datum_hash'}}`, encodeURIComponent(String(datumHash)));
@@ -59,7 +59,7 @@ export const DatumApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    lookupDatums: async (requestBody: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    lookupDatums: (requestBody: Array<string>, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'requestBody' is not null or undefined
         assertParamExists('lookupDatums', 'requestBody', requestBody);
         const localVarPath = `/datums`;
@@ -106,11 +106,8 @@ export const DatumApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async lookupDatum(
-            datumHash: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedDatum>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lookupDatum(datumHash, options);
+        lookupDatum(datumHash: string, options?: AxiosRequestConfig): () => Promise<TimestampedDatum> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.lookupDatum(datumHash, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -120,11 +117,8 @@ export const DatumApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async lookupDatums(
-            requestBody: Array<string>,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedDatums>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lookupDatums(requestBody, options);
+        lookupDatums(requestBody: Array<string>, options?: AxiosRequestConfig): () => Promise<TimestampedDatums> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.lookupDatums(requestBody, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

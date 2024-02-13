@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -23,7 +23,7 @@ export const EcosystemApiAxiosParamCreator = (configuration: Configuration) => (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    adahandleResolve: async (handle: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    adahandleResolve: (handle: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'handle' is not null or undefined
         assertParamExists('adahandleResolve', 'handle', handle);
         const localVarPath = `/ecosystem/adahandle/{handle}`.replace(
@@ -70,11 +70,8 @@ export const EcosystemApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adahandleResolve(
-            handle: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedAddress>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adahandleResolve(handle, options);
+        adahandleResolve(handle: string, options?: AxiosRequestConfig): () => Promise<TimestampedAddress> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.adahandleResolve(handle, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

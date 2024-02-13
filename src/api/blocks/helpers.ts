@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -23,7 +23,7 @@ export const BlocksApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    blockInfo: async (hashOrHeight: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    blockInfo: (hashOrHeight: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'hashOrHeight' is not null or undefined
         assertParamExists('blockInfo', 'hashOrHeight', hashOrHeight);
         const localVarPath = `/blocks/{hash_or_height}`.replace(
@@ -70,11 +70,8 @@ export const BlocksApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async blockInfo(
-            hashOrHeight: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedBlockInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.blockInfo(hashOrHeight, options);
+        blockInfo(hashOrHeight: string, options?: AxiosRequestConfig): () => Promise<TimestampedBlockInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.blockInfo(hashOrHeight, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

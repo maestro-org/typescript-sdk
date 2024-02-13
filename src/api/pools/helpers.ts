@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     DUMMY_BASE_URL,
@@ -34,10 +34,7 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPools: async (
-        localVarQueryParameter?: ListPoolsQueryParams,
-        options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    listPools: (localVarQueryParameter?: ListPoolsQueryParams, options: AxiosRequestConfig = {}): RequestArgs => {
         const localVarPath = `/pools`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -70,11 +67,11 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolBlocks: async (
+    poolBlocks: (
         poolId: string,
         localVarQueryParameter: PoolBlocksQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolBlocks', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/blocks`.replace(`{${'pool_id'}}`, encodeURIComponent(String(poolId)));
@@ -109,11 +106,11 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolDelegators: async (
+    poolDelegators: (
         poolId: string,
         localVarQueryParameter: PoolDelegatorsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolDelegators', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/delegators`.replace(
@@ -151,11 +148,11 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolHistory: async (
+    poolHistory: (
         poolId: string,
         localVarQueryParameter: PoolHistoryQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolHistory', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/history`.replace(`{${'pool_id'}}`, encodeURIComponent(String(poolId)));
@@ -189,7 +186,7 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolInfo: async (poolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    poolInfo: (poolId: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolInfo', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/info`.replace(`{${'pool_id'}}`, encodeURIComponent(String(poolId)));
@@ -225,7 +222,7 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolMetadata: async (poolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    poolMetadata: (poolId: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolMetadata', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/metadata`.replace(`{${'pool_id'}}`, encodeURIComponent(String(poolId)));
@@ -260,7 +257,7 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolRelays: async (poolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    poolRelays: (poolId: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolRelays', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/relays`.replace(`{${'pool_id'}}`, encodeURIComponent(String(poolId)));
@@ -295,7 +292,7 @@ export const PoolsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    poolUpdates: async (poolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    poolUpdates: (poolId: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'poolId' is not null or undefined
         assertParamExists('poolUpdates', 'poolId', poolId);
         const localVarPath = `/pools/{pool_id}/updates`.replace(`{${'pool_id'}}`, encodeURIComponent(String(poolId)));
@@ -339,11 +336,11 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPools(
+        listPools(
             queryParams?: ListPoolsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolListInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listPools(queryParams, options);
+        ): () => Promise<PaginatedPoolListInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.listPools(queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -354,12 +351,12 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolBlocks(
+        poolBlocks(
             poolId: string,
             queryParams?: PoolBlocksQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolBlock>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolBlocks(poolId, queryParams, options);
+        ): () => Promise<PaginatedPoolBlock> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolBlocks(poolId, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -370,12 +367,12 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolDelegators(
+        poolDelegators(
             poolId: string,
             queryParams?: PoolDelegatorsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedDelegatorInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolDelegators(poolId, queryParams, options);
+        ): () => Promise<PaginatedDelegatorInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolDelegators(poolId, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -386,12 +383,12 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolHistory(
+        poolHistory(
             poolId: string,
             queryParams?: PoolHistoryQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPoolHistory>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolHistory(poolId, queryParams, options);
+        ): () => Promise<PaginatedPoolHistory> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolHistory(poolId, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -401,11 +398,8 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolInfo(
-            poolId: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolInfo(poolId, options);
+        poolInfo(poolId: string, options?: AxiosRequestConfig): () => Promise<TimestampedPoolInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolInfo(poolId, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -415,11 +409,8 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolMetadata(
-            poolId: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolMetadata>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolMetadata(poolId, options);
+        poolMetadata(poolId: string, options?: AxiosRequestConfig): () => Promise<TimestampedPoolMetadata> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolMetadata(poolId, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -429,11 +420,8 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolRelays(
-            poolId: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolRelays>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolRelays(poolId, options);
+        poolRelays(poolId: string, options?: AxiosRequestConfig): () => Promise<TimestampedPoolRelays> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolRelays(poolId, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -443,11 +431,8 @@ export const PoolsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async poolUpdates(
-            poolId: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedPoolUpdates>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.poolUpdates(poolId, options);
+        poolUpdates(poolId: string, options?: AxiosRequestConfig): () => Promise<TimestampedPoolUpdates> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.poolUpdates(poolId, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

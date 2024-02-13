@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -33,7 +33,7 @@ export const TransactionsApiAxiosParamCreator = (configuration: Configuration) =
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    addressByTxo: async (txHash: string, index: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    addressByTxo: (txHash: string, index: number, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'txHash' is not null or undefined
         assertParamExists('addressByTxo', 'txHash', txHash);
         // verify required parameter 'index' is not null or undefined
@@ -72,7 +72,7 @@ export const TransactionsApiAxiosParamCreator = (configuration: Configuration) =
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txCborByTxHash: async (txHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    txCborByTxHash: (txHash: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'txHash' is not null or undefined
         assertParamExists('txCborByTxHash', 'txHash', txHash);
         const localVarPath = `/transactions/{tx_hash}/cbor`.replace(
@@ -110,7 +110,7 @@ export const TransactionsApiAxiosParamCreator = (configuration: Configuration) =
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txInfo: async (txHash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    txInfo: (txHash: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'txHash' is not null or undefined
         assertParamExists('txInfo', 'txHash', txHash);
         const localVarPath = `/transactions/{tx_hash}`.replace(`{${'tx_hash'}}`, encodeURIComponent(String(txHash)));
@@ -147,12 +147,12 @@ export const TransactionsApiAxiosParamCreator = (configuration: Configuration) =
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txoByTxoRef: async (
+    txoByTxoRef: (
         txHash: string,
         index: number,
         localVarQueryParameter: TxoByTxoRefQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'txHash' is not null or undefined
         assertParamExists('txoByTxoRef', 'txHash', txHash);
         // verify required parameter 'index' is not null or undefined
@@ -191,11 +191,11 @@ export const TransactionsApiAxiosParamCreator = (configuration: Configuration) =
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    txosByTxoRefs: async (
+    txosByTxoRefs: (
         requestBody: Array<string>,
         localVarQueryParameter: TxosByTxoRefsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'requestBody' is not null or undefined
         assertParamExists('txosByTxoRefs', 'requestBody', requestBody);
         const localVarPath = `/transactions/outputs`;
@@ -243,12 +243,8 @@ export const TransactionsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addressByTxo(
-            txHash: string,
-            index: number,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedAddress>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addressByTxo(txHash, index, options);
+        addressByTxo(txHash: string, index: number, options?: AxiosRequestConfig): () => Promise<TimestampedAddress> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.addressByTxo(txHash, index, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -258,11 +254,8 @@ export const TransactionsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txCborByTxHash(
-            txHash: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedTxCbor>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txCborByTxHash(txHash, options);
+        txCborByTxHash(txHash: string, options?: AxiosRequestConfig): () => Promise<TimestampedTxCbor> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txCborByTxHash(txHash, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -272,11 +265,8 @@ export const TransactionsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txInfo(
-            txHash: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedTransactionInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txInfo(txHash, options);
+        txInfo(txHash: string, options?: AxiosRequestConfig): () => Promise<TimestampedTransactionInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txInfo(txHash, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -288,13 +278,13 @@ export const TransactionsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txoByTxoRef(
+        txoByTxoRef(
             txHash: string,
             index: number,
             queryParams?: TxoByTxoRefQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedUtxo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txoByTxoRef(txHash, index, queryParams, options);
+        ): () => Promise<TimestampedUtxo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txoByTxoRef(txHash, index, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -305,12 +295,12 @@ export const TransactionsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async txosByTxoRefs(
+        txosByTxoRefs(
             requestBody: Array<string>,
             queryParams?: TxosByTxoRefsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUtxoWithBytes>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.txosByTxoRefs(requestBody, queryParams, options);
+        ): () => Promise<PaginatedUtxoWithBytes> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txosByTxoRefs(requestBody, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

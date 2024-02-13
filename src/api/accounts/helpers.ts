@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -39,11 +39,11 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    accountAddresses: async (
+    accountAddresses: (
         stakeAddr: string,
         localVarQueryParameter: AccountAddressesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'stakeAddr' is not null or undefined
         assertParamExists('accountAddresses', 'stakeAddr', stakeAddr);
         const localVarPath = `/accounts/{stake_addr}/addresses`.replace(
@@ -81,11 +81,11 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    accountAssets: async (
+    accountAssets: (
         stakeAddr: string,
         localVarQueryParameter: AccountAssetsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'stakeAddr' is not null or undefined
         assertParamExists('accountAssets', 'stakeAddr', stakeAddr);
         const localVarPath = `/accounts/{stake_addr}/assets`.replace(
@@ -124,11 +124,11 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    accountHistory: async (
+    accountHistory: (
         stakeAddr: string,
         localVarQueryParameter: AccountHistoryQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'stakeAddr' is not null or undefined
         assertParamExists('accountHistory', 'stakeAddr', stakeAddr);
         const localVarPath = `/accounts/{stake_addr}/history`.replace(
@@ -165,7 +165,7 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    accountInfo: async (stakeAddr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    accountInfo: (stakeAddr: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'stakeAddr' is not null or undefined
         assertParamExists('accountInfo', 'stakeAddr', stakeAddr);
         const localVarPath = `/accounts/{stake_addr}`.replace(
@@ -204,11 +204,11 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    accountRewards: async (
+    accountRewards: (
         stakeAddr: string,
         localVarQueryParameter: AccountRewardsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'stakeAddr' is not null or undefined
         assertParamExists('accountRewards', 'stakeAddr', stakeAddr);
         const localVarPath = `/accounts/{stake_addr}/rewards`.replace(
@@ -246,11 +246,11 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    accountUpdates: async (
+    accountUpdates: (
         stakeAddr: string,
         localVarQueryParameter: AccountUpdatesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'stakeAddr' is not null or undefined
         assertParamExists('accountUpdates', 'stakeAddr', stakeAddr);
         const localVarPath = `/accounts/{stake_addr}/updates`.replace(
@@ -297,12 +297,12 @@ export const AccountsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountAddresses(
+        accountAddresses(
             stakeAddr: string,
             queryParams?: AccountAddressesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAddress>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAddresses(stakeAddr, queryParams, options);
+        ): () => Promise<PaginatedAddress> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountAddresses(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -313,12 +313,12 @@ export const AccountsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountAssets(
+        accountAssets(
             stakeAddr: string,
             queryParams?: AccountAssetsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountAssets(stakeAddr, queryParams, options);
+        ): () => Promise<PaginatedAsset> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountAssets(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -329,12 +329,12 @@ export const AccountsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountHistory(
+        accountHistory(
             stakeAddr: string,
             queryParams?: AccountHistoryQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountHistory>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountHistory(stakeAddr, queryParams, options);
+        ): () => Promise<PaginatedAccountHistory> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountHistory(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -344,11 +344,8 @@ export const AccountsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountInfo(
-            stakeAddr: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedAccountInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountInfo(stakeAddr, options);
+        accountInfo(stakeAddr: string, options?: AxiosRequestConfig): () => Promise<TimestampedAccountInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountInfo(stakeAddr, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -359,12 +356,12 @@ export const AccountsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountRewards(
+        accountRewards(
             stakeAddr: string,
             queryParams?: AccountRewardsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountReward>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountRewards(stakeAddr, queryParams, options);
+        ): () => Promise<PaginatedAccountReward> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountRewards(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -375,12 +372,12 @@ export const AccountsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountUpdates(
+        accountUpdates(
             stakeAddr: string,
             queryParams?: AccountUpdatesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAccountUpdate>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountUpdates(stakeAddr, queryParams, options);
+        ): () => Promise<PaginatedAccountUpdate> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountUpdates(stakeAddr, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };

@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -24,10 +24,7 @@ export const VestingApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    contractsVestingCollectBeneficiaryPost: async (
-        beneficiary: string,
-        options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    contractsVestingCollectBeneficiaryPost: (beneficiary: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'beneficiary' is not null or undefined
         assertParamExists('contractsVestingCollectBeneficiaryPost', 'beneficiary', beneficiary);
         const localVarPath = `/contracts/vesting/collect/{beneficiary}`.replace(
@@ -65,10 +62,10 @@ export const VestingApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    contractsVestingLockPost: async (
+    contractsVestingLockPost: (
         contractsVestingLockPostRequest: ContractsVestingLockPostRequest,
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'contractsVestingLockPostRequest' is not null or undefined
         assertParamExists(
             'contractsVestingLockPost',
@@ -114,10 +111,7 @@ export const VestingApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    contractsVestingStateBeneficiaryGet: async (
-        beneficiary: string,
-        options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    contractsVestingStateBeneficiaryGet: (beneficiary: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'beneficiary' is not null or undefined
         assertParamExists('contractsVestingStateBeneficiaryGet', 'beneficiary', beneficiary);
         const localVarPath = `/contracts/vesting/state/{beneficiary}`.replace(
@@ -164,11 +158,11 @@ export const VestingApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async contractsVestingCollectBeneficiaryPost(
+        contractsVestingCollectBeneficiaryPost(
             beneficiary: string,
             options?: AxiosRequestConfig,
-        ): Promise<(basePath?: string) => AxiosPromise<ContractsVestingLockPost200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingCollectBeneficiaryPost(
+        ): () => Promise<ContractsVestingLockPost200Response> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.contractsVestingCollectBeneficiaryPost(
                 beneficiary,
                 options,
             );
@@ -181,11 +175,11 @@ export const VestingApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async contractsVestingLockPost(
+        contractsVestingLockPost(
             contractsVestingLockPostRequest: ContractsVestingLockPostRequest,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContractsVestingLockPost200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingLockPost(
+        ): () => Promise<ContractsVestingLockPost200Response> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.contractsVestingLockPost(
                 contractsVestingLockPostRequest,
                 options,
             );
@@ -198,11 +192,11 @@ export const VestingApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async contractsVestingStateBeneficiaryGet(
+        contractsVestingStateBeneficiaryGet(
             beneficiary: string,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VestingState>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.contractsVestingStateBeneficiaryGet(
+        ): () => Promise<VestingState> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.contractsVestingStateBeneficiaryGet(
                 beneficiary,
                 options,
             );

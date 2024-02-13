@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { RequestArgs } from '../../base';
 import {
     assertParamExists,
@@ -47,11 +47,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    assetAccounts: async (
+    assetAccounts: (
         asset: string,
         localVarQueryParameter: AssetAccountsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'asset' is not null or undefined
         assertParamExists('assetAccounts', 'asset', asset);
         const localVarPath = `/assets/{asset}/accounts`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
@@ -86,11 +86,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    assetAddresses: async (
+    assetAddresses: (
         asset: string,
         localVarQueryParameter: AssetAddressesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'asset' is not null or undefined
         assertParamExists('assetAddresses', 'asset', asset);
         const localVarPath = `/assets/{asset}/addresses`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
@@ -124,7 +124,7 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    assetInfo: async (asset: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+    assetInfo: (asset: string, options: AxiosRequestConfig = {}): RequestArgs => {
         // verify required parameter 'asset' is not null or undefined
         assertParamExists('assetInfo', 'asset', asset);
         const localVarPath = `/assets/{asset}`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
@@ -160,11 +160,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    assetTxs: async (
+    assetTxs: (
         asset: string,
         localVarQueryParameter: AssetTxsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'asset' is not null or undefined
         assertParamExists('assetTxs', 'asset', asset);
         const localVarPath = `/assets/{asset}/transactions`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
@@ -199,11 +199,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    assetUpdates: async (
+    assetUpdates: (
         asset: string,
         localVarQueryParameter: AssetUpdatesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'asset' is not null or undefined
         assertParamExists('assetUpdates', 'asset', asset);
         const localVarPath = `/assets/{asset}/updates`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
@@ -238,11 +238,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    assetUtxos: async (
+    assetUtxos: (
         asset: string,
         localVarQueryParameter: AssetUpdatesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'asset' is not null or undefined
         assertParamExists('assetUtxos', 'asset', asset);
         const localVarPath = `/assets/{asset}/utxos`.replace(`{${'asset'}}`, encodeURIComponent(String(asset)));
@@ -277,11 +277,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    policyAccounts: async (
+    policyAccounts: (
         policy: string,
         localVarQueryParameter: PolicyAccountsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyAccounts', 'policy', policy);
         const localVarPath = `/assets/policy/{policy}/accounts`.replace(
@@ -319,11 +319,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    policyAddresses: async (
+    policyAddresses: (
         policy: string,
         localVarQueryParameter: PolicyAddressesQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyAddresses', 'policy', policy);
         const localVarPath = `/assets/policy/{policy}/addresses`.replace(
@@ -361,11 +361,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    policyInfo: async (
+    policyInfo: (
         policy: string,
         localVarQueryParameter: PolicyInfoQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyInfo', 'policy', policy);
         const localVarPath = `/assets/policy/{policy}`.replace(`{${'policy'}}`, encodeURIComponent(String(policy)));
@@ -400,11 +400,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    policyTxs: async (
+    policyTxs: (
         policy: string,
         localVarQueryParameter: PolicyTxsQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyTxs', 'policy', policy);
         const localVarPath = `/assets/policy/{policy}/txs`.replace(`{${'policy'}}`, encodeURIComponent(String(policy)));
@@ -439,11 +439,11 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    policyUtxos: async (
+    policyUtxos: (
         policy: string,
         localVarQueryParameter: PolicyUtxosQueryParams = {},
         options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
+    ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyUtxos', 'policy', policy);
         const localVarPath = `/assets/policy/{policy}/utxos`.replace(
@@ -490,12 +490,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetAccounts(
+        assetAccounts(
             asset: string,
             queryParams?: AssetAccountsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetHolderAccount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetAccounts(asset, queryParams, options);
+        ): () => Promise<PaginatedAssetHolderAccount> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.assetAccounts(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -506,12 +506,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetAddresses(
+        assetAddresses(
             asset: string,
             queryParams?: AssetAddressesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetHolder>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetAddresses(asset, queryParams, options);
+        ): () => Promise<PaginatedAssetHolder> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.assetAddresses(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -521,11 +521,8 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetInfo(
-            asset: string,
-            options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimestampedAssetInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetInfo(asset, options);
+        assetInfo(asset: string, options?: AxiosRequestConfig): () => Promise<TimestampedAssetInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.assetInfo(asset, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -536,12 +533,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetTxs(
+        assetTxs(
             asset: string,
             queryParams?: AssetTxsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetTx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetTxs(asset, queryParams, options);
+        ): () => Promise<PaginatedAssetTx> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.assetTxs(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -552,12 +549,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetUpdates(
+        assetUpdates(
             asset: string,
             queryParams?: AssetUpdatesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedMintingTx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetUpdates(asset, queryParams, options);
+        ): () => Promise<PaginatedMintingTx> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.assetUpdates(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -568,12 +565,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetUtxos(
+        assetUtxos(
             asset: string,
             queryParams?: AssetUtxosQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetUtxo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetUtxos(asset, queryParams, options);
+        ): () => Promise<PaginatedAssetUtxo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.assetUtxos(asset, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -584,12 +581,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async policyAccounts(
+        policyAccounts(
             policy: string,
             queryParams?: PolicyAccountsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyHolderAccount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyAccounts(policy, queryParams, options);
+        ): () => Promise<PaginatedPolicyHolderAccount> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.policyAccounts(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -600,12 +597,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async policyAddresses(
+        policyAddresses(
             policy: string,
             queryParams?: PolicyAddressesQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyHolder>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyAddresses(policy, queryParams, options);
+        ): () => Promise<PaginatedPolicyHolder> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.policyAddresses(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -616,12 +613,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async policyInfo(
+        policyInfo(
             policy: string,
             queryParams?: PolicyInfoQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyInfo(policy, queryParams, options);
+        ): () => Promise<PaginatedAssetInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.policyInfo(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -632,12 +629,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async policyTxs(
+        policyTxs(
             policy: string,
             queryParams?: PolicyTxsQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedAssetTx>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyTxs(policy, queryParams, options);
+        ): () => Promise<PaginatedAssetTx> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.policyTxs(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
@@ -648,12 +645,12 @@ export const AssetsApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async policyUtxos(
+        policyUtxos(
             policy: string,
             queryParams?: PolicyUtxosQueryParams,
             options?: AxiosRequestConfig,
-        ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPolicyUtxo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.policyUtxos(policy, queryParams, options);
+        ): () => Promise<PaginatedPolicyUtxo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.policyUtxos(policy, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
