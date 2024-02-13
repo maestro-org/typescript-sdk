@@ -103,6 +103,8 @@ export const createRequestFunction =
     <T>(axiosArgs: RequestArgs, configuration: Configuration) =>
     async () => {
         const axiosRequestArgs = { ...axiosArgs.options, url: configuration.baseUrl + axiosArgs.url };
-        const response = await configuration.axiosInstance.request<T, AxiosResponse<T>>(axiosRequestArgs);
-        return response.data;
+        return configuration.axiosInstance
+            .request<T, AxiosResponse<T>>(axiosRequestArgs)
+            .then((response) => response.data)
+            .catch((error) => error);
     };
