@@ -3,7 +3,8 @@ import globalAxios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 export type MaestroSupportedNetworks = 'Mainnet' | 'Preprod' | 'Preview';
 
 export interface ConfigurationParameters {
-    readonly apiKey: string;
+    readonly apiKey?: string;
+    readonly baseUrl?: string;
     readonly network: MaestroSupportedNetworks;
     readonly baseOptions?: AxiosRequestConfig;
     readonly axiosInstance?: AxiosInstance;
@@ -36,8 +37,12 @@ export class Configuration {
     readonly axiosInstance: AxiosInstance;
 
     constructor(param: ConfigurationParameters) {
-        this.apiKey = param.apiKey;
-        this.baseUrl = `https://${param.network}.gomaestro-api.org/v1`;
+        if (param.baseUrl) {
+            this.baseUrl = param.baseUrl;
+        } else {
+            this.baseUrl = `https://${param.network}.gomaestro-api.org/v1`;
+        }
+        this.apiKey = param.apiKey || '';
         this.baseOptions = param.baseOptions;
         this.axiosInstance = param.axiosInstance ?? globalAxios;
     }
