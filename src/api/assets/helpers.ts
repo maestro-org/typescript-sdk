@@ -368,7 +368,7 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
     ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyInfo', 'policy', policy);
-        const localVarPath = `/policy/{policy}`.replace(`{${'policy'}}`, encodeURIComponent(String(policy)));
+        const localVarPath = `/policy/{policy}/assets`.replace(`{${'policy'}}`, encodeURIComponent(String(policy)));
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
         const { baseOptions } = configuration;
@@ -407,7 +407,7 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
     ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyTxs', 'policy', policy);
-        const localVarPath = `/assets/policy/{policy}/txs`.replace(`{${'policy'}}`, encodeURIComponent(String(policy)));
+        const localVarPath = `/policy/{policy}/txs`.replace(`{${'policy'}}`, encodeURIComponent(String(policy)));
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
         const { baseOptions } = configuration;
@@ -446,7 +446,7 @@ export const AssetsApiAxiosParamCreator = (configuration: Configuration) => ({
     ): RequestArgs => {
         // verify required parameter 'policy' is not null or undefined
         assertParamExists('policyUtxos', 'policy', policy);
-        const localVarPath = `/assets/policy/{policy}/utxos`.replace(
+        const localVarPath = `/policy/{policy}/utxos`.replace(
             `{${'policy'}}`,
             encodeURIComponent(String(policy)),
         );
