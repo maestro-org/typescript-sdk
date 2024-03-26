@@ -114,3 +114,25 @@ export interface AccountUpdatesQueryParams {
      */
     cursor?: string | null;
 }
+
+/**
+ * Query parameters for accountDelegationHistory.
+ * @export
+ * @interface AccountDelegationHistoryQueryParams
+ *
+ */
+export interface AccountDelegationHistoryQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof AccountDelegationHistoryQueryParams
+     */
+    count?: number | null;
+
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof AccountDelegationHistoryQueryParams
+     */
+    cursor?: string | null;
+}
