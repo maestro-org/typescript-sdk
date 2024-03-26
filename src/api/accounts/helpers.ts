@@ -17,10 +17,12 @@ import {
     TimestampedAccountInfo,
     PaginatedAccountReward,
     PaginatedAccountUpdate,
+    PaginatedAccountDelegationHistory,
 } from '../type';
 import {
     AccountAddressesQueryParams,
     AccountAssetsQueryParams,
+    AccountDelegationHistoryQueryParams,
     AccountHistoryQueryParams,
     AccountRewardsQueryParams,
     AccountUpdatesQueryParams,
@@ -280,6 +282,48 @@ export const AccountsApiAxiosParamCreator = (configuration: Configuration) => ({
             options: localVarRequestOptions,
         };
     },
+    /**
+     * Returns list of delegation actions relating to a stake account
+     * @summary Stake account delegation history
+     * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+     * @param {AccountDelegationHistoryQueryParams} [localVarQueryParameter] Query parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    accountDelegationHistory: (
+        stakeAddr: string,
+        localVarQueryParameter: AccountDelegationHistoryQueryParams = {},
+        options: AxiosRequestConfig = {},
+    ): RequestArgs => {
+        // verify required parameter 'stakeAddr' is not null or undefined
+        assertParamExists('accountDelegationHistory', 'stakeAddr', stakeAddr);
+        const localVarPath = `/accounts/{stake_addr}/delegations`.replace(
+            `{${'stake_addr'}}`,
+            encodeURIComponent(String(stakeAddr)),
+        );
+        // use dummy base URL string because the URL constructor only accepts absolute URLs.
+        const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+        const { baseOptions } = configuration;
+
+        const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+        const localVarHeaderParameter = {} as Record<string, string>;
+
+        // authentication api-key required
+        setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
+
+        setSearchParams(localVarUrlObj, localVarQueryParameter);
+        const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+        localVarRequestOptions.headers = {
+            ...localVarHeaderParameter,
+            ...headersFromBaseOptions,
+            ...options.headers,
+        };
+
+        return {
+            url: toPathString(localVarUrlObj),
+            options: localVarRequestOptions,
+        };
+    },
 });
 
 /**
@@ -335,6 +379,27 @@ export const AccountsApiFp = (configuration: Configuration) => {
             options?: AxiosRequestConfig,
         ): () => Promise<PaginatedAccountHistory> {
             const localVarAxiosArgs = localVarAxiosParamCreator.accountHistory(stakeAddr, queryParams, options);
+            return createRequestFunction(localVarAxiosArgs, configuration);
+        },
+
+        /**
+         * Returns list of delegation actions relating to a stake account
+         * @summary Stake account history
+         * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+         * @param {AccountDelegationHistoryQueryParams} [queryParams] Query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        accountDelegationHistory(
+            stakeAddr: string,
+            queryParams?: AccountDelegationHistoryQueryParams,
+            options?: AxiosRequestConfig,
+        ): () => Promise<PaginatedAccountDelegationHistory> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.accountDelegationHistory(
+                stakeAddr,
+                queryParams,
+                options,
+            );
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**

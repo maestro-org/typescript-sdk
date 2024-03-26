@@ -7,6 +7,7 @@ import {
     AccountHistoryQueryParams,
     AccountRewardsQueryParams,
     AccountUpdatesQueryParams,
+    AccountDelegationHistoryQueryParams,
 } from './type';
 
 /**
@@ -57,6 +58,23 @@ export class AccountsApi extends BaseAPI {
      */
     public accountHistory(stakeAddr: string, queryParams?: AccountHistoryQueryParams, options?: AxiosRequestConfig) {
         return AccountsApiFp(this.configuration).accountHistory(stakeAddr, queryParams, options)();
+    }
+
+    /**
+     * * Returns list of delegation actions relating to a stake account
+     * @summary Stake account history
+     * @param {string} stakeAddr Bech32 encoded stake/reward address (\&#39;stake1...\&#39;)
+     * @param {AccountDelegationHistoryQueryParams} [queryParams] Query parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountsApi
+     */
+    public accountDelegationHistory(
+        stakeAddr: string,
+        queryParams?: AccountDelegationHistoryQueryParams,
+        options?: AxiosRequestConfig,
+    ) {
+        return AccountsApiFp(this.configuration).accountDelegationHistory(stakeAddr, queryParams, options)();
     }
 
     /**

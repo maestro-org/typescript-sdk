@@ -29,6 +29,18 @@ export class AddressesApi extends BaseAPI {
     }
 
     /**
+     * Return total amount of assets, including ADA, in UTxOs controlled by a specific payment credential
+     * @summary Address Balance
+     * @param {string} credential Payment credential in bech32 format
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressesApi
+     */
+    public addressBalance(credential: string, options?: AxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).addressBalance(credential, options)();
+    }
+
+    /**
      * Returns the number of transactions in which the address spent or received some funds.  Specifically, the number of transactions where: the address controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
      * @summary Address transaction count
      * @param {string} address Address in bech32 format

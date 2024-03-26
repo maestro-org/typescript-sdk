@@ -18,6 +18,33 @@ export type AccountAction = (typeof AccountAction)[keyof typeof AccountAction];
 /**
  * Per-epoch information about a stake account
  * @export
+ * @interface AccountDelegationHistory
+ */
+export interface AccountDelegationHistory {
+    /**
+     * Epoch number in which the delegation becomes active
+     * @type {number}
+     * @memberof AccountDelegationHistory
+     */
+    active_epoch_no: number;
+    /**
+     * Bech32 encoded pool ID the account was delegated to
+     * @type {string}
+     * @memberof AccountDelegationHistory
+     */
+    pool_id: string;
+
+    /**
+     * Absolute slot of the block which contained the transactio
+     * @type {number}
+     * @memberof AccountDelegationHistory
+     */
+    slot: number;
+}
+
+/**
+ * Per-epoch information about a stake account
+ * @export
  * @interface AccountHistory
  */
 export interface AccountHistory {
@@ -233,6 +260,25 @@ export interface AddressInfo {
     staking_cred?: StakingCredential | null;
 }
 
+/**
+ * Current Balance by payment credential
+ * @export
+ * @interface AddressBalance
+ */
+export interface AddressBalance {
+    /**
+     *
+     * @type {object}
+     * @memberof AddressBalance
+     */
+    assets: object;
+    /**
+     *
+     * @type {string}
+     * @memberof AddressBalance
+     */
+    lovelace: object;
+}
 /**
  * Transaction which involved a specific address
  * @export
@@ -1391,6 +1437,32 @@ export interface PaginatedAccountHistory {
      * Pagination cursor
      * @type {string}
      * @memberof PaginatedAccountHistory
+     */
+    next_cursor?: string | null;
+}
+
+/**
+ * A paginated response. Pass in the `next_cursor` in a subsequent request as the `cursor` query parameter to fetch the next page of results.
+ * @export
+ * @interface PaginatedAccountDelegationHistory
+ */
+export interface PaginatedAccountDelegationHistory {
+    /**
+     * Endpoint response data
+     * @type {Array<AccountAction>}
+     * @memberof PaginatedAccountHistory
+     */
+    data: Array<AccountDelegationHistory>;
+    /**
+     *
+     * @type {LastUpdated}
+     * @memberof PaginatedAccountDelegationHistory
+     */
+    last_updated: LastUpdated;
+    /**
+     * Pagination cursor
+     * @type {string}
+     * @memberof PaginatedAccountDelegationHistory
      */
     next_cursor?: string | null;
 }
