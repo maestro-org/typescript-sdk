@@ -18,6 +18,7 @@ import {
     PaginatedPaymentCredentialTransaction,
     PaginatedUtxoRef,
     PaginatedUtxoWithSlot,
+    AddressBalance,
 } from '../type';
 import {
     TxsByAddressQueryParams,
@@ -46,6 +47,45 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
         const localVarPath = `/addresses/{address}/decode`.replace(
             `{${'address'}}`,
             encodeURIComponent(String(address)),
+        );
+        // use dummy base URL string because the URL constructor only accepts absolute URLs.
+        const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+        const { baseOptions } = configuration;
+
+        const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+        const localVarHeaderParameter = {} as Record<string, string>;
+        const localVarQueryParameter = {} as Record<string, string>;
+
+        // authentication api-key required
+        setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
+
+        setSearchParams(localVarUrlObj, localVarQueryParameter);
+        const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+        localVarRequestOptions.headers = {
+            ...localVarHeaderParameter,
+            ...headersFromBaseOptions,
+            ...options.headers,
+        };
+
+        return {
+            url: toPathString(localVarUrlObj),
+            options: localVarRequestOptions,
+        };
+    },
+
+    /**
+     * Return total amount of assets, including ADA, in UTxOs controlled by a specific payment credential
+     * @summary Address Balance
+     * @param {string} credential Payment credential in bech32 format
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addressBalance: (credential: string, options: AxiosRequestConfig = {}): RequestArgs => {
+        // verify required parameter 'credential' is not null or undefined
+        assertParamExists('addressBalance', 'address', credential);
+        const localVarPath = `/addresses/cred/{credential}/balance`.replace(
+            `{${'credential'}}`,
+            encodeURIComponent(String(credential)),
         );
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -425,6 +465,17 @@ export const AddressesApiFp = (configuration: Configuration) => {
          */
         decodeAddress(address: string, options?: AxiosRequestConfig): () => Promise<AddressInfo> {
             const localVarAxiosArgs = localVarAxiosParamCreator.decodeAddress(address, options);
+            return createRequestFunction(localVarAxiosArgs, configuration);
+        },
+        /**
+         * Return total amount of assets, including ADA, in UTxOs controlled by a specific payment credential
+         * @summary Address Balance
+         * @param {string} credential Payment credential in bech32 format
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addressBalance(credential: string, options?: AxiosRequestConfig): () => Promise<AddressBalance> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.addressBalance(credential, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
