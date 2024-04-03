@@ -175,13 +175,13 @@ export interface UtxosByAddressQueryParams {
      * @type {boolean | null}
      * @memberof UtxosByAddressQueryParams
      */
-    resolveDatums?: boolean | null;
+    resolve_datums?: boolean | null;
     /**
      * Include the CBOR encodings of the transaction outputs in the response
      * @type {boolean | null}
      * @memberof UtxosByAddressQueryParams
      */
-    withCbor?: boolean | null;
+    with_cbor?: boolean | null;
     /**
      * The max number of results per page.
      * @type {number | null}
@@ -226,13 +226,13 @@ export interface UtxosByAddressesQueryParams {
      * @type {boolean | null}
      * @memberof UtxosByAddressesQueryParams
      */
-    resolveDatums?: boolean | null;
+    resolve_datums?: boolean | null;
     /**
      * Include the CBOR encodings of the transaction outputs in the response
      * @type {boolean | null}
      * @memberof UtxosByAddressesQueryParams
      */
-    withCbor?: boolean | null;
+    with_cbor?: boolean | null;
     /**
      * The max number of results per page.
      * @type {number | null}
@@ -265,13 +265,13 @@ export interface UtxosByPaymentCredQueryParams {
      * @type {boolean | null}
      * @memberof UtxosByPaymentCredQueryParams
      */
-    resolveDatums?: boolean | null;
+    resolve_datums?: boolean | null;
     /**
      * Include the CBOR encodings of the transaction outputs in the response
      * @type {boolean | null}
      * @memberof UtxosByPaymentCredQueryParams
      */
-    withCbor?: boolean | null;
+    with_cbor?: boolean | null;
     /**
      * The max number of results per page.
      * @type {number | null}

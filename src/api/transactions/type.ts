@@ -10,7 +10,7 @@ export interface TxoByTxoRefQueryParams {
      * @type {boolean | null}
      * @memberof TxoByTxoRefQueryParams
      */
-    withCbor?: boolean | null;
+    with_cbor?: boolean | null;
 }
 
 /**
@@ -25,11 +25,11 @@ export interface TxosByTxoRefsQueryParams {
      * @type {boolean | null}
      * @memberof TxosByTxoRefsQueryParams
      */
-    resolveDatums?: boolean | null;
+    resolve_datums?: boolean | null;
     /**
      * Include the CBOR encoding of the transaction output in the response
      * @type {boolean | null}
      * @memberof TxosByTxoRefsQueryParams
      */
-    withCbor?: boolean | null;
+    with_cbor?: boolean | null;
 }
