@@ -23,6 +23,7 @@ import {
 import {
     TxsByAddressQueryParams,
     TxsByPaymentCredQueryParams,
+    TxsByPaymentCredsQueryParams,
     UtxoRefsAtAddressQueryParams,
     UtxosByAddressQueryParams,
     UtxosByAddressesQueryParams,
@@ -227,6 +228,49 @@ export const AddressesApiAxiosParamCreator = (configuration: Configuration) => (
             ...headersFromBaseOptions,
             ...options.headers,
         };
+
+        return {
+            url: toPathString(localVarUrlObj),
+            options: localVarRequestOptions,
+        };
+    },
+    /**
+     * Returns transactions in which the specified payment credentials spent or received funds.  Specifically, the transactions where: the payment credentials were used in an address which controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
+     * @summary Payment credentials transactions
+     * @param {Array<string>} requestBody Payment credentials in bech32 format
+     * @param {TxsByPaymentCredQueryParams} [localVarQueryParameter] Query parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    txsByPaymentCreds: (
+        requestBody: Array<string>,
+        localVarQueryParameter: TxsByPaymentCredsQueryParams = {},
+        options: AxiosRequestConfig = {},
+    ): RequestArgs => {
+        // verify required parameter 'requestBody' is not null or undefined
+        assertParamExists('txsByPaymentCreds', 'requestBody', requestBody);
+        const localVarPath = `/addresses/cred/transactions`;
+        // use dummy base URL string because the URL constructor only accepts absolute URLs.
+        const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+        const { baseOptions } = configuration;
+
+        const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+        const localVarHeaderParameter = {} as Record<string, string>;
+
+        // authentication api-key required
+        setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
+
+        localVarHeaderParameter['Content-Type'] = 'application/json';
+
+        setSearchParams(localVarUrlObj, localVarQueryParameter);
+        const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+        localVarRequestOptions.headers = {
+            ...localVarHeaderParameter,
+            ...headersFromBaseOptions,
+            ...options.headers,
+            ...HEADER_AMOUNTS_AS_STRING,
+        };
+        localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration);
 
         return {
             url: toPathString(localVarUrlObj),
@@ -519,6 +563,22 @@ export const AddressesApiFp = (configuration: Configuration) => {
             options?: AxiosRequestConfig,
         ): () => Promise<PaginatedPaymentCredentialTransaction> {
             const localVarAxiosArgs = localVarAxiosParamCreator.txsByPaymentCred(credential, queryParams, options);
+            return createRequestFunction(localVarAxiosArgs, configuration);
+        },
+        /**
+         * Returns transactions in which the specified payment credentials spent or received funds.  Specifically, the transactions where: the payment credentials were used in an address which controlled at least one of the transaction inputs and/or receives one of the outputs AND the transaction is phase-2 valid, OR, the address controlled at least one of the collateral inputs and/or receives the collateral return output AND the transaction is phase-2 invalid. [Read more](https://docs.cardano.org/plutus/collateral-mechanism/).
+         * @summary Payment credentials transactions
+         * @param {Array<string>} requestBody Payment credentials in bech32 format
+         * @param {TxsByPaymentCredQueryParams} [localVarQueryParameter] Query parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        txsByPaymentCreds(
+            requestBody: Array<string>,
+            queryParams?: TxsByPaymentCredsQueryParams,
+            options?: AxiosRequestConfig,
+        ): () => Promise<PaginatedPaymentCredentialTransaction> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.txsByPaymentCreds(requestBody, queryParams, options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**

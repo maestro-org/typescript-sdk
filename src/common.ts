@@ -105,6 +105,5 @@ export const createRequestFunction =
         const axiosRequestArgs = { ...axiosArgs.options, url: configuration.baseUrl + axiosArgs.url };
         return configuration.axiosInstance
             .request<T, AxiosResponse<T>>(axiosRequestArgs)
-            .then((response) => response.data)
-            .catch((error) => error);
+            .then((response) => response.data);
     };

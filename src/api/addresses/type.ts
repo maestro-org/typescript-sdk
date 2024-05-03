@@ -119,6 +119,45 @@ export interface TxsByPaymentCredQueryParams {
 }
 
 /**
+ * Query parameters for txsByPaymentCreds.
+ * @export
+ * @interface TxsByPaymentCredsQueryParams
+ *
+ */
+export interface TxsByPaymentCredsQueryParams {
+    /**
+     * The max number of results per page.
+     * @type {number | null}
+     * @memberof TxsByPaymentCredsQueryParams
+     */
+    count?: number | null;
+    /**
+     * The order in which the results are sorted, by transaction age
+     * @type {TxsByPaymentCredOrderEnum}
+     * @memberof TxsByPaymentCredsQueryParams
+     */
+    order?: TxsByPaymentCredOrderEnum;
+    /**
+     * Return only transactions minted on or after a specific slot
+     * @type {number | null}
+     * @memberof TxsByPaymentCredsQueryParams
+     */
+    from?: number | null;
+    /**
+     * Return only transactions minted on or before a specific slot
+     * @type {number | null}
+     * @memberof TxsByPaymentCredsQueryParams
+     */
+    to?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page.
+     * @type {string | null}
+     * @memberof TxsByPaymentCredsQueryParams
+     */
+    cursor?: string | null;
+}
+
+/**
  * Query parameters for utxoRefsAtAddress.
  * @export
  * @interface UtxoRefsAtAddressQueryParams

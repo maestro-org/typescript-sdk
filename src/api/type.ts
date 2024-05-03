@@ -1077,16 +1077,22 @@ export interface DelegatorInfo {
 export interface EpochInfo {
     /**
      * Total active stake in the epoch
-     * @type {number}
+     * @type {string}
      * @memberof EpochInfo
      */
     active_stake?: string | null;
     /**
-     * Average reward in the epoch
-     * @type {number}
+     * Average block reward in the epoch
+     * @type {string}
      * @memberof EpochInfo
      */
     average_reward?: string | null;
+    /**
+     * Total rewards in the epoch
+     * @type {string}
+     * @memberof EpochInfo
+     */
+    total_rewards?: string | null;
     /**
      * Total blocks in the epoch
      * @type {number}
