@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { BaseAPI } from '../../base';
 import { TransactionsApiFp } from './helpers';
-import { TxoByTxoRefQueryParams } from './type';
+import { TxoByTxoRefQueryParams, TxosByTxoRefsQueryParams } from './type';
 
 /**
  * TransactionsApi - object-oriented interface
@@ -77,7 +77,7 @@ export class TransactionsApi extends BaseAPI {
      */
     public txosByTxoRefs(
         requestBody: Array<string>,
-        queryParams?: TxoByTxoRefQueryParams,
+        queryParams?: TxosByTxoRefsQueryParams,
         options?: AxiosRequestConfig,
     ) {
         return TransactionsApiFp(this.configuration).txosByTxoRefs(requestBody, queryParams, options)();

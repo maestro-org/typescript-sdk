@@ -32,4 +32,22 @@ export interface TxosByTxoRefsQueryParams {
      * @memberof TxosByTxoRefsQueryParams
      */
     with_cbor?: boolean | null;
+    /**
+     * Do not return 404 if any transactions are not found (404 will still be returned if you specify an index higher than the number of outputs in a transaction)
+     * @type {boolean | null}
+     * @memberof TxosByTxoRefsQueryParams
+     */
+    allow_missing?: boolean | null;
+    /**
+     * The max number of results per page
+     * @type {number | null}
+     * @memberof TxosByTxoRefsQueryParams
+     */
+    count?: number | null;
+    /**
+     * Pagination cursor string, use the cursor included in a page of results to fetch the next page
+     * @type {string | null}
+     * @memberof TxosByTxoRefsQueryParams
+     */
+    cursor?: string | null;
 }
