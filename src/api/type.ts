@@ -223,6 +223,17 @@ export interface AccountUpdate {
 }
 
 /**
+ *
+ * @export
+ * @interface AdaAmount
+ */
+export interface AdaAmount {
+    ada: {
+        lovelace: number;
+    };
+}
+
+/**
  * Information decoded from a Cardano address
  * @export
  * @interface AddressInfo
@@ -693,6 +704,21 @@ export interface Bound {
      */
     time: number;
 }
+
+/**
+ *
+ * @export
+ * @interface BytesSize
+ */
+export interface BytesSize {
+    /**
+     *
+     * @type {number}
+     * @memberof BytesSize
+     */
+    bytes: number;
+}
+
 /**
  *
  * @export
@@ -1185,19 +1211,19 @@ export interface EraSummary {
  * @export
  * @interface ExUnit
  */
-export interface ExUnit {
+export interface ExUnit<T> {
     /**
      * Memory execution units
-     * @type {number}
+     * @type {T}
      * @memberof ExUnit
      */
-    memory: number;
+    memory: T;
     /**
      * CPU execution units
-     * @type {number}
+     * @type {T}
      * @memberof ExUnit
      */
-    steps: number;
+    cpu: T;
 }
 /**
  *
@@ -2808,37 +2834,25 @@ export interface ProtocolParameters {
      * @type {number}
      * @memberof ProtocolParameters
      */
-    coins_per_utxo_byte: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ProtocolParameters
-     */
     collateral_percentage: number;
     /**
      *
-     * @type {{ [key: string]: { [key: string]: number; }; }}
-     * @memberof ProtocolParameters
-     */
-    cost_models: { [key: string]: { [key: string]: number } };
-    /**
-     *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    desired_number_of_pools: number;
+    desired_number_of_stake_pools: number;
     /**
-     *
-     * @type {number}
+     * Maximum number of bytes allowed for a block body
+     * @type {BytesSize}
      * @memberof ProtocolParameters
      */
-    max_block_body_size: number;
+    max_block_body_size: BytesSize;
     /**
-     *
-     * @type {number}
+     * Maximum number of bytes allowed for a block header
+     * @type {BytesSize}
      * @memberof ProtocolParameters
      */
-    max_block_header_size: number;
+    max_block_header_size: BytesSize;
     /**
      *
      * @type {number}
@@ -2846,29 +2860,29 @@ export interface ProtocolParameters {
      */
     max_collateral_inputs: number;
     /**
-     *
+     * Maximum execution units allowed for a block
      * @type {ExUnit}
      * @memberof ProtocolParameters
      */
-    max_execution_units_per_block: ExUnit;
+    max_execution_units_per_block: ExUnit<number>;
     /**
-     *
+     * Maximum execution units allowed for a transaction
      * @type {ExUnit}
      * @memberof ProtocolParameters
      */
-    max_execution_units_per_transaction: ExUnit;
+    max_execution_units_per_transaction: ExUnit<number>;
+    /**
+     * Maximum number of bytes allowed for a transaction
+     * @type {number}
+     * @memberof ProtocolParameters
+     */
+    max_transaction_size: BytesSize;
     /**
      *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    max_tx_size: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ProtocolParameters
-     */
-    max_value_size: number;
+    max_value_size: BytesSize;
     /**
      *
      * @type {number}
@@ -2876,17 +2890,29 @@ export interface ProtocolParameters {
      */
     min_fee_coefficient: number;
     /**
-     *
-     * @type {number}
+     * Minimum ADA fee
+     * @type {AdaAmount}
      * @memberof ProtocolParameters
      */
-    min_fee_constant: number;
+    min_fee_constant: AdaAmount;
+    /**
+     * Minimum stake pool cost
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    min_stake_pool_cost: AdaAmount;
     /**
      *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    min_pool_cost: number;
+    min_utxo_deposit_coefficient: number;
+    /**
+     * Minimum UTxO deposit amount
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    min_utxo_deposit_constant: AdaAmount;
     /**
      *
      * @type {string}
@@ -2894,47 +2920,53 @@ export interface ProtocolParameters {
      */
     monetary_expansion: string;
     /**
-     *
-     * @type {number}
+     * Plutust script execution cost models
+     * @type {{ plutus_v1: number[]; plutus_v2: number[] }}
      * @memberof ProtocolParameters
      */
-    pool_deposit: number;
+    plutus_cost_models: { plutus_v1: number[]; plutus_v2: number[] };
+    /**
+     * Script execution prices
+     * @type {ExUnit}
+     * @memberof ProtocolParameters
+     */
+    script_execution_prices: ExUnit<string>;
+    /**
+     * Stake deposit amount
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    stake_credential_deposit: AdaAmount;
+    /**
+     * Stake deposit amount
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    stake_pool_deposit: AdaAmount;
     /**
      *
      * @type {string}
      * @memberof ProtocolParameters
      */
-    pool_influence: string;
+    stake_pool_pledge_influence: string;
     /**
      *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    pool_retirement_epoch_bound: number;
-    /**
-     *
-     * @type {Prices}
-     * @memberof ProtocolParameters
-     */
-    prices: Prices;
-    /**
-     *
-     * @type {Version}
-     * @memberof ProtocolParameters
-     */
-    protocol_version: Version;
-    /**
-     *
-     * @type {number}
-     * @memberof ProtocolParameters
-     */
-    stake_key_deposit: number;
+    stake_pool_retirement_epoch_bound: number;
     /**
      *
      * @type {string}
      * @memberof ProtocolParameters
      */
     treasury_expansion: string;
+    /**
+     *
+     * @type {Version}
+     * @memberof ProtocolParameters
+     */
+    version: Version;
 }
 /**
  *

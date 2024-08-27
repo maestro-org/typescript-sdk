@@ -38,8 +38,8 @@ export class GeneralApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    public protocolParams(options?: AxiosRequestConfig) {
-        return GeneralApiFp(this.configuration).protocolParams(options)();
+    public protocolParameters(options?: AxiosRequestConfig) {
+        return GeneralApiFp(this.configuration).protocolParameters(options)();
     }
 
     /**
