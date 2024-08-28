@@ -22,12 +22,6 @@ export type AccountAction = (typeof AccountAction)[keyof typeof AccountAction];
  */
 export interface AccountDelegationHistory {
     /**
-     * Epoch number in which the delegation becomes active
-     * @type {number}
-     * @memberof AccountDelegationHistory
-     */
-    active_epoch_no: number;
-    /**
      * Bech32 encoded pool ID the account was delegated to
      * @type {string}
      * @memberof AccountDelegationHistory
@@ -679,31 +673,6 @@ export interface BlockInfo {
  * @interface BlockInfoProtocolVersionInner
  */
 export interface BlockInfoProtocolVersionInner {}
-/**
- *
- * @export
- * @interface Bound
- */
-export interface Bound {
-    /**
-     *
-     * @type {number}
-     * @memberof Bound
-     */
-    epoch: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Bound
-     */
-    slot: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Bound
-     */
-    time: number;
-}
 
 /**
  *
@@ -1071,12 +1040,6 @@ export type DatumOptionType = (typeof DatumOptionType)[keyof typeof DatumOptionT
  */
 export interface DelegatorInfo {
     /**
-     * Epoch at which the delegation becomes active
-     * @type {number}
-     * @memberof DelegatorInfo
-     */
-    active_epoch_no?: number | null;
-    /**
      * Delegator live stake
      * @type {number}
      * @memberof DelegatorInfo
@@ -1156,6 +1119,61 @@ export interface EpochInfo {
      */
     tx_count: number;
 }
+
+/**
+ *
+ * @export
+ * @interface EraTime
+ */
+export interface EraTime {
+    /**
+     *
+     * @type {number}
+     * @memberof EraTime
+     */
+    seconds: number;
+}
+
+/**
+ *
+ * @export
+ * @interface EraBound
+ */
+export interface EraBound {
+    /**
+     *
+     * @type {number}
+     * @memberof EraBound
+     */
+    epoch: number;
+    /**
+     *
+     * @type {number}
+     * @memberof EraBound
+     */
+    slot: number;
+    /**
+     *
+     * @type {EraTime}
+     * @memberof EraBound
+     */
+    time: EraTime;
+}
+
+/**
+ *
+ * @export
+ * @interface SlotLength
+ */
+export interface SlotLength {
+    /**
+     *
+     * @type {number}
+     * @memberof SlotLength
+     */
+    milliseconds: number;
+}
+
 /**
  *
  * @export
@@ -1170,17 +1188,18 @@ export interface EraParameters {
     epoch_length: number;
     /**
      *
-     * @type {number}
+     * @type {SlotLength}
      * @memberof EraParameters
      */
-    safe_zone?: number | null;
+    slot_length: SlotLength;
     /**
      *
      * @type {number}
      * @memberof EraParameters
      */
-    slot_length: number;
+    safe_zone: number;
 }
+
 /**
  *
  * @export
@@ -1189,10 +1208,10 @@ export interface EraParameters {
 export interface EraSummary {
     /**
      *
-     * @type {Bound}
+     * @type {EraBound}
      * @memberof EraSummary
      */
-    end?: Bound | null;
+    end: EraBound;
     /**
      *
      * @type {EraParameters}
@@ -1201,11 +1220,12 @@ export interface EraSummary {
     parameters: EraParameters;
     /**
      *
-     * @type {Bound}
+     * @type {EraBound}
      * @memberof EraSummary
      */
-    start: Bound;
+    start: EraBound;
 }
+
 /**
  * Execution units for Plutus scripts
  * @export
@@ -2347,12 +2367,6 @@ export interface PoolHistory {
  */
 export interface PoolInfo {
     /**
-     * Epoch when the update takes effect
-     * @type {number}
-     * @memberof PoolInfo
-     */
-    active_epoch_no: number;
-    /**
      * Active stake
      * @type {string}
      * @memberof PoolInfo
@@ -2701,12 +2715,6 @@ export interface PoolRetireCert {
  * @interface PoolUpdate
  */
 export interface PoolUpdate {
-    /**
-     * Epoch when the update takes effect
-     * @type {number}
-     * @memberof PoolUpdate
-     */
-    active_epoch_no: number;
     /**
      * UNIX timestamp of the block containing the transaction
      * @type {number}
