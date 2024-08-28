@@ -84,8 +84,8 @@ export const GeneralApiAxiosParamCreator = (configuration: Configuration) => ({
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    protocolParams: (options: AxiosRequestConfig = {}): RequestArgs => {
-        const localVarPath = `/protocol-params`;
+    protocolParameters: (options: AxiosRequestConfig = {}): RequestArgs => {
+        const localVarPath = `/protocol-parameters`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
         const { baseOptions } = configuration;
@@ -177,8 +177,8 @@ export const GeneralApiFp = (configuration: Configuration) => {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        protocolParams(options?: AxiosRequestConfig): () => Promise<TimestampedProtocolParameters> {
-            const localVarAxiosArgs = localVarAxiosParamCreator.protocolParams(options);
+        protocolParameters(options?: AxiosRequestConfig): () => Promise<TimestampedProtocolParameters> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.protocolParameters(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
