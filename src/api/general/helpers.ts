@@ -47,13 +47,13 @@ export const GeneralApiAxiosParamCreator = (configuration: Configuration) => ({
         };
     },
     /**
-     * Returns the blockchain era history
-     * @summary Era history
+     * Returns the blockchain era summaries
+     * @summary Era summaries
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    eraHistory: (options: AxiosRequestConfig = {}): RequestArgs => {
-        const localVarPath = `/era-history`;
+    eraSummaries: (options: AxiosRequestConfig = {}): RequestArgs => {
+        const localVarPath = `/era-summaries`;
         // use dummy base URL string because the URL constructor only accepts absolute URLs.
         const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
         const { baseOptions } = configuration;
@@ -162,13 +162,13 @@ export const GeneralApiFp = (configuration: Configuration) => {
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**
-         * Returns the blockchain era history
-         * @summary Era history
+         * Returns the blockchain era summaries
+         * @summary Era summaries
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        eraHistory(options?: AxiosRequestConfig): () => Promise<TimestampedEraSummaries> {
-            const localVarAxiosArgs = localVarAxiosParamCreator.eraHistory(options);
+        eraSummaries(options?: AxiosRequestConfig): () => Promise<TimestampedEraSummaries> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.eraSummaries(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
         /**

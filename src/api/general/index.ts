@@ -21,14 +21,14 @@ export class GeneralApi extends BaseAPI {
     }
 
     /**
-     * Returns the blockchain era history
-     * @summary Era history
+     * Returns the blockchain era summaries
+     * @summary Era summaries
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    public eraHistory(options?: AxiosRequestConfig) {
-        return GeneralApiFp(this.configuration).eraHistory(options)();
+    public eraSummaries(options?: AxiosRequestConfig) {
+        return GeneralApiFp(this.configuration).eraSummaries(options)();
     }
 
     /**
