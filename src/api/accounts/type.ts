@@ -17,6 +17,12 @@ export interface AccountAddressesQueryParams {
      * @memberof AccountAddressesQueryParams
      */
     cursor?: string | null;
+    /**
+     * Include addresses that have been seen on-chain but have no balance.
+     * @type {boolean | null}
+     * @memberof AccountAddressesQueryParams
+     */
+    include_empty?: boolean | null;
 }
 
 /**
