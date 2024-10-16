@@ -22,12 +22,6 @@ export type AccountAction = (typeof AccountAction)[keyof typeof AccountAction];
  */
 export interface AccountDelegationHistory {
     /**
-     * Epoch number in which the delegation becomes active
-     * @type {number}
-     * @memberof AccountDelegationHistory
-     */
-    active_epoch_no: number;
-    /**
      * Bech32 encoded pool ID the account was delegated to
      * @type {string}
      * @memberof AccountDelegationHistory
@@ -220,6 +214,17 @@ export interface AccountUpdate {
      * @memberof AccountUpdate
      */
     tx_hash: string;
+}
+
+/**
+ *
+ * @export
+ * @interface AdaAmount
+ */
+export interface AdaAmount {
+    ada: {
+        lovelace: number;
+    };
 }
 
 /**
@@ -668,31 +673,21 @@ export interface BlockInfo {
  * @interface BlockInfoProtocolVersionInner
  */
 export interface BlockInfoProtocolVersionInner {}
+
 /**
  *
  * @export
- * @interface Bound
+ * @interface BytesSize
  */
-export interface Bound {
+export interface BytesSize {
     /**
      *
      * @type {number}
-     * @memberof Bound
+     * @memberof BytesSize
      */
-    epoch: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Bound
-     */
-    slot: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Bound
-     */
-    time: number;
+    bytes: number;
 }
+
 /**
  *
  * @export
@@ -1045,12 +1040,6 @@ export type DatumOptionType = (typeof DatumOptionType)[keyof typeof DatumOptionT
  */
 export interface DelegatorInfo {
     /**
-     * Epoch at which the delegation becomes active
-     * @type {number}
-     * @memberof DelegatorInfo
-     */
-    active_epoch_no?: number | null;
-    /**
      * Delegator live stake
      * @type {number}
      * @memberof DelegatorInfo
@@ -1130,6 +1119,61 @@ export interface EpochInfo {
      */
     tx_count: number;
 }
+
+/**
+ *
+ * @export
+ * @interface EraTime
+ */
+export interface EraTime {
+    /**
+     *
+     * @type {number}
+     * @memberof EraTime
+     */
+    seconds: number;
+}
+
+/**
+ *
+ * @export
+ * @interface EraBound
+ */
+export interface EraBound {
+    /**
+     *
+     * @type {number}
+     * @memberof EraBound
+     */
+    epoch: number;
+    /**
+     *
+     * @type {number}
+     * @memberof EraBound
+     */
+    slot: number;
+    /**
+     *
+     * @type {EraTime}
+     * @memberof EraBound
+     */
+    time: EraTime;
+}
+
+/**
+ *
+ * @export
+ * @interface SlotLength
+ */
+export interface SlotLength {
+    /**
+     *
+     * @type {number}
+     * @memberof SlotLength
+     */
+    milliseconds: number;
+}
+
 /**
  *
  * @export
@@ -1144,17 +1188,18 @@ export interface EraParameters {
     epoch_length: number;
     /**
      *
-     * @type {number}
+     * @type {SlotLength}
      * @memberof EraParameters
      */
-    safe_zone?: number | null;
+    slot_length: SlotLength;
     /**
      *
      * @type {number}
      * @memberof EraParameters
      */
-    slot_length: number;
+    safe_zone: number;
 }
+
 /**
  *
  * @export
@@ -1163,10 +1208,10 @@ export interface EraParameters {
 export interface EraSummary {
     /**
      *
-     * @type {Bound}
+     * @type {EraBound}
      * @memberof EraSummary
      */
-    end?: Bound | null;
+    end: EraBound;
     /**
      *
      * @type {EraParameters}
@@ -1175,29 +1220,30 @@ export interface EraSummary {
     parameters: EraParameters;
     /**
      *
-     * @type {Bound}
+     * @type {EraBound}
      * @memberof EraSummary
      */
-    start: Bound;
+    start: EraBound;
 }
+
 /**
  * Execution units for Plutus scripts
  * @export
  * @interface ExUnit
  */
-export interface ExUnit {
+export interface ExUnit<T> {
     /**
      * Memory execution units
-     * @type {number}
+     * @type {T}
      * @memberof ExUnit
      */
-    memory: number;
+    memory: T;
     /**
      * CPU execution units
-     * @type {number}
+     * @type {T}
      * @memberof ExUnit
      */
-    steps: number;
+    cpu: T;
 }
 /**
  *
@@ -2321,12 +2367,6 @@ export interface PoolHistory {
  */
 export interface PoolInfo {
     /**
-     * Epoch when the update takes effect
-     * @type {number}
-     * @memberof PoolInfo
-     */
-    active_epoch_no: number;
-    /**
      * Active stake
      * @type {string}
      * @memberof PoolInfo
@@ -2676,12 +2716,6 @@ export interface PoolRetireCert {
  */
 export interface PoolUpdate {
     /**
-     * Epoch when the update takes effect
-     * @type {number}
-     * @memberof PoolUpdate
-     */
-    active_epoch_no: number;
-    /**
      * UNIX timestamp of the block containing the transaction
      * @type {number}
      * @memberof PoolUpdate
@@ -2808,37 +2842,25 @@ export interface ProtocolParameters {
      * @type {number}
      * @memberof ProtocolParameters
      */
-    coins_per_utxo_byte: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ProtocolParameters
-     */
     collateral_percentage: number;
     /**
      *
-     * @type {{ [key: string]: { [key: string]: number; }; }}
-     * @memberof ProtocolParameters
-     */
-    cost_models: { [key: string]: { [key: string]: number } };
-    /**
-     *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    desired_number_of_pools: number;
+    desired_number_of_stake_pools: number;
     /**
-     *
-     * @type {number}
+     * Maximum number of bytes allowed for a block body
+     * @type {BytesSize}
      * @memberof ProtocolParameters
      */
-    max_block_body_size: number;
+    max_block_body_size: BytesSize;
     /**
-     *
-     * @type {number}
+     * Maximum number of bytes allowed for a block header
+     * @type {BytesSize}
      * @memberof ProtocolParameters
      */
-    max_block_header_size: number;
+    max_block_header_size: BytesSize;
     /**
      *
      * @type {number}
@@ -2846,29 +2868,29 @@ export interface ProtocolParameters {
      */
     max_collateral_inputs: number;
     /**
-     *
+     * Maximum execution units allowed for a block
      * @type {ExUnit}
      * @memberof ProtocolParameters
      */
-    max_execution_units_per_block: ExUnit;
+    max_execution_units_per_block: ExUnit<number>;
     /**
-     *
+     * Maximum execution units allowed for a transaction
      * @type {ExUnit}
      * @memberof ProtocolParameters
      */
-    max_execution_units_per_transaction: ExUnit;
+    max_execution_units_per_transaction: ExUnit<number>;
+    /**
+     * Maximum number of bytes allowed for a transaction
+     * @type {number}
+     * @memberof ProtocolParameters
+     */
+    max_transaction_size: BytesSize;
     /**
      *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    max_tx_size: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ProtocolParameters
-     */
-    max_value_size: number;
+    max_value_size: BytesSize;
     /**
      *
      * @type {number}
@@ -2876,17 +2898,29 @@ export interface ProtocolParameters {
      */
     min_fee_coefficient: number;
     /**
-     *
-     * @type {number}
+     * Minimum ADA fee
+     * @type {AdaAmount}
      * @memberof ProtocolParameters
      */
-    min_fee_constant: number;
+    min_fee_constant: AdaAmount;
+    /**
+     * Minimum stake pool cost
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    min_stake_pool_cost: AdaAmount;
     /**
      *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    min_pool_cost: number;
+    min_utxo_deposit_coefficient: number;
+    /**
+     * Minimum UTxO deposit amount
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    min_utxo_deposit_constant: AdaAmount;
     /**
      *
      * @type {string}
@@ -2894,47 +2928,53 @@ export interface ProtocolParameters {
      */
     monetary_expansion: string;
     /**
-     *
-     * @type {number}
+     * Plutust script execution cost models
+     * @type {{ plutus_v1: number[]; plutus_v2: number[] }}
      * @memberof ProtocolParameters
      */
-    pool_deposit: number;
+    plutus_cost_models: { plutus_v1: number[]; plutus_v2: number[] };
+    /**
+     * Script execution prices
+     * @type {ExUnit}
+     * @memberof ProtocolParameters
+     */
+    script_execution_prices: ExUnit<string>;
+    /**
+     * Stake deposit amount
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    stake_credential_deposit: AdaAmount;
+    /**
+     * Stake deposit amount
+     * @type {AdaAmount}
+     * @memberof ProtocolParameters
+     */
+    stake_pool_deposit: AdaAmount;
     /**
      *
      * @type {string}
      * @memberof ProtocolParameters
      */
-    pool_influence: string;
+    stake_pool_pledge_influence: string;
     /**
      *
      * @type {number}
      * @memberof ProtocolParameters
      */
-    pool_retirement_epoch_bound: number;
-    /**
-     *
-     * @type {Prices}
-     * @memberof ProtocolParameters
-     */
-    prices: Prices;
-    /**
-     *
-     * @type {Version}
-     * @memberof ProtocolParameters
-     */
-    protocol_version: Version;
-    /**
-     *
-     * @type {number}
-     * @memberof ProtocolParameters
-     */
-    stake_key_deposit: number;
+    stake_pool_retirement_epoch_bound: number;
     /**
      *
      * @type {string}
      * @memberof ProtocolParameters
      */
     treasury_expansion: string;
+    /**
+     *
+     * @type {Version}
+     * @memberof ProtocolParameters
+     */
+    version: Version;
 }
 /**
  *
