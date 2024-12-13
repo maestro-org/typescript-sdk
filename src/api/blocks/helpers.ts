@@ -54,6 +54,39 @@ export const BlocksApiAxiosParamCreator = (configuration: Configuration) => ({
             options: localVarRequestOptions,
         };
     },
+
+    /**
+     * Returns information about the latest block
+     * @summary Latest block
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    blockLatest: (options: AxiosRequestConfig = {}): RequestArgs => {
+        const localVarPath = `/blocks/latest`;
+        // use dummy base URL string because the URL constructor only accepts absolute URLs.
+        const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+        const { baseOptions } = configuration;
+
+        const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+        const localVarHeaderParameter = {} as Record<string, string>;
+        const localVarQueryParameter = {} as Record<string, string>;
+
+        // authentication api-key required
+        setApiKeyToObject(localVarHeaderParameter, 'api-key', configuration);
+
+        setSearchParams(localVarUrlObj, localVarQueryParameter);
+        const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+        localVarRequestOptions.headers = {
+            ...localVarHeaderParameter,
+            ...headersFromBaseOptions,
+            ...options.headers,
+        };
+
+        return {
+            url: toPathString(localVarUrlObj),
+            options: localVarRequestOptions,
+        };
+    },
 });
 
 /**
@@ -72,6 +105,16 @@ export const BlocksApiFp = (configuration: Configuration) => {
          */
         blockInfo(hashOrHeight: string, options?: AxiosRequestConfig): () => Promise<TimestampedBlockInfo> {
             const localVarAxiosArgs = localVarAxiosParamCreator.blockInfo(hashOrHeight, options);
+            return createRequestFunction(localVarAxiosArgs, configuration);
+        },
+        /**
+         * Returns information about the latest block
+         * @summary Latest block
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        blockLatest(options?: AxiosRequestConfig): () => Promise<TimestampedBlockInfo> {
+            const localVarAxiosArgs = localVarAxiosParamCreator.blockLatest(options);
             return createRequestFunction(localVarAxiosArgs, configuration);
         },
     };
