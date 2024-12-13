@@ -20,4 +20,15 @@ export class BlocksApi extends BaseAPI {
     public blockInfo(hashOrHeight: string, options?: AxiosRequestConfig) {
         return BlocksApiFp(this.configuration).blockInfo(hashOrHeight, options)();
     }
+
+    /**
+     * Returns information about the latest block
+     * @summary Latest block
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BlocksApi
+     */
+    public blockLatest(options?: AxiosRequestConfig) {
+        return BlocksApiFp(this.configuration).blockLatest(options)();
+    }
 }
